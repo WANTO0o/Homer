@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G17023" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SocketDeviceViewController">
+            <connections>
+                <outlet property="alarmOFFButton" destination="FCq-Yn-inz" id="kvV-bO-gnq"/>
+                <outlet property="alarmOnButton" destination="CPx-aR-wyY" id="7Ye-CN-gsi"/>
+                <outlet property="deviceOFFButton" destination="cxF-hU-KJa" id="28V-fG-RnA"/>
+                <outlet property="deviceOnButton" destination="y4n-Uo-bUU" id="IQq-wQ-B1N"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="control_bg_socket" translatesAutoresizingMaskIntoConstraints="NO" id="k5h-X2-QHy">
+                    <rect key="frame" x="86" y="129" width="202.5" height="176.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="k5h-X2-QHy" secondAttribute="height" multiplier="1:0.87" id="x2w-Kc-Ouv"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="control_bg_wave" translatesAutoresizingMaskIntoConstraints="NO" id="dTL-jy-A8g">
+                    <rect key="frame" x="0.0" y="524" width="375" height="143"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="143" id="cLh-rO-4Ll"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxF-hU-KJa">
+                    <rect key="frame" x="205" y="607" width="120" height="40"/>
+                    <color key="backgroundColor" red="0.39746556020000001" green="0.65028409890000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="r4S-Zq-YF6"/>
+                        <constraint firstAttribute="height" constant="40" id="tcs-da-hdl"/>
+                    </constraints>
+                    <state key="normal" title="关闭">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="didDeviceOFFButtonClicked:" destination="-1" eventType="touchUpInside" id="HQw-W4-ibu"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设备开关" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqy-1M-Cp9">
+                    <rect key="frame" x="20" y="578" width="61" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="E75-Pt-zl4"/>
+                        <constraint firstAttribute="width" constant="61" id="gNT-VD-T5L"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.39746556020000001" green="0.65028409890000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4n-Uo-bUU">
+                    <rect key="frame" x="50" y="607" width="120" height="40"/>
+                    <color key="backgroundColor" red="0.79215686269999996" green="0.81568627449999997" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="LfB-py-s3C"/>
+                        <constraint firstAttribute="height" constant="40" id="RPQ-UE-Ucb"/>
+                    </constraints>
+                    <state key="normal" title="开启">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="didDeviceOnButtonClicked:" destination="-1" eventType="touchUpInside" id="XOj-Hq-y8t"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="闹铃定时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecf-I3-ebo">
+                    <rect key="frame" x="20" y="415" width="61" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="61" id="ZPE-CL-K76"/>
+                        <constraint firstAttribute="height" constant="21" id="f7E-rz-J3w"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPx-aR-wyY">
+                    <rect key="frame" x="50" y="444" width="120" height="40"/>
+                    <color key="backgroundColor" red="0.39746556020000001" green="0.65028409890000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="qN3-gJ-Y7Z"/>
+                        <constraint firstAttribute="width" constant="120" id="rFV-SI-bHh"/>
+                    </constraints>
+                    <state key="normal" title="开" image="control_icon_ alarm1">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="didAlarmOnButtonClicked:" destination="-1" eventType="touchUpInside" id="Ool-LQ-oYC"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCq-Yn-inz">
+                    <rect key="frame" x="205" y="444" width="120" height="40"/>
+                    <color key="backgroundColor" red="0.39746556020000001" green="0.65028409890000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Yb0-23-fxl"/>
+                        <constraint firstAttribute="width" constant="120" id="y70-y2-XwR"/>
+                    </constraints>
+                    <state key="normal" title="关" image="control_icon_ alarm1"/>
+                    <connections>
+                        <action selector="didAlarmOFFButtonClicked:" destination="-1" eventType="touchUpInside" id="NEm-AT-3cc"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.39746556020000001" green="0.65028409890000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="dTL-jy-A8g" firstAttribute="top" secondItem="CPx-aR-wyY" secondAttribute="bottom" constant="40" id="16T-tb-QDS"/>
+                <constraint firstAttribute="bottom" secondItem="dTL-jy-A8g" secondAttribute="bottom" id="3VU-7D-ZZb"/>
+                <constraint firstItem="FCq-Yn-inz" firstAttribute="top" secondItem="CPx-aR-wyY" secondAttribute="top" id="4MJ-dB-D8H"/>
+                <constraint firstAttribute="bottom" secondItem="cxF-hU-KJa" secondAttribute="bottom" constant="20" id="4ch-dD-3Rj"/>
+                <constraint firstItem="k5h-X2-QHy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CzB-ca-skh"/>
+                <constraint firstAttribute="trailing" secondItem="cxF-hU-KJa" secondAttribute="trailing" constant="50" id="FGF-t3-ZGk"/>
+                <constraint firstItem="k5h-X2-QHy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="129" id="H6M-sJ-eoa"/>
+                <constraint firstItem="CPx-aR-wyY" firstAttribute="top" secondItem="ecf-I3-ebo" secondAttribute="bottom" constant="8" id="HOy-aT-2hd"/>
+                <constraint firstItem="y4n-Uo-bUU" firstAttribute="top" secondItem="Xqy-1M-Cp9" secondAttribute="bottom" constant="8" id="JOF-sf-q5i"/>
+                <constraint firstAttribute="bottom" secondItem="y4n-Uo-bUU" secondAttribute="bottom" constant="20" id="LTS-o9-NKK"/>
+                <constraint firstItem="CPx-aR-wyY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="RTM-Ds-csN"/>
+                <constraint firstItem="k5h-X2-QHy" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.54" id="Xs1-HF-ub7"/>
+                <constraint firstAttribute="trailing" secondItem="dTL-jy-A8g" secondAttribute="trailing" id="Zaa-ig-cfT"/>
+                <constraint firstItem="ecf-I3-ebo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="drm-if-QgW"/>
+                <constraint firstItem="dTL-jy-A8g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gAR-WC-zcd"/>
+                <constraint firstItem="Xqy-1M-Cp9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="mJI-HK-abX"/>
+                <constraint firstItem="y4n-Uo-bUU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="wIQ-ke-jyL"/>
+                <constraint firstAttribute="trailing" secondItem="FCq-Yn-inz" secondAttribute="trailing" constant="50" id="zob-7c-fZf"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="386.5" y="320.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="control_bg_socket" width="217" height="189"/>
+        <image name="control_bg_wave" width="375" height="214"/>
+        <image name="control_icon_ alarm1" width="34" height="34"/>
+    </resources>
+</document>

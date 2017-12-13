@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.0.1</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>APIKey</key>
+	<string>eyJhbGciOiJSU0EtU0hBMjU2IiwidmVyIjoiMSJ9.eyJ2ZXIiOiIzIiwiZW5kcG9pbnRzIjp7ImF1dGh6IjoiaHR0cHM6Ly93d3cuYW1hem9uLmNvbS9hcC9vYSIsInRva2VuRXhjaGFuZ2UiOiJodHRwczovL2FwaS5hbWF6b24uY29tL2F1dGgvbzIvdG9rZW4ifSwiY2xpZW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1vYTItY2xpZW50LmVhZThlZWRkMzE3YTQ2MDhiZGJkN2M2YjkyOGZmY2UyIiwiYXBwRmFtaWx5SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi43OTM0NWI4YWM5Y2E0NGZjYTM3ZDQ5NGJjYzM4NjA4NiIsImJ1bmRsZVNlZWRJZCI6ImNvbS5ob21lci5saW5rdXNsaWdodCIsImJ1bmRsZUlkIjoiY29tLmhvbWVyLmxpbmt1c2xpZ2h0IiwiaXNzIjoiQW1hem9uIiwidHlwZSI6IkFQSUtleSIsImFwcFZhcmlhbnRJZCI6ImFtem4xLmFwcGxpY2F0aW9uLWNsaWVudC44ZTA4NTJjNWE1NjE0YjYwYTc5ZWZiNzY5NDRmYmRlNCIsInRydXN0UG9vbCI6bnVsbCwiYXBwSWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1jbGllbnQuOGUwODUyYzVhNTYxNGI2MGE3OWVmYjc2OTQ0ZmJkZTQiLCJpZCI6ImZkYWUzMDNjLWRjZDctMTFlNy04YTRkLWQ5ZjM3NGFiMWJmOCIsImlhdCI6IjE1MTI4MjA1ODkwMjEifQ==.WT9RtkkrfwHMp5b7xkIYZW8wYPANzx9paJbdIWSfDQWoyPyHaQ0ciY23qLzkV/UUS03+pakqlKZxzi4C9YH6nqIRdPba08G2gVG0ZHREs8SuR2entl7V76URqsW+FSaZWQEeuvxdXzD9MNQUpe/sXArCDQkSLkxhfODE3W2M9jU5ATg37p0dMwCAYb1xJ6hFJuOWDGpvf6wf4FPOKhqd93BAmpZCeXS91pEHj5aMFjnHnCSB1xQWdbBmXqBXd2lZEb873STl8D8Ux5gZ2c0eq+blutDJBNNskwz//eLQYy3Vp2R9LApXXqbfSjzBbvqwmLVgKKoREJvIfe5NXXLH2A==</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.homer.linkuslight</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>amzn-com.homer.linkuslight</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
