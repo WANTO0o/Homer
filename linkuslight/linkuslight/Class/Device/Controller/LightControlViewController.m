@@ -11,6 +11,7 @@
 #import "UIColor-Extensions.h"
 #import "ClockViewController.h"
 #import "LightControlViewController.h"
+#import "ColorLight.h"
 
 @interface LightControlViewController ()<LLCircularViewDelegate>
 
@@ -40,8 +41,9 @@
 
 @property (retain, nonatomic) LZCircularSlider *lightBrightnessSlider;
 
-
 @property (weak, nonatomic) IBOutlet UILabel *brightnessLable;
+
+@property (retain, nonatomic) ColorLight *colorLight;
 
 @end
 
@@ -50,15 +52,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
+    
     [self initView];
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController.topViewController.navigationItem setTitle:@"灯控制"];
+    [self.navigationController.topViewController.navigationItem setTitle:_DeviceInfo.name];
     //self.navigationController.navigationBar.tintColor = nil;
     //self.navigationController.navigationBar.backgroundColor = nil;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
@@ -121,6 +124,7 @@
 - (void)sliderEndChangeValue:(id)sender {
     //亮度变化
    DebugLog(@"亮度：%f",_lightenessSlider.value);
+    [_colorLight setBrightness:(uint8_t)_lightenessSlider.value];
     _brightnessLable.text = [NSString stringWithFormat:@"亮度：%d",(int)_lightenessSlider.value];
 }
 
@@ -182,7 +186,7 @@
     _lightenessSlider.enabled = NO;
     [_lightenessSlider removeFromSuperview];*/
     _lightenessSlider.minimumValue = 0;
-    _lightenessSlider.maximumValue = 255;
+    _lightenessSlider.maximumValue = 100;
     [_lightenessSlider.layer setCornerRadius:10];
     _lightenessSlider.maximumValueImage = [UIImage imageNamed:@"control_icon_variability_big"];
     _lightenessSlider.minimumValueImage = [UIImage imageNamed:@"control_icon_variability_small"];
@@ -295,6 +299,7 @@
         [_lightTurnWhiteButton.layer setBorderColor:[UIColor whiteColor].CGColor];
         
         _LightType = LULLightSliderTypeColourLight;
+        _colorLight.lightType = LULLightTypeColourLight;
         [self turnSlider];
         
     } else {
@@ -307,6 +312,7 @@
         [_lightTurnWhiteButton.layer setBorderColor:kLightOrangeColor.CGColor];
         
         _LightType = LULLightSliderTypeWhiteLight;
+        _colorLight.lightType = LULLightTypeWhiteLight;
         [self turnSlider];
     }
 }
@@ -314,9 +320,11 @@
 - (void)turnDeviceOn:(Boolean)isOn {
     
     if (isOn) {
+        [_colorLight turnOn];
         [_deviceOnButton.layer setBackgroundColor:kBackgroundColor.CGColor];
         [_deviceOFFButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
     } else {
+        [_colorLight turnOff];
         [_deviceOnButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
         [_deviceOFFButton.layer setBackgroundColor:kBackgroundColor.CGColor];
     }
@@ -367,6 +375,9 @@
     //获取hsv
     struct HSV hsv;
     [selectedColor getHue:&hsv.hu saturation:&hsv.sa brightness:&hsv.br alpha:&hsv.al];
+    
+    [_colorLight setColorH:(hsv.hu*100) S:(hsv.sa*100) B:(hsv.br*100)];
+    
     DebugLog(@"HSV is :%f,%f,%f,%f",hsv.hu,hsv.sa,hsv.br,hsv.al);
 }
 

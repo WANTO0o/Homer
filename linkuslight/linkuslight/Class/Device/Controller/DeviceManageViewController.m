@@ -304,19 +304,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < _devices.count) {
         NSLog(@"didSelectRowAtIndexRow:%ld",(long)indexPath.row);
-        switch (indexPath.row) {
-                case 0:
-                [self showLightViewWithDeviceType:LULDeviceLinkStateColourLight];
-                break;
-                case 1:
-                [self showLightViewWithDeviceType:LULDeviceLinkStateWhiteLight];
-                break;
-                case 2:
-                [self showSocketView];
-                break;
-            default:
-                break;
-        }
+        [self showLightViewWithDeviceInfo:_devices[indexPath.row]];
+//        switch (indexPath.row) {
+//                case 0:
+//                [self showLightViewWithDeviceType:LULDeviceLinkStateColourLight];
+//                break;
+//                case 1:
+//                [self showLightViewWithDeviceType:LULDeviceLinkStateWhiteLight];
+//                break;
+//                case 2:
+//                [self showSocketView];
+//                break;
+//            default:
+//                break;
+//        }
     };
 }
 
@@ -332,7 +333,23 @@
     return NO;
 }
 
-- (void)showLightViewWithDeviceType:(LULDeviceType)deviceType {
+- (void)showLightViewWithDeviceInfo:(DeviceInfo*)devInfo {
+    LightControlViewController *controller = [[LightControlViewController alloc] init];
+    controller.isDevice = YES;
+    controller.DeviceInfo = devInfo;
+    if (devInfo.deviceType == LULDeviceLinkStateWhiteLight) {
+        controller.LightType = LULLightSliderTypeWhiteLight;
+    } else {
+        controller.LightType = LULLightSliderTypeColourLight;
+    }
+    
+    [self setHidesBottomBarWhenPushed:YES];
+    
+    [self.navigationController pushViewController:controller animated:YES];
+    [self setHidesBottomBarWhenPushed:NO];
+}
+
+- (void)showLightViewWithDeviceType:(LULDeviceType)deviceType{
     
     LightControlViewController *controller = [[LightControlViewController alloc] init];
     controller.isDevice = YES;

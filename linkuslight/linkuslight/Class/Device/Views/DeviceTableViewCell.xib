@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,35 +20,35 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZFm-EO-2c1">
-                        <rect key="frame" x="22" y="11" width="44" height="44"/>
+                        <rect key="frame" x="30" y="11" width="44" height="44"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="76N-et-A8v"/>
                             <constraint firstAttribute="height" constant="44" id="EWN-zD-bwV"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hcu-T9-fa9">
-                        <rect key="frame" x="261" y="16.5" width="38" height="33"/>
+                        <rect key="frame" x="253" y="16.5" width="38" height="33"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="N1B-CO-NXf"/>
                             <constraint firstAttribute="height" constant="33" id="iRZ-Vj-1oV"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MeR-MA-N2P">
-                        <rect key="frame" x="186" y="18" width="17" height="17"/>
+                        <rect key="frame" x="178" y="21" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="8TY-Bt-Gr5"/>
                             <constraint firstAttribute="height" constant="17" id="qZO-1c-cMz"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iIY-yI-hVx">
-                        <rect key="frame" x="211" y="18" width="17" height="17"/>
+                        <rect key="frame" x="203" y="21" width="17" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="Ygc-Ty-tHl"/>
                             <constraint firstAttribute="height" constant="17" id="eZU-Ge-ADn"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lamp blub" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="to2-LX-LE9">
-                        <rect key="frame" x="74" y="18" width="111" height="30"/>
+                        <rect key="frame" x="82" y="18" width="95" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="kPy-YP-S8T"/>
                         </constraints>

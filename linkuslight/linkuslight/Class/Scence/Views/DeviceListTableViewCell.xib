@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G17023" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,38 +20,38 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zgc-IE-arQ">
-                        <rect key="frame" x="26" y="13" width="49" height="49"/>
+                        <rect key="frame" x="34" y="13" width="49" height="49"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="49" id="5s3-xf-dzs"/>
                             <constraint firstAttribute="width" constant="49" id="WEx-J3-evo"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Clg-IW-GcY">
-                        <rect key="frame" x="94" y="27" width="157" height="21"/>
+                        <rect key="frame" x="102" y="27" width="141" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Kx8-bc-50f"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNo-wd-8tH">
-                        <rect key="frame" x="272" y="23" width="30" height="30"/>
+                        <rect key="frame" x="264" y="23" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="MY3-t8-f1i"/>
                             <constraint firstAttribute="width" constant="30" id="UYs-Pz-F8D"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                         <state key="normal" title="○">
-                            <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
                             <action selector="didSelectedButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZDZ-xH-yfL"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KJ-bB-SZJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
-                        <color key="tintColor" red="0.39746556020000001" green="0.65028409890000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="8" y="3" width="304" height="70.5"/>
+                        <color key="tintColor" red="0.39746556020000001" green="0.65028409890000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <action selector="didBCSelectedButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VHn-eO-WBb"/>
                         </connections>
