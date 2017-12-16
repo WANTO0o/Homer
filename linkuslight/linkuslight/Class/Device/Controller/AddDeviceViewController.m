@@ -10,14 +10,21 @@
 
 #import "MBProgressHUD+Add.h"
 #import "AddDeviceViewController.h"
+#import "Homer.h"
 
-@interface AddDeviceViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *ssidTextField;
+@interface AddDeviceViewController () <HomerConnectDelegate>
+//@property (weak, nonatomic) IBOutlet UITextField *ssidTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *mutButton;
 @property (weak, nonatomic) IBOutlet UIImageView *addStateImg;
 @property (weak, nonatomic) IBOutlet UILabel *addStateText;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UILabel *ssidLabel;
+
+@property (nonatomic, copy) NSString *ssid;
+@property (nonatomic, copy) NSString *pswd;
+
+@property (nonatomic, strong) Homer *homerCtrl;
 
 @end
 
@@ -25,6 +32,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.homerCtrl = [[Homer alloc]init];
+    _ssid = [_homerCtrl getSsid];
+    
     [self initView];
     // Do any additional setup after loading the view from its nib.
 }
@@ -83,10 +93,11 @@
 }
 
 - (IBAction)didDoneButtonClicked:(id)sender {
+    _pswd = _passwordTextField.text;
+    [_homerCtrl connectWithApSsid:_ssid andApPwd:_pswd andTimeoutMillisecond:25000 andDelegate:self];
     
-    [MBProgressHUD showMsg:@"添加成功" imgName:@"addition_succeed" duration:1 toView:self.view];
+    //[MBProgressHUD showMsg:@"添加成功" imgName:@"addition_succeed" duration:1 toView:self.view];
     //[MBProgressHUD showMsg:@"添加失败" imgName:@"addition_be defeated" duration:1 toView:self.view];
-
     //[self backUPView];
 }
 
@@ -95,6 +106,7 @@
 {
     [self.view setBackgroundColor:[UIColor colorWithRed:0.3975 green:0.6503 blue:1.0 alpha:1.0]];
     UIColor *color = [UIColor whiteColor];
+    _ssidLabel.text = [_homerCtrl getSsid];
     _passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName: color}];
     
     UIView *rightVeiw = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -148,6 +160,22 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
 
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onDeviceConnect:(Device *)result {
+    NSString *devIp = [result getIp];
+    NSString *devId = [result getId];
+    DebugLog(@"IP:%@ ID:%@", devIp, devId);
+    
+    if([devId length] == 0) {
+        DebugLog(@"添加失败");
+        [MBProgressHUD showMsg:@"添加失败" imgName:@"addition_be defeated" duration:3 toView:self.view];
+    } else {
+        DebugLog(@"添加成功");
+        NSString *msg = [NSString stringWithFormat:@"添加成功 %@", devIp];
+        [MBProgressHUD showMsg:msg imgName:@"addition_succeed" duration:3 toView:self.view];
+        [self backUPView];
+    }
 }
 
 @end

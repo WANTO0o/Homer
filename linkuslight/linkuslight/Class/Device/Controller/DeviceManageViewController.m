@@ -25,7 +25,7 @@
 @property (nonatomic,retain)UIView *tipsView;
 @property (nonatomic,retain)NSMutableArray *devices;
 
-@property (atomic, strong) Homer *_homerCtrl;
+@property (nonatomic, strong) Homer *_homerCtrl;
 
 @end
 
@@ -163,15 +163,10 @@
 //    dev3.linkState = LULDeviceLinkStateWiFi;
 //    [_devices addObject:dev3];
     
-    [self._homerCtrl beginSearchDeviceWithDelegate:self];
+    UIView *theView = _deviceTableView.backgroundView;
+    [theView addSubview:_tipsView];
     
-    if (_devices.count > 0) {
-        [_tipsView removeFromSuperview];
-    } else {
-        
-        UIView *theView = _deviceTableView.backgroundView;
-        [theView addSubview:_tipsView];
-    }
+    [self._homerCtrl beginSearchDeviceWithDelegate:self];
 }
 
 - (void)loadData {
@@ -181,24 +176,31 @@
         return;
     }*/
     
+    // 由于当前的设备搜索没有在操作结束时候返回一个委托，导致无法根据知道什么时候搜索完毕，因此endRefresh的时机不好控制
+    // 临时是将设备列表和界面更新到动作放在每次搜索到设备时候调用到委托内
+    // 可以确保设备列表的清空和加载正常，但是无法很好的让用户根据endRefresh的效果感受到搜索过程
+    
+    // 每次重载数据前先清空数据
+    [_devices removeAllObjects];
     [self._homerCtrl beginSearchDeviceWithDelegate:self];
-    [self.deviceTableView reloadData];
+    
     [self endRefresh];
 }
 
 #pragma mark - 下拉刷新
 - (void)headerRefresh {
+    DebugLog(@"headerRefresh");
     
     [self loadData];
 }
 
 #pragma mark - 结束下拉刷新和上拉加载
 - (void)endRefresh {
+    DebugLog(@"endRefresh");
     
-    if (_devices.count == 0) {
-        [self.deviceTableView.mj_header endRefreshing];
-    }
-    
+    //if (_devices.count == 0) {
+    //    [self.deviceTableView.mj_header endRefreshing];
+    //}
     [self.deviceTableView.mj_header endRefreshing];
     
 }
@@ -305,19 +307,6 @@
     if (indexPath.row < _devices.count) {
         NSLog(@"didSelectRowAtIndexRow:%ld",(long)indexPath.row);
         [self showLightViewWithDeviceInfo:_devices[indexPath.row]];
-//        switch (indexPath.row) {
-//                case 0:
-//                [self showLightViewWithDeviceType:LULDeviceLinkStateColourLight];
-//                break;
-//                case 1:
-//                [self showLightViewWithDeviceType:LULDeviceLinkStateWhiteLight];
-//                break;
-//                case 2:
-//                [self showSocketView];
-//                break;
-//            default:
-//                break;
-//        }
     };
 }
 
@@ -396,7 +385,15 @@
         devFind.hasStatuFlag = NO;
         devFind.hasClockFlag = YES;
         devFind.linkState = LULDeviceLinkStateWiFi;
+        
         [_devices addObject:devFind];
+        
+        // TODO: 是否需要判断_tipsView当前是否存在于Superview中，再做remove的动作
+        if(_devices.count > 0) {
+            [_tipsView removeFromSuperview];
+        }
+        [self.deviceTableView reloadData];
+        
     });
 }
 
