@@ -19,6 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *lightView;
 
+@property(strong, nonatomic)UIView *rightbgView;
+
 @property(strong, nonatomic)UIView *rightMenuView;
 
 @property (weak, nonatomic) IBOutlet UIButton *alarmONButton;
@@ -134,6 +136,10 @@
     [self transform];
 
     [self.view setBackgroundColor:[UIColor colorWithRed:0.3975 green:0.6503 blue:1.0 alpha:1.0]];
+    
+    self.rightbgView = [[UIView alloc] initWithFrame:CGRectMake(30, 30, 30, 30)];
+    
+    [self.view addSubview:self.rightbgView];
     /*UIColor *color = [UIColor whiteColor];
      _passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName: color}];
      
@@ -371,7 +377,7 @@
 {
     //DebugLog(@"%@",selectedColor);
     DebugLog(@"currentValue:%d",currentValue);
-
+    self.rightbgView.backgroundColor = selectedColor;
     //获取hsv
     struct HSV hsv;
     [selectedColor getHue:&hsv.hu saturation:&hsv.sa brightness:&hsv.br alpha:&hsv.al];

@@ -947,7 +947,7 @@
 				TargetAttributes = {
 					209AD8AD1F8605CE0062830A = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = VB67W4ATZ3;
+						DevelopmentTeam = G4YDC5HG5M;
 						SystemCapabilities = {
 							com.apple.HomeKit = {
 								enabled = 0;
@@ -1399,7 +1399,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = VB67W4ATZ3;
+				DEVELOPMENT_TEAM = G4YDC5HG5M;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/LoginWithAmazon";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/linkuslight/PrefixHeader.pch";
@@ -1422,7 +1422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = VB67W4ATZ3;
+				DEVELOPMENT_TEAM = G4YDC5HG5M;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/LoginWithAmazon";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/linkuslight/PrefixHeader.pch";

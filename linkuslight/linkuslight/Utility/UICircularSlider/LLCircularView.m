@@ -404,11 +404,13 @@
     angle = currentAngle;
 
     CGPoint handleCenter = [self pointFromAngle:angle];
-    CGPoint location = CGPointMake(handleCenter.x-_lineWidth/2+5, handleCenter.y-_lineWidth/2+5);
-    
-    UIColor *pointcolor = [self colorOfPoint:handleCenter];
+    CGPoint location = CGPointMake(handleCenter.x-_lineWidth/2+25, handleCenter.y-_lineWidth/2+25);
+    NSLog(@"location.is..%f,%f",location.x,location.y);
+
+    UIColor *pointcolor = [self colorOfPoint:location];
     
     struct HSV hsv;
+    
     [pointcolor getHue:&hsv.hu saturation:&hsv.sa brightness:&hsv.br alpha:&hsv.al];
     /*if ((ceil(hsv.hu) == 0)&&(ceil(hsv.sa) == 0)&&(ceil(hsv.br) != 0)) {
         
