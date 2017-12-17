@@ -93,11 +93,11 @@
 		20EE48111F9B5D86007B02E7 /* AddDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20EE480F1F9B5D86007B02E7 /* AddDeviceViewController.xib */; };
 		3E3B2A046DE524E162DD09F2 /* libPods-linkuslightTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8925368F5248F9ECC23A3E /* libPods-linkuslightTests.a */; };
 		4643D7020EA50F9F41A61732 /* libPods-linkuslight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCCE846A73A00EC59073990F /* libPods-linkuslight.a */; };
-		C549A1141FDC00B20076C8A0 /* LoginWithAmazon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C549A1131FDC00B10076C8A0 /* LoginWithAmazon.framework */; };
 		C549A1161FDC00E20076C8A0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C549A1151FDC00E20076C8A0 /* Security.framework */; };
 		C549A1181FDC00ED0076C8A0 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C549A1171FDC00ED0076C8A0 /* SafariServices.framework */; };
 		C549A11B1FE1756A0076C8A0 /* ColorLight.m in Sources */ = {isa = PBXBuildFile; fileRef = C549A11A1FE1756A0076C8A0 /* ColorLight.m */; };
 		C549A11E1FE178300076C8A0 /* WhiteLight.m in Sources */ = {isa = PBXBuildFile; fileRef = C549A11D1FE178300076C8A0 /* WhiteLight.m */; };
+		C54C97731FE616EC0012360A /* LoginWithAmazon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54C97721FE616EC0012360A /* LoginWithAmazon.framework */; };
 		C5A16BB31FDB96A600707D69 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D35B661FD84D3600EF22A7 /* CFNetwork.framework */; };
 		C5D35B6B1FD8509300EF22A7 /* libHomer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D35B691FD8509200EF22A7 /* libHomer.a */; };
 /* End PBXBuildFile section */
@@ -273,13 +273,13 @@
 		AB8925368F5248F9ECC23A3E /* libPods-linkuslightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-linkuslightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCE846A73A00EC59073990F /* libPods-linkuslight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-linkuslight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8E326B2E6C518843EF4860 /* Pods-linkuslight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-linkuslight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-linkuslight/Pods-linkuslight.debug.xcconfig"; sourceTree = "<group>"; };
-		C549A1131FDC00B10076C8A0 /* LoginWithAmazon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoginWithAmazon.framework; path = "../../AmazonAWS/Amazon-iOS-SDKs/LoginWithAmazon/LoginWithAmazon.framework"; sourceTree = "<group>"; };
 		C549A1151FDC00E20076C8A0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C549A1171FDC00ED0076C8A0 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		C549A1191FE1756A0076C8A0 /* ColorLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorLight.h; sourceTree = "<group>"; };
 		C549A11A1FE1756A0076C8A0 /* ColorLight.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorLight.m; sourceTree = "<group>"; };
 		C549A11C1FE178300076C8A0 /* WhiteLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteLight.h; sourceTree = "<group>"; };
 		C549A11D1FE178300076C8A0 /* WhiteLight.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteLight.m; sourceTree = "<group>"; };
+		C54C97721FE616EC0012360A /* LoginWithAmazon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoginWithAmazon.framework; path = LoginWithAmazon/LoginWithAmazon.framework; sourceTree = "<group>"; };
 		C5A16BB01FDB904500707D69 /* linkuslight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = linkuslight.entitlements; sourceTree = "<group>"; };
 		C5D35B661FD84D3600EF22A7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		C5D35B691FD8509200EF22A7 /* libHomer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHomer.a; sourceTree = "<group>"; };
@@ -296,9 +296,9 @@
 			files = (
 				C549A1181FDC00ED0076C8A0 /* SafariServices.framework in Frameworks */,
 				C549A1161FDC00E20076C8A0 /* Security.framework in Frameworks */,
-				C549A1141FDC00B20076C8A0 /* LoginWithAmazon.framework in Frameworks */,
 				C5A16BB31FDB96A600707D69 /* CFNetwork.framework in Frameworks */,
 				C5D35B6B1FD8509300EF22A7 /* libHomer.a in Frameworks */,
+				C54C97731FE616EC0012360A /* LoginWithAmazon.framework in Frameworks */,
 				4643D7020EA50F9F41A61732 /* libPods-linkuslight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -853,11 +853,11 @@
 			children = (
 				C549A1171FDC00ED0076C8A0 /* SafariServices.framework */,
 				C549A1151FDC00E20076C8A0 /* Security.framework */,
-				C549A1131FDC00B10076C8A0 /* LoginWithAmazon.framework */,
 				C5D35B661FD84D3600EF22A7 /* CFNetwork.framework */,
 				BCCE846A73A00EC59073990F /* libPods-linkuslight.a */,
 				AB8925368F5248F9ECC23A3E /* libPods-linkuslightTests.a */,
 				D59185B580240E147DFE2D3E /* libPods-linkuslightUITests.a */,
+				C54C97721FE616EC0012360A /* LoginWithAmazon.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1400,7 +1400,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = VB67W4ATZ3;
-				FRAMEWORK_SEARCH_PATHS = "/Users/zex/Documents/Workspace/AmazonAWS/Amazon-iOS-SDKs/LoginWithAmazon";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/LoginWithAmazon";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/linkuslight/PrefixHeader.pch";
 				INFOPLIST_FILE = linkuslight/Info.plist;
@@ -1423,7 +1423,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = VB67W4ATZ3;
-				FRAMEWORK_SEARCH_PATHS = "/Users/zex/Documents/Workspace/AmazonAWS/Amazon-iOS-SDKs/LoginWithAmazon";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/LoginWithAmazon";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/linkuslight/PrefixHeader.pch";
 				INFOPLIST_FILE = linkuslight/Info.plist;
