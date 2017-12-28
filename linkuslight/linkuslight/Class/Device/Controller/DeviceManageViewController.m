@@ -7,6 +7,7 @@
 //
 
 #import "DeviceInfo.h"
+#import "ColorPickerController.h"
 #import "MJRefresh/MJRefresh.h"
 #import "ClockViewController.h"
 #import "DeviceTableViewCell.h"
@@ -306,7 +307,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < _devices.count) {
         NSLog(@"didSelectRowAtIndexRow:%ld",(long)indexPath.row);
-        [self showLightViewWithDeviceInfo:_devices[indexPath.row]];
+        //[self showLightViewWithDeviceInfo:_devices[indexPath.row]];
+        [self showColorPickerController];
     };
 }
 
@@ -321,6 +323,18 @@
     DebugLog(@"changanle");
     return NO;
 }
+
+- (void)showColorPickerController {
+    ColorPickerController *controller = [[ColorPickerController alloc] init];
+    
+    UIImage * imng = [UIImage imageNamed:@"addition_bg_sh"];
+    [controller createARGBBitmapContextFromImage:imng.CGImage];
+    [self setHidesBottomBarWhenPushed:YES];
+    
+    [self.navigationController pushViewController:controller animated:YES];
+    [self setHidesBottomBarWhenPushed:NO];
+}
+
 
 - (void)showLightViewWithDeviceInfo:(DeviceInfo*)devInfo {
     LightControlViewController *controller = [[LightControlViewController alloc] init];

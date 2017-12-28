@@ -30,7 +30,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    // 设置可获取崩溃信息
+    // 设置可获取崩溃信息 AiIaJi
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
 
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;

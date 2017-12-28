@@ -376,7 +376,7 @@
 - (void)didCircularClicked:(UIColor*)selectedColor Value:(int)currentValue
 {
     //DebugLog(@"%@",selectedColor);
-    DebugLog(@"currentValue:%d",currentValue);
+    //DebugLog(@"currentValue:%d",currentValue);
     self.rightbgView.backgroundColor = selectedColor;
     //获取hsv
     struct HSV hsv;

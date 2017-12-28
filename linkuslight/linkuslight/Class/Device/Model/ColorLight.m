@@ -32,7 +32,7 @@
     _Color_S = colorS;
     _Color_B = colorB;
     if (_deviceInfo.linkState == LULDeviceLinkStateWiFi) {
-        DebugLog(@"ColorH:%d, ColorS:%d, ColorB:%d", _Color_H, _Color_S, _Color_B);
+        //DebugLog(@"ColorH:%d, ColorS:%d, ColorB:%d", _Color_H, _Color_S, _Color_B);
         [_device controlColorH:colorH S:colorS B:colorB];
     }
 }
