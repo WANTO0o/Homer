@@ -72,6 +72,8 @@
 		209AD97D1F87CF720062830A /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 209AD9781F87CF720062830A /* MBProgressHUD+Add.m */; };
 		209AD97E1F87CF720062830A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 209AD97A1F87CF720062830A /* MBProgressHUD.m */; };
 		209AD97F1F87CF720062830A /* README.mdown in Sources */ = {isa = PBXBuildFile; fileRef = 209AD97B1F87CF720062830A /* README.mdown */; };
+		209FB5471FF5F405001255CB /* WHCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 209FB5431FF5F405001255CB /* WHCircularSlider.m */; };
+		209FB54B1FF5F44D001255CB /* ColorCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209FB54A1FF5F44D001255CB /* ColorCircleView.m */; };
 		20A71DD01FAE05A2000C543B /* LLInputGroupNameAlterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A71DCF1FAE05A2000C543B /* LLInputGroupNameAlterView.m */; };
 		20A71DD31FAE05D0000C543B /* LLSelectGroupTypeAlterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A71DD21FAE05D0000C543B /* LLSelectGroupTypeAlterView.m */; };
 		20A71DDC1FAE07EC000C543B /* GroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A71DDA1FAE07EC000C543B /* GroupTableViewCell.m */; };
@@ -237,6 +239,10 @@
 		209AD9791F87CF720062830A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		209AD97A1F87CF720062830A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		209AD97B1F87CF720062830A /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.mdown; sourceTree = "<group>"; };
+		209FB5431FF5F405001255CB /* WHCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHCircularSlider.m; sourceTree = "<group>"; };
+		209FB5451FF5F405001255CB /* WHCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHCircularSlider.h; sourceTree = "<group>"; };
+		209FB5491FF5F44D001255CB /* ColorCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCircleView.h; sourceTree = "<group>"; };
+		209FB54A1FF5F44D001255CB /* ColorCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCircleView.m; sourceTree = "<group>"; };
 		20A71DCE1FAE05A2000C543B /* LLInputGroupNameAlterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLInputGroupNameAlterView.h; sourceTree = "<group>"; };
 		20A71DCF1FAE05A2000C543B /* LLInputGroupNameAlterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLInputGroupNameAlterView.m; sourceTree = "<group>"; };
 		20A71DD11FAE05D0000C543B /* LLSelectGroupTypeAlterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSelectGroupTypeAlterView.h; sourceTree = "<group>"; };
@@ -637,6 +643,7 @@
 		209AD8F71F867E270062830A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				209FB5421FF5F405001255CB /* WHCircularSlider */,
 				20779A031FA5ACA40095ED0C /* UICircularSlider */,
 				207799FE1FA42FE40095ED0C /* HLAlertView */,
 				209AD8F81F867E270062830A /* Category */,
@@ -826,6 +833,17 @@
 				209AD97B1F87CF720062830A /* README.mdown */,
 			);
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		209FB5421FF5F405001255CB /* WHCircularSlider */ = {
+			isa = PBXGroup;
+			children = (
+				209FB5491FF5F44D001255CB /* ColorCircleView.h */,
+				209FB54A1FF5F44D001255CB /* ColorCircleView.m */,
+				209FB5431FF5F405001255CB /* WHCircularSlider.m */,
+				209FB5451FF5F405001255CB /* WHCircularSlider.h */,
+			);
+			path = WHCircularSlider;
 			sourceTree = "<group>";
 		};
 		20BFF7C21F890BDA002FFD52 /* EAIntroView */ = {
@@ -1200,6 +1218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				209FB54B1FF5F44D001255CB /* ColorCircleView.m in Sources */,
 				209AD95C1F87722E0062830A /* LOLUser.m in Sources */,
 				209AD9591F8765DC0062830A /* LULSessionManager.m in Sources */,
 				209AD9221F867E270062830A /* ViewController.m in Sources */,
@@ -1223,6 +1242,7 @@
 				20B09E0E1FB0619100301F8E /* DeviceListViewController.m in Sources */,
 				207799F71FA2284E0095ED0C /* ClockViewController.m in Sources */,
 				209AD8B61F8605CE0062830A /* AppDelegate.m in Sources */,
+				209FB5471FF5F405001255CB /* WHCircularSlider.m in Sources */,
 				209AD9241F867E270062830A /* NSDate+convenience.m in Sources */,
 				209AD9271F867E270062830A /* numberBOOL.m in Sources */,
 				209AD9431F8756B60062830A /* ScenceManageViewController.m in Sources */,

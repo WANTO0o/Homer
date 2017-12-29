@@ -9,11 +9,27 @@
 #import "ColorPickerController.h"
 
 @interface ColorPickerController ()
+@property(strong, nonatomic)UIView *rightbgView;
 
 @end
 
 @implementation ColorPickerController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    [self initView];
+}
+
+- (void)initView
+{
+    //[self.view setBackgroundColor:[UIColor colorWithRed:0.3975 green:0.6503 blue:1.0 alpha:1.0]];
+    
+    self.rightbgView = [[UIView alloc] initWithFrame:CGRectMake(130, 130, 30, 30)];
+    
+    [self.view addSubview:self.rightbgView];
+}
 
 #pragma mark - 点击结束
 - (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -89,6 +105,8 @@
         
         // 根据RGBA 生成颜色对象
         color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
+        
+        self.rightbgView.backgroundColor = color;
     }
     
     // 操作完成后,释放上下文对象

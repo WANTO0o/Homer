@@ -137,32 +137,32 @@
 
     _devices = [NSMutableArray arrayWithCapacity:1];
     
-//    DeviceInfo *dev = [[DeviceInfo alloc] init];
-//    dev.deviceID = @"SHTBY0001";
-//    dev.isOn = YES;
-//    dev.name = @"lamp blub 001";
-//    dev.hasStatuFlag = YES;
-//    dev.hasClockFlag = YES;
-//    dev.linkState = LULDeviceLinkStateCloud;
-//    [_devices addObject:dev];
-//
-//    DeviceInfo *dev2 = [[DeviceInfo alloc] init];
-//    dev2.deviceID = @"SHTBY0002";
-//    dev2.isOn = YES;
-//    dev2.name = @"lamp blub 002";
-//    dev2.hasStatuFlag = NO;
-//    dev2.hasClockFlag = YES;
-//    dev2.linkState = LULDeviceLinkStateWiFi;
-//    [_devices addObject:dev2];
-//
-//    DeviceInfo *dev3 = [[DeviceInfo alloc] init];
-//    dev3.deviceID = @"SHTBY0003";
-//    dev3.isOn = NO;
-//    dev3.name = @"lamp blub 003";
-//    dev3.hasStatuFlag = NO;
-//    dev3.hasClockFlag = YES;
-//    dev3.linkState = LULDeviceLinkStateWiFi;
-//    [_devices addObject:dev3];
+    DeviceInfo *dev = [[DeviceInfo alloc] init];
+    dev.deviceID = @"SHTBY0001";
+    dev.isOn = YES;
+    dev.name = @"lamp blub 001";
+    dev.hasStatuFlag = YES;
+    dev.hasClockFlag = YES;
+    dev.linkState = LULDeviceLinkStateCloud;
+    [_devices addObject:dev];
+
+    DeviceInfo *dev2 = [[DeviceInfo alloc] init];
+    dev2.deviceID = @"SHTBY0002";
+    dev2.isOn = YES;
+    dev2.name = @"lamp blub 002";
+    dev2.hasStatuFlag = NO;
+    dev2.hasClockFlag = YES;
+    dev2.linkState = LULDeviceLinkStateWiFi;
+    [_devices addObject:dev2];
+
+    DeviceInfo *dev3 = [[DeviceInfo alloc] init];
+    dev3.deviceID = @"SHTBY0003";
+    dev3.isOn = NO;
+    dev3.name = @"lamp blub 003";
+    dev3.hasStatuFlag = NO;
+    dev3.hasClockFlag = YES;
+    dev3.linkState = LULDeviceLinkStateWiFi;
+    [_devices addObject:dev3];
     
     UIView *theView = _deviceTableView.backgroundView;
     [theView addSubview:_tipsView];
@@ -182,7 +182,7 @@
     // 可以确保设备列表的清空和加载正常，但是无法很好的让用户根据endRefresh的效果感受到搜索过程
     
     // 每次重载数据前先清空数据
-    [_devices removeAllObjects];
+    //[_devices removeAllObjects];
     [self._homerCtrl beginSearchDeviceWithDelegate:self];
     
     [self endRefresh];
@@ -307,11 +307,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < _devices.count) {
         NSLog(@"didSelectRowAtIndexRow:%ld",(long)indexPath.row);
-        //[self showLightViewWithDeviceInfo:_devices[indexPath.row]];
-        [self showColorPickerController];
+        [self showLightViewWithDeviceInfo:_devices[indexPath.row]];
     };
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
@@ -327,8 +325,8 @@
 - (void)showColorPickerController {
     ColorPickerController *controller = [[ColorPickerController alloc] init];
     
-    UIImage * imng = [UIImage imageNamed:@"addition_bg_sh"];
-    [controller createARGBBitmapContextFromImage:imng.CGImage];
+    //UIImage * imng = [UIImage imageNamed:@"addition_bg_sh"];
+    //[controller createARGBBitmapContextFromImage:imng.CGImage];
     [self setHidesBottomBarWhenPushed:YES];
     
     [self.navigationController pushViewController:controller animated:YES];

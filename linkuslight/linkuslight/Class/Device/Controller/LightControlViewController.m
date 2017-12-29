@@ -10,6 +10,7 @@
 #import "LZCircularSlider.h"
 #import "UIColor-Extensions.h"
 #import "ClockViewController.h"
+#import "WHCircularSlider.h"
 #import "LightControlViewController.h"
 #import "ColorLight.h"
 
@@ -39,7 +40,7 @@
 
 @property (retain, nonatomic) LLCircularView *whiteLightSlider;
 
-@property (retain, nonatomic) LLCircularView *colourLightSlider;
+@property (retain, nonatomic) WHCircularSlider *colourLightSlider;
 
 @property (retain, nonatomic) LZCircularSlider *lightBrightnessSlider;
 
@@ -137,9 +138,9 @@
 
     [self.view setBackgroundColor:[UIColor colorWithRed:0.3975 green:0.6503 blue:1.0 alpha:1.0]];
     
-    self.rightbgView = [[UIView alloc] initWithFrame:CGRectMake(30, 30, 30, 30)];
+    //self.rightbgView = [[UIView alloc] initWithFrame:CGRectMake(30, 30, 30, 30)];
     
-    [self.view addSubview:self.rightbgView];
+    //[self.view addSubview:self.rightbgView];
     /*UIColor *color = [UIColor whiteColor];
      _passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName: color}];
      
@@ -339,9 +340,10 @@
 - (void)turnSlider{
     
     CGRect fram = _lightView.frame;
-    
+    CGRect fram1 = _lightView.bounds;
+
     if (!self.whiteLightSlider) {
-        _whiteLightSlider = [[LLCircularView alloc] initWithFrame:CGRectMake(fram.origin.x+1, fram.origin.y+2, fram.size.width, fram.size.width)];
+        _whiteLightSlider = [[LLCircularView alloc] initWithFrame:CGRectMake(kScreen_Width/2-fram.size.width/2, fram.origin.y+2, fram.size.width, fram.size.width)];
         _whiteLightSlider.backgroundColor = [UIColor clearColor];
         _whiteLightSlider.lineWidth =30;
         _whiteLightSlider.maximumValue =7500;
@@ -352,14 +354,35 @@
     }
     
     if (!self.colourLightSlider) {
-        _colourLightSlider = [[LLCircularView alloc] initWithFrame:CGRectMake(fram.origin.x+1, fram.origin.y+2, fram.size.width, fram.size.width)];
+        /*_colourLightSlider = [[LLCircularView alloc] initWithFrame:CGRectMake(fram.origin.x+1, fram.origin.y+2, fram.size.width, fram.size.width)];
         _colourLightSlider.backgroundColor = [UIColor clearColor];
         _colourLightSlider.lineWidth =30;
         _colourLightSlider.maximumValue =7500;
         _colourLightSlider.minimumValue =2700;
         _colourLightSlider.currentValue =2700;
         _colourLightSlider.LightType = LULLightSliderTypeColourLight;
-        _colourLightSlider.delegate = self;
+        _colourLightSlider.delegate = self;*/
+        self.colourLightSlider = [WHCircularSlider new];
+        
+        _colourLightSlider.frame = CGRectMake(kScreen_Width/2-fram.size.width/2, fram.origin.y+2, fram.size.width, fram.size.width);
+        _colourLightSlider.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:_colourLightSlider];
+        
+        /*UIView *v = [[UIView alloc]initWithFrame:CGRectMake(50, 50, 50, 50)];
+        v.layer.cornerRadius = 25;
+        v.layer.masksToBounds = YES;
+        [self.view addSubview:v];*/
+        
+        _colourLightSlider.colBlock = ^(UIColor *col){
+            
+            struct HSV hsv;
+            
+            [col getHue:&hsv.hu saturation:&hsv.sa brightness:&hsv.br alpha:&hsv.al];
+            
+            DebugLog(@"HSV is :%f,%f,%f,%f",hsv.hu,hsv.sa,hsv.br,hsv.al);
+
+        };
+        
     }
 
     if (_LightType == LULLightSliderTypeWhiteLight) {
@@ -377,7 +400,7 @@
 {
     //DebugLog(@"%@",selectedColor);
     //DebugLog(@"currentValue:%d",currentValue);
-    self.rightbgView.backgroundColor = selectedColor;
+    //self.rightbgView.backgroundColor = selectedColor;
     //获取hsv
     struct HSV hsv;
     [selectedColor getHue:&hsv.hu saturation:&hsv.sa brightness:&hsv.br alpha:&hsv.al];
