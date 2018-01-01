@@ -19,6 +19,7 @@
 #import "UINavigationBar+BackgroundColor.h"
 
 #import "Homer.h"
+#import "DeviceManager.h"
 
 @interface DeviceManageViewController ()<UITableViewDelegate, UITableViewDataSource, HomerSearchDelegate>
 
@@ -62,7 +63,7 @@
     [super viewDidAppear:animated];
 
     [self.navigationController.topViewController.navigationItem setTitle:@"LINKUS LIGHT"];
-    [self.deviceTableView.mj_header beginRefreshing];
+    //[self.deviceTableView.mj_header beginRefreshing];
 }
 
 /*
@@ -114,19 +115,19 @@
         [theView addSubview:_tipsView];
     }
     //Footer
-    UILabel *comnameLable = [[UILabel alloc] initWithFrame:(CGRectMake(0, tableFrame.size.height-30, kScreen_Width, 20))];
-    comnameLable.textAlignment = NSTextAlignmentCenter;
-    comnameLable.textColor = [UIColor blackColor];
-    comnameLable.font = [UIFont systemFontOfSize:12];
-    comnameLable.text = @"凌科斯科技（深圳）有限公司";
-    [theView addSubview:comnameLable];
-    
-    UILabel *comLinkLable = [[UILabel alloc] initWithFrame:(CGRectMake(0, tableFrame.size.height-13, kScreen_Width, 17))];
-    comLinkLable.textAlignment = NSTextAlignmentCenter;
-    comLinkLable.textColor = [UIColor colorWithRed:0.3686 green:0.6 blue:0.9333 alpha:1.0];
-    comLinkLable.font = [UIFont systemFontOfSize:11];
-    comLinkLable.text = @"www.linkustek.com";
-    [theView addSubview:comLinkLable];
+//    UILabel *comnameLable = [[UILabel alloc] initWithFrame:(CGRectMake(0, tableFrame.size.height-30, kScreen_Width, 20))];
+//    comnameLable.textAlignment = NSTextAlignmentCenter;
+//    comnameLable.textColor = [UIColor blackColor];
+//    comnameLable.font = [UIFont systemFontOfSize:12];
+//    comnameLable.text = @"凌科斯科技（深圳）有限公司";
+//    [theView addSubview:comnameLable];
+//
+//    UILabel *comLinkLable = [[UILabel alloc] initWithFrame:(CGRectMake(0, tableFrame.size.height-13, kScreen_Width, 17))];
+//    comLinkLable.textAlignment = NSTextAlignmentCenter;
+//    comLinkLable.textColor = [UIColor colorWithRed:0.3686 green:0.6 blue:0.9333 alpha:1.0];
+//    comLinkLable.font = [UIFont systemFontOfSize:11];
+//    comLinkLable.text = @"www.linkustek.com";
+//    [theView addSubview:comLinkLable];
 
     _deviceTableView.backgroundView = theView;
     //默认【下拉刷新】
@@ -135,39 +136,45 @@
 
 - (void)initData {
 
-    _devices = [NSMutableArray arrayWithCapacity:1];
+    _devices = [NSMutableArray arrayWithCapacity:0];
     
-    DeviceInfo *dev = [[DeviceInfo alloc] init];
-    dev.deviceID = @"SHTBY0001";
-    dev.isOn = YES;
-    dev.name = @"lamp blub 001";
-    dev.hasStatuFlag = YES;
-    dev.hasClockFlag = YES;
-    dev.linkState = LULDeviceLinkStateCloud;
-    [_devices addObject:dev];
-
-    DeviceInfo *dev2 = [[DeviceInfo alloc] init];
-    dev2.deviceID = @"SHTBY0002";
-    dev2.isOn = YES;
-    dev2.name = @"lamp blub 002";
-    dev2.hasStatuFlag = NO;
-    dev2.hasClockFlag = YES;
-    dev2.linkState = LULDeviceLinkStateWiFi;
-    [_devices addObject:dev2];
-
-    DeviceInfo *dev3 = [[DeviceInfo alloc] init];
-    dev3.deviceID = @"SHTBY0003";
-    dev3.isOn = NO;
-    dev3.name = @"lamp blub 003";
-    dev3.hasStatuFlag = NO;
-    dev3.hasClockFlag = YES;
-    dev3.linkState = LULDeviceLinkStateWiFi;
-    [_devices addObject:dev3];
+//    DeviceInfo *dev = [[DeviceInfo alloc] init];
+//    dev.deviceID = @"SHTBY0001";
+//    dev.isOn = YES;
+//    dev.name = @"lamp blub 001";
+//    dev.hasStatuFlag = YES;
+//    dev.hasClockFlag = YES;
+//    dev.linkState = LULDeviceLinkStateCloud;
+//    [_devices addObject:dev];
+//
+//    DeviceInfo *dev2 = [[DeviceInfo alloc] init];
+//    dev2.deviceID = @"SHTBY0002";
+//    dev2.isOn = YES;
+//    dev2.name = @"lamp blub 002";
+//    dev2.hasStatuFlag = NO;
+//    dev2.hasClockFlag = YES;
+//    dev2.linkState = LULDeviceLinkStateWiFi;
+//    dev2.deviceType= LULDeviceLinkStateWhiteLight;
+//    [_devices addObject:dev2];
+//
+//    DeviceInfo *dev3 = [[DeviceInfo alloc] init];
+//    dev3.deviceID = @"SHTBY0003";
+//    dev3.isOn = NO;
+//    dev3.name = @"lamp blub 003";
+//    dev3.hasStatuFlag = NO;
+//    dev3.hasClockFlag = YES;
+//    dev3.linkState = LULDeviceLinkStateWiFi;
+//    [_devices addObject:dev3];
     
-    UIView *theView = _deviceTableView.backgroundView;
-    [theView addSubview:_tipsView];
+    for (DeviceInfo *devInfo in [DeviceManager sharedManager].deviceList) {
+        [_devices addObject:devInfo];
+    }
     
-    [self._homerCtrl beginSearchDeviceWithDelegate:self];
+    // TODO: 正常界面的更新不应该放在initData这里，而是initData之后initView里去初始化，不知为何调整initData和initView的顺序之后没有相应效果
+    if(_devices.count <= 0) {
+        UIView *theView = _deviceTableView.backgroundView;
+        [theView addSubview:_tipsView];
+    }
 }
 
 - (void)loadData {
@@ -182,10 +189,27 @@
     // 可以确保设备列表的清空和加载正常，但是无法很好的让用户根据endRefresh的效果感受到搜索过程
     
     // 每次重载数据前先清空数据
-    //[_devices removeAllObjects];
+    [_devices removeAllObjects];
+    // TODO: 这种做法需要更改，每次都需要DeviceManager去清理所有数据，那么这个DeviceManager就失去意义了。关键当前没有一个合理的标志搜索结束的标记。
+    [[DeviceManager sharedManager].deviceList removeAllObjects];
     [self._homerCtrl beginSearchDeviceWithDelegate:self];
     
     [self endRefresh];
+}
+
+- (void)updateDeviceData {
+    for (DeviceInfo *devInfo in [DeviceManager sharedManager].deviceList) {
+        [_devices addObject:devInfo];
+    }
+    
+    if(_devices.count <= 0) {
+        UIView *theView = _deviceTableView.backgroundView;
+        [theView addSubview:_tipsView];
+    } else {
+        [_tipsView removeFromSuperview];
+    }
+    
+    [self.deviceTableView reloadData];
 }
 
 #pragma mark - 下拉刷新
@@ -398,14 +422,16 @@
         devFind.hasClockFlag = YES;
         devFind.linkState = LULDeviceLinkStateWiFi;
         
-        [_devices addObject:devFind];
+        //[_devices addObject:devFind];
+//        // TODO: 是否需要判断_tipsView当前是否存在于Superview中，再做remove的动作
+//        if(_devices.count > 0) {
+//            [_tipsView removeFromSuperview];
+//        }
+//        [self.deviceTableView reloadData];
         
-        // TODO: 是否需要判断_tipsView当前是否存在于Superview中，再做remove的动作
-        if(_devices.count > 0) {
-            [_tipsView removeFromSuperview];
-        }
-        [self.deviceTableView reloadData];
+        [[DeviceManager sharedManager] add:devFind];
         
+        [self updateDeviceData];
     });
 }
 

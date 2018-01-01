@@ -32,12 +32,13 @@
     _Color_S = colorS;
     _Color_B = colorB;
     if (_deviceInfo.linkState == LULDeviceLinkStateWiFi) {
-        //DebugLog(@"ColorH:%d, ColorS:%d, ColorB:%d", _Color_H, _Color_S, _Color_B);
-        [_device controlColorH:colorH S:colorS B:colorB];
+        DebugLog(@"ColorH:%d, ColorS:%d, ColorB:%d", _Color_H, _Color_S, _Color_B);
+        [_device controlColorH:colorH S:colorS B:_Color_Brightness];
     }
 }
 
 - (void) turnOff {
+    DebugLog(@"ColorLight turnOff");
     if (_deviceInfo.linkState == LULDeviceLinkStateWiFi) {
         switch (_lightType) {
             case LULLightTypeWhiteLight:
@@ -52,13 +53,14 @@
 }
 
 - (void) turnOn {
+    DebugLog(@"ColorLight turnOn");
     if (_deviceInfo.linkState == LULDeviceLinkStateWiFi) {
         switch (_lightType) {
             case LULLightTypeWhiteLight:
                 [_device controlColorTemperature:_Color_Temp];
                 break;
             case LULLightTypeColourLight:
-                [_device controlColorH:_Color_H S:_Color_S B:_Color_B];
+                [_device controlColorH:_Color_H S:_Color_S B:_Color_Brightness];
             default:
                 break;
         }

@@ -295,7 +295,7 @@
 
 
 - (void)turnLight:(Boolean)isColour {
-    
+    DebugLog(@"turnlight");
     if (isColour) {
         [_lightTurnClourButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_lightTurnClourButton setBackgroundColor:kLightOrangeColor];
@@ -346,11 +346,13 @@
         _whiteLightSlider = [[LLCircularView alloc] initWithFrame:CGRectMake(kScreen_Width/2-fram.size.width/2, fram.origin.y+2, fram.size.width, fram.size.width)];
         _whiteLightSlider.backgroundColor = [UIColor clearColor];
         _whiteLightSlider.lineWidth =30;
-        _whiteLightSlider.maximumValue =7500;
-        _whiteLightSlider.minimumValue =2700;
+        _whiteLightSlider.maximumValue =2700;
+        _whiteLightSlider.minimumValue =7000;
         _whiteLightSlider.currentValue =2700;
-        _whiteLightSlider.LightType =  LULLightSliderTypeWhiteLight        ;
+        _whiteLightSlider.LightType =  LULLightSliderTypeWhiteLight;
         _whiteLightSlider.delegate = self;
+        
+        NSLog(@"white light turn");
     }
     
     if (!self.colourLightSlider) {
@@ -373,12 +375,15 @@
         v.layer.masksToBounds = YES;
         [self.view addSubview:v];*/
         
+        __weak typeof(self) weakSelf = self;
+        
         _colourLightSlider.colBlock = ^(UIColor *col){
             
             struct HSV hsv;
             
             [col getHue:&hsv.hu saturation:&hsv.sa brightness:&hsv.br alpha:&hsv.al];
             
+            [weakSelf.colorLight setColorH:(hsv.hu*360) S:(hsv.sa*100) B:(hsv.br*100)];
             DebugLog(@"HSV is :%f,%f,%f,%f",hsv.hu,hsv.sa,hsv.br,hsv.al);
 
         };
@@ -402,12 +407,13 @@
     //DebugLog(@"currentValue:%d",currentValue);
     //self.rightbgView.backgroundColor = selectedColor;
     //获取hsv
-    struct HSV hsv;
-    [selectedColor getHue:&hsv.hu saturation:&hsv.sa brightness:&hsv.br alpha:&hsv.al];
+    //struct HSV hsv;
+    //[selectedColor getHue:&hsv.hu saturation:&hsv.sa brightness:&hsv.br alpha:&hsv.al];
     
-    [_colorLight setColorH:(hsv.hu*100) S:(hsv.sa*100) B:(hsv.br*100)];
-    
-    DebugLog(@"HSV is :%f,%f,%f,%f",hsv.hu,hsv.sa,hsv.br,hsv.al);
+    //[_colorLight setColorH:(hsv.hu*360) S:(hsv.sa*100) B:(hsv.br*100)];
+    DebugLog(@"Current Value %d", currentValue);
+    [_colorLight setColorTemp:currentValue];
+    //DebugLog(@"HSV2 is :%f,%f,%f,%f",hsv.hu,hsv.sa,hsv.br,hsv.al);
 }
 
 @end
