@@ -97,6 +97,7 @@
 		20EE48111F9B5D86007B02E7 /* AddDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20EE480F1F9B5D86007B02E7 /* AddDeviceViewController.xib */; };
 		3E3B2A046DE524E162DD09F2 /* libPods-linkuslightTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8925368F5248F9ECC23A3E /* libPods-linkuslightTests.a */; };
 		4643D7020EA50F9F41A61732 /* libPods-linkuslight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCCE846A73A00EC59073990F /* libPods-linkuslight.a */; };
+		C529469B2000AE3E0057A99E /* HomerRemoteCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = C529469A2000AE3E0057A99E /* HomerRemoteCtrl.m */; };
 		C549A1161FDC00E20076C8A0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C549A1151FDC00E20076C8A0 /* Security.framework */; };
 		C549A1181FDC00ED0076C8A0 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C549A1171FDC00ED0076C8A0 /* SafariServices.framework */; };
 		C549A11B1FE1756A0076C8A0 /* ColorLight.m in Sources */ = {isa = PBXBuildFile; fileRef = C549A11A1FE1756A0076C8A0 /* ColorLight.m */; };
@@ -285,6 +286,8 @@
 		AB8925368F5248F9ECC23A3E /* libPods-linkuslightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-linkuslightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCE846A73A00EC59073990F /* libPods-linkuslight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-linkuslight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8E326B2E6C518843EF4860 /* Pods-linkuslight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-linkuslight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-linkuslight/Pods-linkuslight.debug.xcconfig"; sourceTree = "<group>"; };
+		C52946992000AE3E0057A99E /* HomerRemoteCtrl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomerRemoteCtrl.h; sourceTree = "<group>"; };
+		C529469A2000AE3E0057A99E /* HomerRemoteCtrl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomerRemoteCtrl.m; sourceTree = "<group>"; };
 		C549A1151FDC00E20076C8A0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C549A1171FDC00ED0076C8A0 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		C549A1191FE1756A0076C8A0 /* ColorLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorLight.h; sourceTree = "<group>"; };
@@ -544,6 +547,8 @@
 				C549A11D1FE178300076C8A0 /* WhiteLight.m */,
 				C5F167BC1FFA741C00EB66D6 /* DeviceManager.h */,
 				C5F167BD1FFA741C00EB66D6 /* DeviceManager.m */,
+				C52946992000AE3E0057A99E /* HomerRemoteCtrl.h */,
+				C529469A2000AE3E0057A99E /* HomerRemoteCtrl.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1289,6 +1294,7 @@
 				209AD9291F867E270062830A /* UIImage+ImageScaleSize.m in Sources */,
 				20CCA65C1FF51A0C00876F7A /* ColorPickerController.m in Sources */,
 				209AD92A1F867E270062830A /* UILabel+Extension.m in Sources */,
+				C529469B2000AE3E0057A99E /* HomerRemoteCtrl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1446,7 +1452,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomerSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.homer.linkuslight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.homer.smartelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1469,7 +1475,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/HomerSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.homer.linkuslight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.homer.smartelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -20,14 +20,16 @@
 
 #import "Homer.h"
 #import "DeviceManager.h"
+#import "HomerRemoteCtrl.h"
 
-@interface DeviceManageViewController ()<UITableViewDelegate, UITableViewDataSource, HomerSearchDelegate>
+@interface DeviceManageViewController ()<UITableViewDelegate, UITableViewDataSource, HomerSearchDelegate, HomerRemoteCtrlDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *deviceTableView;
 @property (nonatomic,retain)UIView *tipsView;
 @property (nonatomic,retain)NSMutableArray *devices;
 
-@property (nonatomic, strong) Homer *_homerCtrl;
+@property (nonatomic, strong) Homer *homerCtrl;
+@property (nonatomic, assign) HomerRemoteCtrl *homerRemoteCtrl;
 
 @end
 
@@ -36,7 +38,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self._homerCtrl = [[Homer alloc]init];
+    self.homerCtrl = [[Homer alloc]init];
+    self.homerRemoteCtrl = [HomerRemoteCtrl sharedManager];
+    [self.homerRemoteCtrl setDelegate:self]; // 赋值委托
     
     [self initView];
     [self initData];
@@ -62,7 +66,7 @@
     
     [super viewDidAppear:animated];
 
-    [self.navigationController.topViewController.navigationItem setTitle:@"LINKUS LIGHT"];
+    [self.navigationController.topViewController.navigationItem setTitle:@"SMART ELF"];
     //[self.deviceTableView.mj_header beginRefreshing];
 }
 
@@ -192,9 +196,10 @@
     [_devices removeAllObjects];
     // TODO: 这种做法需要更改，每次都需要DeviceManager去清理所有数据，那么这个DeviceManager就失去意义了。关键当前没有一个合理的标志搜索结束的标记。
     [[DeviceManager sharedManager].deviceList removeAllObjects];
-    [self._homerCtrl beginSearchDeviceWithDelegate:self];
+    [self.homerCtrl beginSearchDeviceWithDelegate:self];
+    [self.homerRemoteCtrl searchDevice];
     
-    [self endRefresh];
+    //[self endRefresh];
 }
 
 - (void)updateDeviceData {
@@ -409,8 +414,7 @@
 }
 
 -(void) onDeviceSearch:(Device *)result {
-    NSLog(@"Devicd %@ is found", [result getIp]);
-    
+    DebugLog(@"Device %@ is found", [result getIp]);
     dispatch_async(dispatch_get_main_queue(), ^{
         //[self showAlertWithResult:result];
         DeviceInfo *devFind = [[DeviceInfo alloc] init];
@@ -431,8 +435,28 @@
         
         [[DeviceManager sharedManager] add:devFind];
         
-        [self updateDeviceData];
+        //[self updateDeviceData];
     });
+}
+
+-(void) remoteSearchDevice:(NSMutableArray *)devList {
+    for (ColorLight *light in devList) {
+        [[DeviceManager sharedManager] add:[light deviceInfo]];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateDeviceData];
+        
+        [self endRefresh];
+    });
+}
+
+-(void)transferSuccess {
+    
+}
+
+-(void)transferFailWithMsg:(NSError *)failMsg {
+    
 }
 
 @end

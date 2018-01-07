@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddDeviceViewController">
             <connections>
                 <outlet property="addStateImg" destination="LOn-GA-Bkv" id="i4R-ll-NAl"/>
-                <outlet property="addStateText" destination="4ZK-JM-nYp" id="uKt-GF-D2l"/>
                 <outlet property="doneButton" destination="Lsw-wO-ZAD" id="PUY-rG-Fej"/>
                 <outlet property="mutButton" destination="wSx-Ui-iXE" id="3FH-EP-Pjp"/>
                 <outlet property="passwordTextField" destination="v84-gI-AIg" id="7Ja-hy-K70"/>
@@ -33,7 +32,7 @@
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v84-gI-AIg">
                     <rect key="frame" x="74" y="139" width="227" height="30"/>
-                    <color key="backgroundColor" red="0.39746556020000001" green="0.65028409890000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.5033541157987399" green="0.6940366558234109" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="aGX-mI-hQi"/>
@@ -59,25 +58,6 @@
                         <action selector="didDoneButtonClicked:" destination="-1" eventType="touchUpInside" id="SAT-4T-OoL"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="点击确定前请确定设备的灯处于慢闪等待连接状态" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DND-Sp-3vY">
-                    <rect key="frame" x="168" y="438" width="264" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="Hkp-p4-b8o"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前去配置WIFI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZK-JM-nYp">
-                    <rect key="frame" x="136.5" y="386" width="102" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="Rm4-lA-BED"/>
-                        <constraint firstAttribute="width" constant="102" id="bXi-fG-gop"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="多个设备" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCc-ya-2r4">
                     <rect key="frame" x="100" y="176" width="68" height="30"/>
                     <constraints>
@@ -104,6 +84,15 @@
                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="点击确定前请确定设备的灯处于慢闪等待连接状态" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DND-Sp-3vY">
+                    <rect key="frame" x="55" y="512" width="264" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="Hkp-p4-b8o"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.39746556020000001" green="0.65028409890000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -114,7 +103,6 @@
                 <constraint firstItem="v84-gI-AIg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="74" id="HG7-RO-hzi"/>
                 <constraint firstAttribute="trailing" secondItem="LOn-GA-Bkv" secondAttribute="trailing" constant="114" id="Hb5-RB-Pal"/>
                 <constraint firstItem="wSx-Ui-iXE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="70" id="IEW-V3-JNr"/>
-                <constraint firstItem="4ZK-JM-nYp" firstAttribute="top" secondItem="LOn-GA-Bkv" secondAttribute="bottom" constant="14" id="Isz-Ho-s0K"/>
                 <constraint firstItem="Lsw-wO-ZAD" firstAttribute="top" secondItem="DND-Sp-3vY" secondAttribute="bottom" constant="15" id="Lcd-ad-gyo"/>
                 <constraint firstAttribute="bottom" secondItem="Lsw-wO-ZAD" secondAttribute="bottom" constant="69" id="Nag-aj-1cp"/>
                 <constraint firstItem="LOn-GA-Bkv" firstAttribute="top" secondItem="aCc-ya-2r4" secondAttribute="bottom" constant="53" id="cBR-sV-g9f"/>
@@ -125,7 +113,6 @@
                 <constraint firstAttribute="trailing" secondItem="v84-gI-AIg" secondAttribute="trailing" constant="74" id="kyg-8J-ryw"/>
                 <constraint firstAttribute="trailing" secondItem="Lsw-wO-ZAD" secondAttribute="trailing" constant="10" id="mCQ-Yt-A9w"/>
                 <constraint firstItem="aCc-ya-2r4" firstAttribute="leading" secondItem="wSx-Ui-iXE" secondAttribute="trailing" id="mQs-8K-tUk"/>
-                <constraint firstItem="4ZK-JM-nYp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qM9-fx-ttk"/>
                 <constraint firstItem="cVd-ED-nuA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="74" id="qgm-9J-6sX"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="54.5"/>

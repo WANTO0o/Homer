@@ -28,7 +28,11 @@
     for (int i = 0; i < _deviceList.count; i++) {
         DeviceInfo *devInfo = _deviceList[i];
         if(devInfo.deviceID == Device.deviceID) {
-            devInfo = Device.copy;
+            if(Device.linkState == LULDeviceLinkStateCloud) {
+                devInfo.name = Device.name;
+                devInfo.desc = Device.desc;
+            }
+            devInfo.linkState = LULDeviceLinkStateBoth;
             return;
         }
     }

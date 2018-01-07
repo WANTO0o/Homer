@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, LULDeviceLinkState) {
-    LULDeviceLinkStateWiFi,
-    LULDeviceLinkStateCloud,
-    LULDeviceLinkStateNone
+    LULDeviceLinkStateWiFi = 0x01,
+    LULDeviceLinkStateCloud = 0x10,
+    LULDeviceLinkStateBoth = 0x11,
+    LULDeviceLinkStateNone = 0x00
 };
 
 typedef NS_ENUM(NSInteger, LULDeviceType) {
@@ -30,6 +31,8 @@ typedef NS_ENUM(NSInteger, LULDeviceType) {
 @property (nonatomic,assign)Boolean hasStatuFlag;
 @property (nonatomic,assign)LULDeviceLinkState linkState;
 @property (nonatomic,assign)LULDeviceType deviceType;
+@property (nonatomic,copy)NSString *macAddr;
+@property (nonatomic,copy)NSString *desc;
 
 @end
 

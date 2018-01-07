@@ -13,6 +13,7 @@
 #import "WHCircularSlider.h"
 #import "LightControlViewController.h"
 #import "ColorLight.h"
+#import "HomerRemoteCtrl.h"
 
 @interface LightControlViewController ()<LLCircularViewDelegate>
 
@@ -244,9 +245,9 @@
     
     NSMutableArray *items;
     if (_isDevice) {
-        items = [NSMutableArray arrayWithObjects:@"本地升级",@"恢复出厂设置",@"删除设备",@"修改设备名称", nil];
+        items = [NSMutableArray arrayWithObjects:@"本地升级",@"重置设备",@"删除设备",@"修改设备名称", nil];
     } else {
-        items = [NSMutableArray arrayWithObjects:@"本地升级",@"恢复出厂设置",@"删除分组",@"修改分组名称", nil];
+        items = [NSMutableArray arrayWithObjects:@"批量升级",@"批量重置",@"删除分组",@"修改分组名称", nil];
     }
     
     NSMutableArray *menuitems = [NSMutableArray arrayWithCapacity:1];
@@ -257,6 +258,7 @@
                                        userInfo:@{@"title":@"Menu"}
                                       ];
         item.foreColor=[UIColor colorWithRed:0.4027 green:0.4027 blue:0.4027 alpha:1.0];
+        
         [menuitems addObject:item];
     }
 
@@ -266,9 +268,73 @@
         [YCXMenu dismissMenu];
     } else {
         [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 55, 60, 50, 0) menuItems:menuitems selected:^(NSInteger index, YCXMenuItem *item) {
-            NSLog(@"%@",item);
+            if([item.title isEqualToString:@"本地升级"]) {
+                [self updateFirmware];
+            } else if ([item.title isEqualToString:@"批量升级"]) {
+                [self updateFirmware];
+            } else if ([item.title isEqualToString:@"重置设备"]) {
+                [self restoreToFactory];
+            } else if ([item.title isEqualToString:@"删除设备"]) {
+                [self delDevice];
+            } else if ([item.title isEqualToString:@"删除分组"]) {
+                [self delGroup];
+            } else if ([item.title isEqualToString:@"修改设备名称"]) {
+                [self updateDeviceInfo];
+            } else if ([item.title isEqualToString:@"修改分组名称"]) {
+                [self updateGroupInfo];
+            }
         }];
     }
+}
+
+// 升级固件
+- (void)updateFirmware {
+}
+
+// 恢复出厂设置
+- (void)restoreToFactory {
+}
+
+// 删除设备
+- (void)delDevice {
+    
+}
+
+// 删除分组
+- (void)delGroup {
+    
+}
+
+// 更新设备信息
+- (void)updateDeviceInfo {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入设备名称" preferredStyle:UIAlertControllerStyleAlert];
+    //增加确定按钮；
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //获取第1个输入框；
+        UITextField *nameTextField = alertController.textFields.firstObject;
+        NSString *newName = nameTextField.text;
+        if (![newName isEqualToString:_DeviceInfo.name]) {
+            [self.colorLight updateName:newName AndDesc:[self.DeviceInfo desc]];
+        }
+        //NSLog(@"用户名 = %@，密码 = %@",userNameTextField.text,passwordTextField.text);
+        
+    }]];
+    
+    //增加取消按钮；
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    
+    //定义输入框；
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = _DeviceInfo.name;
+    }];
+    
+    [self presentViewController:alertController animated:true completion:nil];
+}
+
+// 更新分组信息
+- (void)updateGroupInfo {
+    
 }
 
 - (void)turnAlarmOn:(Boolean)isOn {

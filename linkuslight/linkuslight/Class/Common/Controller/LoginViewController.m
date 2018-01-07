@@ -77,6 +77,7 @@
     
     AMZNAuthorizationRequestHandler requestHandler = ^(AMZNAuthorizeResult * result, BOOL userDidCancel, NSError * error) {
         if (error) {
+            NSLog(@"error %@", error);
             // If error code = kAIApplicationNotAuthorized, allow user to log in again.
             if(error.code == kAIApplicationNotAuthorized) {
                 // Show authorize user button.
@@ -88,12 +89,14 @@
             }
         } else if (userDidCancel) {
             // Your code to handle user cancel scenario.
-            
+            NSLog(@"UserCancel");
         } else {
             NSLog(@"login success");
             // Authentication was successful. Obtain the user profile data.
             AMZNUser *amznUser = result.user;
             user.amznUser = amznUser;
+            user.userID = amznUser.userID;
+            DebugLog(@"UserID: %@", user.userID);
             user.userEmail = amznUser.email;
             user.userName = amznUser.name;
             

@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, LULLightType) {
 // 当前是否打开
 @property (nonatomic, assign) Boolean IsOn;
 @property (nonatomic, assign) LULLightType lightType;
+@property (nonatomic, retain) DeviceInfo *deviceInfo;
 
 -(id) initWithDeviceInfo:(DeviceInfo*) devInfo;
 // 开灯
@@ -38,5 +39,11 @@ typedef NS_ENUM(NSInteger, LULLightType) {
 -(void) setColorTemp:(uint16_t)colorTemp;
 // 设置亮度，可调范围为0～100
 -(void) setBrightness:(uint8_t)brightness;
+
+// 以下方法后续应该考虑设计为设备类型通用
+// 绑定到云端
+-(void) bindToCloud;
+-(void) setMacAddr;
+-(void) updateName:(NSString *)name AndDesc:(NSString *)desc;
 
 @end

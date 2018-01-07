@@ -43,7 +43,7 @@
                                 <action selector="didLoginButtonClicked:" destination="-1" eventType="touchUpInside" id="hjF-pK-zXK"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LINKUS LIGHT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j62-3j-egs">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SMART ELF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j62-3j-egs">
                             <rect key="frame" x="124.5" y="81" width="127" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="0nY-tb-5ik"/>

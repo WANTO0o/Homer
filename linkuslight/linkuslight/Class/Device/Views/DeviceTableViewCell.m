@@ -78,7 +78,10 @@
         lkimgName = @"wifi";
     } else if (device.linkState == LULDeviceLinkStateCloud) {
         lkimgName = @"Cloud data";
-    } else {
+    } else if (device.linkState == LULDeviceLinkStateBoth) {
+        lkimgName = @"wifi";
+    }
+    else {
         lkimgName = @"";
     }
     
