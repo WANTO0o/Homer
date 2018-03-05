@@ -14,6 +14,7 @@
 #import "LightControlViewController.h"
 #import "ColorLight.h"
 #import "HomerRemoteCtrl.h"
+#import "Uility.h"
 
 @interface LightControlViewController ()<LLCircularViewDelegate>
 
@@ -96,7 +97,7 @@
  // Pass the selected object to the new view controller.
  }
  */
-
+#pragma mark - ButtionClickedAction
 - (IBAction)didAlarmButtionClicked:(id)sender {
     [self showClockView];
 }
@@ -116,11 +117,11 @@
 - (IBAction)didlightTurnWhiteButtonClicked:(id)sender {
     [self turnLight:NO];
 }
-
+//设备开
 - (IBAction)diddeviceOnButtonClicked:(id)sender {
     [self turnDeviceOn:YES];
 }
-
+//设备关
 - (IBAction)diddeviceOFFButtonClicked:(id)sender {
     [self turnDeviceOn:NO];
 }
@@ -360,6 +361,9 @@
 }
 
 
+/**
+ 白彩灯切换
+ */
 - (void)turnLight:(Boolean)isColour {
     DebugLog(@"turnlight");
     if (isColour) {
@@ -402,6 +406,7 @@
         [_deviceOFFButton.layer setBackgroundColor:kBackgroundColor.CGColor];
     }
 }
+
 
 - (void)turnSlider{
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044C10E4204D0D4400EDE8FD /* Uility.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C10E3204D0D4400EDE8FD /* Uility.m */; };
 		12D9ABAA542B33DA473C7F87 /* libPods-linkuslightUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D59185B580240E147DFE2D3E /* libPods-linkuslightUITests.a */; };
 		204C86C51FAF0CF900CFA50C /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204C86C31FAF0CF900CFA50C /* CollectionViewCell.m */; };
 		204C86C61FAF0CF900CFA50C /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204C86C41FAF0CF900CFA50C /* CollectionViewCell.xib */; };
@@ -126,6 +127,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		044C10E2204D0D4400EDE8FD /* Uility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Uility.h; sourceTree = "<group>"; };
+		044C10E3204D0D4400EDE8FD /* Uility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Uility.m; sourceTree = "<group>"; };
 		204C86C21FAF0CF900CFA50C /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		204C86C31FAF0CF900CFA50C /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		204C86C41FAF0CF900CFA50C /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
@@ -658,6 +661,8 @@
 				207799FE1FA42FE40095ED0C /* HLAlertView */,
 				209AD8F81F867E270062830A /* Category */,
 				209AD90B1F867E270062830A /* Constraint.h */,
+				044C10E2204D0D4400EDE8FD /* Uility.h */,
+				044C10E3204D0D4400EDE8FD /* Uility.m */,
 				209AD90C1F867E270062830A /* Keychain */,
 				209AD9111F867E270062830A /* Location */,
 				209AD9141F867E270062830A /* Reachability */,
@@ -984,6 +989,7 @@
 					209AD8AD1F8605CE0062830A = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = VB67W4ATZ3;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.HomeKit = {
 								enabled = 0;
@@ -1094,7 +1100,8 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1130,7 +1137,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1214,7 +1221,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1247,6 +1254,7 @@
 				C549A11B1FE1756A0076C8A0 /* ColorLight.m in Sources */,
 				20BFF7CA1F890BDA002FFD52 /* EAIntroPage.m in Sources */,
 				20779A011FA430060095ED0C /* HLAlertView.m in Sources */,
+				044C10E4204D0D4400EDE8FD /* Uility.m in Sources */,
 				209AD9741F87CF4A0062830A /* README.md in Sources */,
 				20B09E181FB1614D00301F8E /* UIColor-Extensions.m in Sources */,
 				20B09E0E1FB0619100301F8E /* DeviceListViewController.m in Sources */,
@@ -1441,6 +1449,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = VB67W4ATZ3;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/LoginWithAmazon";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -1454,6 +1464,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.homer.smartelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e8d78f71-f2c1-491c-b680-17bb599d57f8";
+				PROVISIONING_PROFILE_SPECIFIER = SmartELF;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1464,7 +1476,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = VB67W4ATZ3;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/LoginWithAmazon";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/linkuslight/PrefixHeader.pch";
@@ -1477,6 +1490,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.homer.smartelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

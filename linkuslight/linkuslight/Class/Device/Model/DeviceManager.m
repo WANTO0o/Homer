@@ -43,4 +43,33 @@
     [_deviceList removeObject:Device];
 }
 
+
+
+/**
+ 整合设备列表
+ @param localDevices 本地设备
+ @param remoteDevices 网络获取设备
+ */
+- (void)integrateLocalDevices:(NSMutableArray *)localDevices remoteDevices:(NSMutableArray *)remoteDevices{
+    BOOL repeat = NO;
+    NSMutableArray *tempArr = [NSMutableArray array];
+    for (DeviceInfo *localDevice in localDevices) {
+        for (DeviceInfo *remoteDevice in remoteDevices) {
+            if ([localDevice.deviceID isEqualToString:remoteDevice.deviceID]) {
+                repeat = YES;
+                remoteDevice.ip = localDevice.ip;
+                remoteDevice.linkState = LULDeviceLinkStateBoth;
+                break;
+            }
+        }
+        if (!repeat) {
+            [tempArr addObject:localDevice];
+        }
+    }
+    [tempArr addObjectsFromArray:remoteDevices];
+    _deviceList = remoteDevices;
+    DebugLog(@"设备列表：%@",_deviceList);
+}
+
+
 @end

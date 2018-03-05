@@ -44,6 +44,7 @@
 }
 
 -(void)searchDevice {
+    //amzn1.account.AEYR2AGOLSGVKYSKXAJTPK7VO3CQ
     NSDictionary *params = @{
                              @"userId": self.amznUserID,
                              @"option": @"GetDevList"

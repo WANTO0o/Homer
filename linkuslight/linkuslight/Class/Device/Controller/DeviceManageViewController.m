@@ -22,15 +22,20 @@
 #import "DeviceManager.h"
 #import "HomerRemoteCtrl.h"
 
+#import "Uility.h"
+
 @interface DeviceManageViewController ()<UITableViewDelegate, UITableViewDataSource, HomerSearchDelegate, HomerRemoteCtrlDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *deviceTableView;
 @property (nonatomic,retain)UIView *tipsView;
-@property (nonatomic,retain)NSMutableArray *devices;
+//@property (nonatomic,retain)NSMutableArray *devices;
 
 @property (nonatomic, strong) Homer *homerCtrl;
 @property (nonatomic, assign) HomerRemoteCtrl *homerRemoteCtrl;
-
+@property (nonatomic, retain)  NSMutableArray *localDevices;
+@property (nonatomic, retain)  NSMutableArray *remoteDevices;
+@property (nonatomic, assign)  BOOL getLocalDevice;
+@property (nonatomic, assign)  BOOL getRemoteDevice;
 @end
 
 @implementation DeviceManageViewController
@@ -41,14 +46,11 @@
     self.homerCtrl = [[Homer alloc]init];
     self.homerRemoteCtrl = [HomerRemoteCtrl sharedManager];
     [self.homerRemoteCtrl setDelegate:self]; // 赋值委托
-    
+    self.localDevices = [NSMutableArray array];
+    self.remoteDevices = [NSMutableArray array];
     [self initView];
-    [self initData];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//    [self initData];
+    [_deviceTableView.mj_header beginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,15 +72,6 @@
     //[self.deviceTableView.mj_header beginRefreshing];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 #pragma mark Private 
 - (void)initView {
     //self.automaticallyAdjustsScrollViewInsets = NO;
@@ -112,7 +105,7 @@
     actioncommentnameLable.text = @"您可以通过添加设备来控制设备";
     [_tipsView addSubview:actioncommentnameLable];
     
-    if (_devices.count > 0) {
+    if ([DeviceManager sharedManager].deviceList.count > 0) {
 
     } else {
         UIView *theView = _deviceTableView.backgroundView;
@@ -136,49 +129,51 @@
     _deviceTableView.backgroundView = theView;
     //默认【下拉刷新】
     _deviceTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    
+
 }
 
 - (void)initData {
+//
+//    _devices = [NSMutableArray array];//[NSMutableArray arrayWithCapacity:0];
 
-    _devices = [NSMutableArray arrayWithCapacity:0];
-    
-//    DeviceInfo *dev = [[DeviceInfo alloc] init];
-//    dev.deviceID = @"SHTBY0001";
-//    dev.isOn = YES;
-//    dev.name = @"lamp blub 001";
-//    dev.hasStatuFlag = YES;
-//    dev.hasClockFlag = YES;
-//    dev.linkState = LULDeviceLinkStateCloud;
-//    [_devices addObject:dev];
-//
-//    DeviceInfo *dev2 = [[DeviceInfo alloc] init];
-//    dev2.deviceID = @"SHTBY0002";
-//    dev2.isOn = YES;
-//    dev2.name = @"lamp blub 002";
-//    dev2.hasStatuFlag = NO;
-//    dev2.hasClockFlag = YES;
-//    dev2.linkState = LULDeviceLinkStateWiFi;
-//    dev2.deviceType= LULDeviceLinkStateWhiteLight;
-//    [_devices addObject:dev2];
-//
-//    DeviceInfo *dev3 = [[DeviceInfo alloc] init];
-//    dev3.deviceID = @"SHTBY0003";
-//    dev3.isOn = NO;
-//    dev3.name = @"lamp blub 003";
-//    dev3.hasStatuFlag = NO;
-//    dev3.hasClockFlag = YES;
-//    dev3.linkState = LULDeviceLinkStateWiFi;
-//    [_devices addObject:dev3];
-    
-    for (DeviceInfo *devInfo in [DeviceManager sharedManager].deviceList) {
-        [_devices addObject:devInfo];
-    }
+    DeviceInfo *dev = [[DeviceInfo alloc] init];
+    dev.deviceID = @"SHTBY0001";
+    dev.isOn = YES;
+    dev.name = @"lamp blub 001";
+    dev.hasStatuFlag = YES;
+    dev.hasClockFlag = YES;
+    dev.linkState = LULDeviceLinkStateCloud;
+    [[DeviceManager sharedManager].deviceList addObject:dev];
+
+    DeviceInfo *dev2 = [[DeviceInfo alloc] init];
+    dev2.deviceID = @"SHTBY0002";
+    dev2.isOn = YES;
+    dev2.name = @"lamp blub 002";
+    dev2.hasStatuFlag = NO;
+    dev2.hasClockFlag = YES;
+    dev2.linkState = LULDeviceLinkStateWiFi;
+    dev2.deviceType= LULDeviceLinkStateWhiteLight;
+    [[DeviceManager sharedManager].deviceList addObject:dev2];
+
+    DeviceInfo *dev3 = [[DeviceInfo alloc] init];
+    dev3.deviceID = @"SHTBY0003";
+    dev3.isOn = NO;
+    dev3.name = @"lamp blub 003";
+    dev3.hasStatuFlag = NO;
+    dev3.hasClockFlag = YES;
+    dev3.linkState = LULDeviceLinkStateWiFi;
+    [[DeviceManager sharedManager].deviceList addObject:dev3];
+
+//    for (DeviceInfo *devInfo in [DeviceManager sharedManager].deviceList) {
+//        [_devices addObject:devInfo];
+//    }
     
     // TODO: 正常界面的更新不应该放在initData这里，而是initData之后initView里去初始化，不知为何调整initData和initView的顺序之后没有相应效果
-    if(_devices.count <= 0) {
-        UIView *theView = _deviceTableView.backgroundView;
-        [theView addSubview:_tipsView];
-    }
+//    if(_devices.count <= 0) {
+//        UIView *theView = _deviceTableView.backgroundView;
+//        [theView addSubview:_tipsView];
+//    }
 }
 
 - (void)loadData {
@@ -193,21 +188,34 @@
     // 可以确保设备列表的清空和加载正常，但是无法很好的让用户根据endRefresh的效果感受到搜索过程
     
     // 每次重载数据前先清空数据
-    [_devices removeAllObjects];
+//    [_devices removeAllObjects];
     // TODO: 这种做法需要更改，每次都需要DeviceManager去清理所有数据，那么这个DeviceManager就失去意义了。关键当前没有一个合理的标志搜索结束的标记。
     [[DeviceManager sharedManager].deviceList removeAllObjects];
-    [self.homerCtrl beginSearchDeviceWithDelegate:self];
-    [self.homerRemoteCtrl searchDevice];
+    [self.localDevices removeAllObjects];
+    [self.remoteDevices removeAllObjects];
+    [self.tipsView removeFromSuperview];
     
-    //[self endRefresh];
+    self.getLocalDevice = NO;
+    self.getRemoteDevice = NO;
+    [self.homerRemoteCtrl searchDevice];
+    [self.homerCtrl beginSearchDeviceWithDelegate:self];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         self.getLocalDevice = YES;
+        if (self.getRemoteDevice) {//已获取到远程列表
+            [[DeviceManager sharedManager] integrateLocalDevices:self.localDevices remoteDevices:self.remoteDevices];
+            [self updateDeviceData];
+            [self endRefresh];
+        }
+    });
+
 }
 
 - (void)updateDeviceData {
-    for (DeviceInfo *devInfo in [DeviceManager sharedManager].deviceList) {
-        [_devices addObject:devInfo];
-    }
+//    for (DeviceInfo *devInfo in [DeviceManager sharedManager].deviceList) {
+//        [_devices addObject:devInfo];
+//    }
     
-    if(_devices.count <= 0) {
+    if([DeviceManager sharedManager].deviceList.count <= 0) {
         UIView *theView = _deviceTableView.backgroundView;
         [theView addSubview:_tipsView];
     } else {
@@ -313,9 +321,8 @@
 }
 
 #pragma TableView Delegate
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _devices.count;
+    return [DeviceManager sharedManager].deviceList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -327,16 +334,16 @@
     DeviceTableViewCell *cell = [DeviceTableViewCell cellWithTableView:tableView];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    DeviceInfo *dev = [_devices objectAtIndex:indexPath.row];
+    DeviceInfo *dev = [[DeviceManager sharedManager].deviceList objectAtIndex:indexPath.row];
     [cell refreshWithDeviceInfo:dev];
     return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < _devices.count) {
+    if (indexPath.row < [DeviceManager sharedManager].deviceList.count) {
         NSLog(@"didSelectRowAtIndexRow:%ld",(long)indexPath.row);
-        [self showLightViewWithDeviceInfo:_devices[indexPath.row]];
+        [self showLightViewWithDeviceInfo:[DeviceManager sharedManager].deviceList[indexPath.row]];
     };
 }
 
@@ -413,10 +420,32 @@
     [self setHidesBottomBarWhenPushed:NO];
 }
 
+
+#pragma mark - homeSearchDelegate
 -(void) onDeviceSearch:(Device *)result {
     DebugLog(@"Device %@ is found", [result getIp]);
     dispatch_async(dispatch_get_main_queue(), ^{
+//        if ( [DeviceManager sharedManager].deviceList.count > 0) {
+//            DebugLog(@"搜索异常，没有提前获取列表");
+//            return ;
+//        }
+//        for (DeviceInfo *device in [DeviceManager sharedManager].deviceList){
+//            //云端列表已有
+//            if (device.deviceID == [result getId]) {
+//                device.linkState = LULDeviceLinkStateWiFi;
+//                device.name = [result getId];
+//                device.ip = [result getIp];
+//                devFind.hasStatuFlag = NO;
+//                devFind.hasClockFlag = YES;
+//                [self.deviceTableView reloadData];
+//                break;
+//            }
+//        }
+        //云端列表暂有
         //[self showAlertWithResult:result];
+        
+        
+        
         DeviceInfo *devFind = [[DeviceInfo alloc] init];
         devFind.deviceID = [result getId];
         devFind.isOn = YES;
@@ -425,38 +454,52 @@
         devFind.hasStatuFlag = NO;
         devFind.hasClockFlag = YES;
         devFind.linkState = LULDeviceLinkStateWiFi;
-        
-        //[_devices addObject:devFind];
-//        // TODO: 是否需要判断_tipsView当前是否存在于Superview中，再做remove的动作
-//        if(_devices.count > 0) {
+
+//        [_devices addObject:devFind];
+        // TODO: 是否需要判断_tipsView当前是否存在于Superview中，再做remove的动作
+        //if(_devices.count > 0) {
+//        if (_tipsView.superview) {
 //            [_tipsView removeFromSuperview];
 //        }
+        //}
+//        [[DeviceManager sharedManager] add:devFind];
+        if (!self.getLocalDevice) {//5秒内添加，超时不添加
+            [self.localDevices addObject:devFind];
+        }
+
 //        [self.deviceTableView reloadData];
         
-        [[DeviceManager sharedManager] add:devFind];
+   
         
-        //[self updateDeviceData];
     });
 }
 
+#pragma mark -HomerRemoteCtrl delegate
 -(void) remoteSearchDevice:(NSMutableArray *)devList {
     for (ColorLight *light in devList) {
-        [[DeviceManager sharedManager] add:[light deviceInfo]];
+        [self.remoteDevices addObject:[light deviceInfo]];
+//        [[DeviceManager sharedManager] add:[light deviceInfo]];
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateDeviceData];
-        
-        [self endRefresh];
-    });
+    self.getRemoteDevice = YES;
+    if (self.getLocalDevice) {//搜索本地已结束
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[DeviceManager sharedManager] integrateLocalDevices:self.localDevices remoteDevices:self.remoteDevices];
+            [self updateDeviceData];
+            [self endRefresh];
+        });
+    }else{
+        //继续等待
+    }
+  
 }
 
 -(void)transferSuccess {
-    
+    DebugLog(@"getDeviceSuccess");
 }
 
 -(void)transferFailWithMsg:(NSError *)failMsg {
-    
+    DebugLog(@"getDeviceFailed");
+    self.getLocalDevice = YES;
 }
 
 @end
