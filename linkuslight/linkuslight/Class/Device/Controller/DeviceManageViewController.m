@@ -129,7 +129,6 @@
     _deviceTableView.backgroundView = theView;
     //默认【下拉刷新】
     _deviceTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    
 
 }
 

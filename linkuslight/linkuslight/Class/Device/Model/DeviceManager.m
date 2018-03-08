@@ -67,7 +67,7 @@
         }
     }
     [tempArr addObjectsFromArray:remoteDevices];
-    _deviceList = remoteDevices;
+    _deviceList = tempArr;
     DebugLog(@"设备列表：%@",_deviceList);
 }
 

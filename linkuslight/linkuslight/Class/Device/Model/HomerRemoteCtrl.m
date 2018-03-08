@@ -32,7 +32,8 @@
         //manager.amznUserID = @"amzn1.account.AFPRDTUZWOWR4W2SZHG4DTTNHYXQ";
         //manager.apiGateWayURL = @"https://n32ircd1ha.execute-api.us-east-1.amazonaws.com/v1";
         
-        manager.apiGateWayURL = @"https://oi4dghee2h.execute-api.us-east-1.amazonaws.com/SmartELF_Stage";
+        //manager.apiGateWayURL = @"https://oi4dghee2h.execute-api.us-east-1.amazonaws.com/SmartELF_Stage";
+        manager.apiGateWayURL = @"https://dnvh8mdbub.execute-api.us-east-1.amazonaws.com/Stage1";
         manager.amznUserID = [[LULSessionManager manager] GetUserData].userID;
         
         manager.httpSessionManager = [AFHTTPSessionManager manager];
