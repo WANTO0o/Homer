@@ -855,8 +855,8 @@
 			children = (
 				209FB5491FF5F44D001255CB /* ColorCircleView.h */,
 				209FB54A1FF5F44D001255CB /* ColorCircleView.m */,
-				209FB5431FF5F405001255CB /* WHCircularSlider.m */,
 				209FB5451FF5F405001255CB /* WHCircularSlider.h */,
+				209FB5431FF5F405001255CB /* WHCircularSlider.m */,
 			);
 			path = WHCircularSlider;
 			sourceTree = "<group>";

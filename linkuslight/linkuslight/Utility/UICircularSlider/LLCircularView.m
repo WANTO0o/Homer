@@ -419,9 +419,9 @@
     } else {
         [self getCurentValue:mousepoint];
         
-        if (self.delegate) {
-            [self.delegate didCircularClicked:pointcolor Value:_currentValue];
-        }
+//        if (self.delegate) {
+//            [self.delegate didCircularClicked:pointcolor Value:_currentValue];
+//        }
     }
     
     [self moveHandle:mousepoint];
@@ -462,9 +462,9 @@
     } else {
         [self getCurentValue:lastPoint];
         
-        if (self.delegate) {
-            [self.delegate didCircularClicked:pointcolor Value:_currentValue];
-        }
+//        if (self.delegate) {
+//            [self.delegate didCircularClicked:pointcolor Value:_currentValue];
+//        }
     }
     
     [self moveHandle:lastPoint];
@@ -513,6 +513,11 @@
 - (void)endTrackingWithTouch:(nullable UITouch *)touch withEvent:(nullable UIEvent *)event
 {
     [super endTrackingWithTouch:touch withEvent:event];
+    if (self.delegate) {
+        CGPoint lastPoint =[touch locationInView:self];
+        UIColor *pointcolor = [self colorOfPoint:lastPoint];
+        [self.delegate didCircularClicked:pointcolor Value:_currentValue];
+    }
 }
 
 - (void)moveHandle:(CGPoint)point{

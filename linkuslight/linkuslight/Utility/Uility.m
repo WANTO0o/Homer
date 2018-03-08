@@ -42,4 +42,16 @@
 + (BOOL)getAutoLogin{
    return  [[NSUserDefaults standardUserDefaults]  objectForKey:@"autoLogin"];
 }
+
+//圆心到点的距离>?半径
++ (BOOL)point:(CGPoint)point inCircleRect:(CGRect)rect {
+    CGFloat radius = rect.size.width/2.0;
+    CGPoint center = CGPointMake(rect.origin.x + radius, rect.origin.y + radius);
+    double dx = fabs(point.x - center.x);
+    double dy = fabs(point.y - center.y);
+    double dis = hypot(dx, dy);
+//    DebugLog(@"%ld",dis <= radius);
+    return dis <= radius;
+    
+}
 @end

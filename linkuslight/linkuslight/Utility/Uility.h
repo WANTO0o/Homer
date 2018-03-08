@@ -36,4 +36,10 @@
  获取自动登录状态
  */
 + (BOOL)getAutoLogin;
+
+
+/**
+圆心到点的距离>?半径
+ */
++ (BOOL)point:(CGPoint)point inCircleRect:(CGRect)rect;
 @end

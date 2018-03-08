@@ -15,6 +15,7 @@
 #import "ColorLight.h"
 #import "HomerRemoteCtrl.h"
 #import "Uility.h"
+#import "ColorCircleView.h"
 
 @interface LightControlViewController ()<LLCircularViewDelegate>
 
@@ -42,9 +43,9 @@
 
 @property (retain, nonatomic) LLCircularView *whiteLightSlider;
 
-@property (retain, nonatomic) WHCircularSlider *colourLightSlider;
+//@property (retain, nonatomic) WHCircularSlider *colourLightSlider;
 
-@property (retain, nonatomic) LZCircularSlider *lightBrightnessSlider;
+@property (retain, nonatomic) ColorCircleView *colorCircleSlider;
 
 @property (weak, nonatomic) IBOutlet UILabel *brightnessLable;
 
@@ -426,7 +427,7 @@
         NSLog(@"white light turn");
     }
     
-    if (!self.colourLightSlider) {
+    if (!self.colorCircleSlider) {
         /*_colourLightSlider = [[LLCircularView alloc] initWithFrame:CGRectMake(fram.origin.x+1, fram.origin.y+2, fram.size.width, fram.size.width)];
         _colourLightSlider.backgroundColor = [UIColor clearColor];
         _colourLightSlider.lineWidth =30;
@@ -435,12 +436,13 @@
         _colourLightSlider.currentValue =2700;
         _colourLightSlider.LightType = LULLightSliderTypeColourLight;
         _colourLightSlider.delegate = self;*/
-        self.colourLightSlider = [WHCircularSlider new];
-        
-        _colourLightSlider.frame = CGRectMake(kScreen_Width/2-fram.size.width/2, fram.origin.y+2, fram.size.width, fram.size.width);
-        _colourLightSlider.backgroundColor = [UIColor clearColor];
-        [self.view addSubview:_colourLightSlider];
-        
+//        self.colourLightSlider = [WHCircularSlider new];
+//        
+//        _colourLightSlider.frame = CGRectMake(kScreen_Width/2-fram.size.width/2, fram.origin.y+2, fram.size.width, fram.size.width);
+//        _colourLightSlider.backgroundColor = [UIColor clearColor];
+//        [self.view addSubview:_colourLightSlider];
+        _colorCircleSlider = [[ColorCircleView alloc]init];
+        _colorCircleSlider.frame = CGRectMake(kScreen_Width/2-fram.size.width/2, fram.origin.y+2, fram.size.width, fram.size.width);
         /*UIView *v = [[UIView alloc]initWithFrame:CGRectMake(50, 50, 50, 50)];
         v.layer.cornerRadius = 25;
         v.layer.masksToBounds = YES;
@@ -448,7 +450,7 @@
         
         __weak typeof(self) weakSelf = self;
         
-        _colourLightSlider.colBlock = ^(UIColor *col){
+        _colorCircleSlider.colorBlock = ^(UIColor *col){
             
             struct HSV hsv;
             
@@ -462,11 +464,11 @@
     }
 
     if (_LightType == LULLightSliderTypeWhiteLight) {
-        [self.colourLightSlider removeFromSuperview];
+        [self.colorCircleSlider removeFromSuperview];
         [self.view addSubview:_whiteLightSlider];
     } else {
         [self.whiteLightSlider removeFromSuperview];
-        [self.view addSubview:_colourLightSlider];
+        [self.view addSubview:_colorCircleSlider];
     }
     
     return;
