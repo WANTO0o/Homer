@@ -129,6 +129,10 @@
 /* Begin PBXFileReference section */
 		044C10E2204D0D4400EDE8FD /* Uility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Uility.h; sourceTree = "<group>"; };
 		044C10E3204D0D4400EDE8FD /* Uility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Uility.m; sourceTree = "<group>"; };
+		04E5BA99205294310008E021 /* HomerSearchDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomerSearchDelegate.h; sourceTree = "<group>"; };
+		04E5BA9A205294310008E021 /* Slaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slaver.h; sourceTree = "<group>"; };
+		04E5BA9B205294310008E021 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		04E5BA9C205294310008E021 /* Device.h.bak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h.bak.h; sourceTree = "<group>"; };
 		204C86C21FAF0CF900CFA50C /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		204C86C31FAF0CF900CFA50C /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		204C86C41FAF0CF900CFA50C /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
@@ -906,6 +910,10 @@
 		C5D35B681FD8504200EF22A7 /* HomerSDK */ = {
 			isa = PBXGroup;
 			children = (
+				04E5BA9B205294310008E021 /* Device.h */,
+				04E5BA9C205294310008E021 /* Device.h.bak.h */,
+				04E5BA99205294310008E021 /* HomerSearchDelegate.h */,
+				04E5BA9A205294310008E021 /* Slaver.h */,
 				C5D35B6A1FD8509200EF22A7 /* Homer.h */,
 				C5D35B691FD8509200EF22A7 /* libHomer.a */,
 			);

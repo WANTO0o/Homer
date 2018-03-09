@@ -171,6 +171,18 @@
         DebugLog(@"添加失败");
         [MBProgressHUD showMsg:@"添加失败" imgName:@"addition_be defeated" duration:3 toView:self.view];
     } else {
+        if (self.addBolck) {
+            DeviceInfo *devFind = [[DeviceInfo alloc] init];
+            devFind.deviceID = [result getId];
+            devFind.isOn = YES;
+            devFind.name = [result getId];
+            devFind.ip = [result getIp];
+            devFind.hasStatuFlag = NO;
+            devFind.hasClockFlag = YES;
+            devFind.linkState = LULDeviceLinkStateWiFi;
+            self.addBolck(devFind);
+        }
+        
         DebugLog(@"添加成功");
         NSString *msg = [NSString stringWithFormat:@"添加成功 %@", devIp];
         [MBProgressHUD showMsg:msg imgName:@"addition_succeed" duration:3 toView:self.view];

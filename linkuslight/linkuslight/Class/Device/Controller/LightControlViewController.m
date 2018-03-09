@@ -299,7 +299,10 @@
 
 // 删除设备
 - (void)delDevice {
-    
+    if (self.deleteDeviceBlock) {
+        self.deleteDeviceBlock(self.DeviceInfo);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 // 删除分组

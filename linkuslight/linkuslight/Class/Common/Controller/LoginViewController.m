@@ -57,8 +57,8 @@
 - (IBAction)didLoginButtonClicked:(id)sender {
     
     // Make authorize call to SDK to get authorization from the user. While making the call you can specify the scopes for which the user authorization is needed.
-//    [(AppDelegate*)[UIApplication sharedApplication].delegate showMainPage];
-//    return ;
+    [(AppDelegate*)[UIApplication sharedApplication].delegate showMainPage];
+    return ;
     // Build an authorize request.
     AMZNAuthorizeRequest *request = [[AMZNAuthorizeRequest alloc] init];
     

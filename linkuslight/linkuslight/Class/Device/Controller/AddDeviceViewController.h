@@ -15,4 +15,6 @@
 @property (nonatomic,assign) Boolean addWifiDevice;
 @property (nonatomic,assign) LULDeviceType deviceType;
 
+
+@property (nonatomic,copy) void (^addBolck)(DeviceInfo *addDevice);
 @end

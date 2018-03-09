@@ -16,4 +16,6 @@
 @property (nonatomic) LULLightSliderType LightType;
 @property (nonatomic, strong) DeviceInfo *DeviceInfo;
 
+
+@property (nonatomic, copy) void(^deleteDeviceBlock)(DeviceInfo *);
 @end

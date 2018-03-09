@@ -49,8 +49,8 @@
     self.localDevices = [NSMutableArray array];
     self.remoteDevices = [NSMutableArray array];
     [self initView];
-//    [self initData];
-    [_deviceTableView.mj_header beginRefreshing];
+    [self initData];
+//    [_deviceTableView.mj_header beginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -281,6 +281,10 @@
     AddDeviceViewController *addController = [[AddDeviceViewController alloc] init];
     addController.addWifiDevice = YES;
     addController.deviceType = deviceType;
+    addController.addBolck = ^(DeviceInfo *addDevice) {
+        [[DeviceManager sharedManager]add:addDevice];
+        [self.deviceTableView reloadData];
+    };
     
     [self setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:addController animated:YES];
@@ -378,7 +382,11 @@
     } else {
         controller.LightType = LULLightSliderTypeColourLight;
     }
-    
+    controller.deleteDeviceBlock = ^(DeviceInfo *device) {
+        [[DeviceManager sharedManager]del:device];
+        [self.deviceTableView reloadData];
+        [Uility showSuccess:@"删除成功" toView:self.view];
+    };
     [self setHidesBottomBarWhenPushed:YES];
     
     [self.navigationController pushViewController:controller animated:YES];
