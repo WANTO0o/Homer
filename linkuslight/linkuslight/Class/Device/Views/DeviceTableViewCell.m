@@ -14,7 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLable;
 @property (weak, nonatomic) IBOutlet UIImageView *clockImg;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImg;
-@property (weak, nonatomic) IBOutlet UIImageView *linkStateImg;
+@property (weak, nonatomic) IBOutlet UIImageView *linkStateImgRight;
+@property (weak, nonatomic) IBOutlet UIImageView *linkStateImgLeft;
 
 @end
 
@@ -73,23 +74,24 @@
         self.statusImg.image = nil;
     }
 
-    NSString *lkimgName = @"";
-    if (device.linkState == LULDeviceLinkStateWiFi) {
-        lkimgName = @"wifi";
-    } else if (device.linkState == LULDeviceLinkStateCloud) {
-        lkimgName = @"Cloud data";
-    } else if (device.linkState == LULDeviceLinkStateBoth) {
-        lkimgName = @"wifi";
-    }
-    else {
-        lkimgName = @"";
-    }
-    
-    UIImage *lkimg = [UIImage imageNamed:lkimgName];
+    // 如果两个状态都在，左边显示wifi，右边显示云
+    UIImage *cloudImg = [UIImage imageNamed:@"Cloud data"];
+    UIImage *wifiImg = [UIImage imageNamed:@"wifi"];
     if (device.isOn) {
-        self.linkStateImg.image = lkimg;
+        if(device.linkState == LULDeviceLinkStateBoth)
+        {
+            [self.linkStateImgLeft setHidden:false];
+            self.linkStateImgLeft.image = wifiImg;
+            self.linkStateImgRight.image = cloudImg;
+        } else if (device.linkState == LULDeviceLinkStateCloud) {
+            [self.linkStateImgLeft setHidden:true];
+            self.linkStateImgRight.image = cloudImg;
+        } else if (device.linkState == LULDeviceLinkStateWiFi) {
+            [self.linkStateImgLeft setHidden:true];
+            self.linkStateImgRight.image = wifiImg;
+        }
     } else {
-        self.linkStateImg.image = [lkimg rt_tintedImageWithColor:[UIColor colorWithRed:0.7922 green:0.8157 blue:0.8392 alpha:1.0]];
+        self.linkStateImgRight.image = [cloudImg rt_tintedImageWithColor:[UIColor colorWithRed:0.7922 green:0.8157 blue:0.8392 alpha:1.0]];
     }
 
     

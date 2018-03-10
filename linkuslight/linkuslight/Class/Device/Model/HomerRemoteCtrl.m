@@ -233,6 +233,8 @@
                           DebugLog(@"%@---", error);
                           [_delegate transferFailWithMsg:error];
                       }];
+    
+    
 }
 
 @end
