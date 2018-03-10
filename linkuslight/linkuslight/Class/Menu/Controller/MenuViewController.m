@@ -10,6 +10,7 @@
 #import "MenuViewController.h"
 #import "LoginViewController.h"
 #import "MenuUserTableViewCell.h"
+#import <LoginWithAmazon/LoginWithAmazon.h>
 
 @interface MenuViewController ()<UITableViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
@@ -91,8 +92,9 @@
 
 - (void)initData {
     
-    _menus = [NSMutableArray arrayWithObjects:@"用户",@"配置",@"帮助",@"关于", nil];
-    _menusImg = [NSMutableArray arrayWithObjects:@"",@"personal_icon_setting",@"personal_icon_regard",@"personal_icon_hape", nil];
+    _menus = [NSMutableArray arrayWithObjects:@"用户",@"配置",@"帮助",@"关于",@"退出登录", nil];
+    _menusImg = [NSMutableArray arrayWithObjects:@"",@"personal_icon_setting",@"personal_icon_regard",@"personal_icon_hape",
+                 @"personal_icon_setting", nil];
 }
 
 - (void)showLoginPage {
@@ -175,8 +177,27 @@
         
         switch (indexPath.row) {
             case 0:
-                [self showLoginPage];
+                // 用户信息
                 break;
+            case 1:
+                // 配置
+                break;
+            case 2:
+                // 帮助
+                break;
+            case 3:
+                // 关于
+                break;
+            case 4:
+                // 退出登录
+            {
+                [[AMZNAuthorizationManager sharedManager] signOut:^(NSError * _Nullable error) {
+                    // Your additional logic after the user authorization state is cleared.
+                    
+                    [self showLoginPage];
+                }];
+                break;
+            }
             default:
                 NSLog(@"didSelectRowAtIndexRow:%ld",(long)indexPath.row);
                 break;
