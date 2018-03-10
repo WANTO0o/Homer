@@ -49,8 +49,8 @@
     self.localDevices = [NSMutableArray array];
     self.remoteDevices = [NSMutableArray array];
     [self initView];
-    [self initData];
-//    [_deviceTableView.mj_header beginRefreshing];
+//    [self initData];
+    [_deviceTableView.mj_header beginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
