@@ -40,7 +40,7 @@
 }
 
 + (BOOL)getAutoLogin{
-   return  [[NSUserDefaults standardUserDefaults]  objectForKey:@"autoLogin"];
+   return  [[[NSUserDefaults standardUserDefaults]  objectForKey:@"autoLogin"] boolValue];
 }
 
 //圆心到点的距离>?半径

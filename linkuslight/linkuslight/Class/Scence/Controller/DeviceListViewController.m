@@ -7,6 +7,11 @@
 //
 
 #import "DeviceListViewController.h"
+#import "DeviceManager.h"
+#import "Uility.h"
+#import "DataStoreHelper.h"
+#import "HomerRemoteCtrl.h"
+#import "Homer.h"
 
 @interface DeviceListViewController ()<UITableViewDelegate, UITableViewDataSource,DeviceTableViewCellDelegate>
 
@@ -22,7 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    [self initData];
+    _devices = [DeviceManager sharedManager].deviceList;
+//    [self initData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,9 +48,60 @@
 }
 
 - (IBAction)didDoneButtonClicked:(id)sender {
+    if (self.funcionType == FunctionTypeCreatGroup) {
+        [self createGroupAction];
+    }else if(self.funcionType == FunctionTypeCreatScence){
+        [self createScenceAction];
+    }
+   
+}
+
+/**
+创建组
+ */
+- (void)createGroupAction{
+    NSMutableArray *tempArr = [NSMutableArray array];
+    for (DeviceInfo *device in self.devices) {
+        if (device.isOn) {
+            [tempArr addObject:device];
+        }
+    }
+    if (tempArr.count == 0) {
+        [Uility showError:@"没有选择设备" toView:self.view];
+        return;
+    }
+    GroupInfo *group = [[GroupInfo alloc]init];
+    group.name = self.groupName;
+    group.deviceType = self.deviceType;
+    group.deviceArr = tempArr;
+    
+    [[DataStoreHelper shareInstance]addGroup:group];
+    
     [self backUPView];
 }
 
+/**
+ 设备关联场景
+ */
+- (void)createScenceAction{
+    for (DeviceInfo *device in self.devices) {
+        if (device.isOn) {
+            ColorLight *colorLight = [[ColorLight alloc] initWithDeviceInfo:device];
+            [colorLight setBrightness:10];//暂时设置固定值
+            if ((device.linkState == LULDeviceLinkStateWiFi) || (device.linkState == LULDeviceLinkStateBoth)) {//本地设置
+//               Homer set
+                [device.device setColorBrightness:colorLight.Color_Brightness];
+            }else if (device.linkState == LULDeviceLinkStateCloud){//wifi获取的列表处理
+                [[HomerRemoteCtrl sharedManager]setLightHSV:colorLight];
+            }
+        }
+    }
+    [Uility showSuccess:@"设置成功" toView:self.view];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+           [self backUPView];
+    });
+ 
+}
 
 /*
  #pragma mark - Navigation

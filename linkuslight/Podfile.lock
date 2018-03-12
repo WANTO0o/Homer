@@ -23,19 +23,22 @@ PODS:
   - Canvas (0.1.2)
   - IQKeyboardManager (3.3.7)
   - MJRefresh (3.1.12)
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
   - Canvas (~> 0.1.2)
   - IQKeyboardManager
   - MJRefresh
+  - YYCache (~> 1.0.4)
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
   IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 879661882e91b9c9d212d82e08e6185bd55352c1
+PODFILE CHECKSUM: 626e9e5973508c1e32d534654815ec35956c9b47
 
 COCOAPODS: 1.4.0

@@ -204,6 +204,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         DeviceListViewController *controller = [[DeviceListViewController alloc] init];
         controller.deviceType = deviceType;
+        controller.funcionType = FunctionTypeCreatScence;
         [self setHidesBottomBarWhenPushed:YES];
         
         [self.navigationController pushViewController:controller animated:YES];

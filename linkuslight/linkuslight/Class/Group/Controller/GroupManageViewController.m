@@ -18,12 +18,15 @@
 #import "SocketDeviceViewController.h"
 #import "LLSelectGroupTypeAlterView.h"
 #import "UINavigationBar+BackgroundColor.h"
+#import "DataStoreHelper.h"
 
 @interface GroupManageViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *groupTableView;
 @property (nonatomic,retain)UIView *tipsView;
 @property (nonatomic,retain)NSMutableArray *groups;
+
+@property (nonatomic,strong) NSString *addGroupName;
 
 @end
 
@@ -32,7 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    [self initData];
+    [self.groupTableView.mj_header beginRefreshing];
+//    [self initData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,21 +138,21 @@
     _groups = [NSMutableArray arrayWithCapacity:1];
     
     GroupInfo *dev = [[GroupInfo alloc] init];
-    dev.deviceID = @"DSHTBY0001";
+//    dev.deviceID = @"DSHTBY0001";
     dev.isOn = YES;
     dev.name = @"lamp blub 001";
     dev.deviceType = LULDeviceLinkStateColourLight;
     [_groups addObject:dev];
     
     GroupInfo *dev2 = [[GroupInfo alloc] init];
-    dev2.deviceID = @"DSHTBY0002";
+//    dev2.deviceID = @"DSHTBY0002";
     dev2.isOn = YES;
     dev2.name = @"lamp blub 002";
     dev2.deviceType = LULDeviceLinkStateWhiteLight;
     [_groups addObject:dev2];
     
     GroupInfo *dev3 = [[GroupInfo alloc] init];
-    dev3.deviceID = @"DSHTBY0003";
+//    dev3.deviceID = @"DSHTBY0003";
     dev3.isOn = NO;
     dev3.name = @"lamp blub 003";
     dev3.deviceType = LULDeviceLinkStateSocket;
@@ -165,7 +169,8 @@
 }
 
 - (void)loadData {
-
+//    [[DataStoreHelper shareInstance] deleteAllGroup];
+    self.groups = [[DataStoreHelper shareInstance] getGroupList];
     [self.groupTableView reloadData];
     [self endRefresh];
 }
@@ -225,7 +230,8 @@
     LLInputGroupNameAlterView *lll = [[LLInputGroupNameAlterView alloc] initWithTitle:@"分组名称" SureTitle:@"下一步" CancelBtClcik:^{
         //取消按钮点击事件
         NSLog(@"取消");
-    } SureBtClcik:^{
+    } SureBtClcik:^(NSString *groupName){
+        self.addGroupName = [groupName copy];
         //确定按钮点击事件
         NSLog(@"确定");
         [self gotoSelectGroupTypeView];
@@ -272,6 +278,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         DeviceListViewController *controller = [[DeviceListViewController alloc] init];
         controller.deviceType = deviceType;
+        controller.groupName = self.addGroupName;
+        controller.funcionType = FunctionTypeCreatGroup;
         [self setHidesBottomBarWhenPushed:YES];
         
         [self.navigationController pushViewController:controller animated:YES];

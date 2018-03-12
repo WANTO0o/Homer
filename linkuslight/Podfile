@@ -12,6 +12,7 @@ target 'linkuslight' do
 	pod 'AFNetworking', '~> 2.5'
     pod 'MJRefresh'
     pod 'Canvas', '~> 0.1.2'
+    pod 'YYCache', '~> 1.0.4'
     
 end
 

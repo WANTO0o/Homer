@@ -179,7 +179,7 @@
 {
     [self removeFromSuperview];
     if (self.sure_block) {
-        self.sure_block();
+        self.sure_block(self.inputTextField.text);
     }
     
 }

@@ -10,7 +10,7 @@
 typedef void(^cancelInputGroupNameBlock)();
 
 //确定按钮点击事件
-typedef void(^sureInputGroupNameBlock)();
+typedef void(^sureInputGroupNameBlock)(NSString *groupName);
 
 
 @interface LLInputGroupNameAlterView : UIView

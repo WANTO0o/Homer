@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "MenuUserTableViewCell.h"
 #import <LoginWithAmazon/LoginWithAmazon.h>
+#import "Uility.h"
 
 @interface MenuViewController ()<UITableViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
@@ -191,9 +192,11 @@
             case 4:
                 // 退出登录
             {
+                [Uility showLoadingToView:self.view];
                 [[AMZNAuthorizationManager sharedManager] signOut:^(NSError * _Nullable error) {
                     // Your additional logic after the user authorization state is cleared.
-                    
+                    [Uility hideLoadingView:self.view];
+                    [Uility setAutoLogin:NO];
                     [self showLoginPage];
                 }];
                 break;

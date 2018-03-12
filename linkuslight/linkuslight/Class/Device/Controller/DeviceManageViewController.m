@@ -461,6 +461,7 @@
         devFind.hasStatuFlag = NO;
         devFind.hasClockFlag = YES;
         devFind.linkState = LULDeviceLinkStateWiFi;
+        devFind.device = result;
 
 //        [_devices addObject:devFind];
         // TODO: 是否需要判断_tipsView当前是否存在于Superview中，再做remove的动作
@@ -506,6 +507,8 @@
 
 -(void)transferFailWithMsg:(NSError *)failMsg {
     DebugLog(@"getDeviceFailed");
+    [self endRefresh];
+    [Uility showError:@"获取数据失败，请重新尝试" toView:self.view];
     self.getLocalDevice = YES;
 }
 

@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 
 #import <LoginWithAmazon/LoginWithAmazon.h>
+#import "Uility.h"
 
 @interface LoginViewController ()
 
@@ -25,11 +26,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self initView];
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    if ([Uility getAutoLogin]) {
+        [self didLoginButtonClicked:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,6 +66,7 @@
 //    [(AppDelegate*)[UIApplication sharedApplication].delegate showMainPage];
 //    return ;
     // Build an authorize request.
+    [Uility showLoadingToView:self.view];
     AMZNAuthorizeRequest *request = [[AMZNAuthorizeRequest alloc] init];
     
     // Requesting 'profile' scopes for the current user.
@@ -79,7 +86,9 @@
     NSLog(@"call requestHandler");
     
     AMZNAuthorizationRequestHandler requestHandler = ^(AMZNAuthorizeResult * result, BOOL userDidCancel, NSError * error) {
+        [Uility hideLoadingView:self.view];
         if (error) {
+            
             NSLog(@"error %@", error);
             // If error code = kAIApplicationNotAuthorized, allow user to log in again.
             if(error.code == kAIApplicationNotAuthorized) {
@@ -94,6 +103,7 @@
             // Your code to handle user cancel scenario.
             NSLog(@"UserCancel");
         } else {
+            [Uility setAutoLogin:YES];
             NSLog(@"login success");
             // Authentication was successful. Obtain the user profile data.
             AMZNUser *amznUser = result.user;

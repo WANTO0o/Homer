@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Device.h"
 typedef NS_ENUM(NSInteger, LULDeviceLinkState) {
     LULDeviceLinkStateWiFi = 0x01,
     LULDeviceLinkStateCloud = 0x10,
@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, LULDeviceType) {
     LULDeviceLinkStateSocket
 };
 
-@interface DeviceInfo : NSObject
+@interface DeviceInfo : NSObject <NSCoding>
 
 @property (nonatomic,copy)NSString *deviceID;
 @property (nonatomic,assign)Boolean isOn;
@@ -35,15 +35,21 @@ typedef NS_ENUM(NSInteger, LULDeviceType) {
 @property (nonatomic,copy)NSString *desc;
 
 
+/**
+ 暂时通过这种方式存储本地device
+ */
+@property (nonatomic,strong) Device  *device;
+
+
 @end
 
 @interface GroupInfo : NSObject
 
-@property (nonatomic,copy)NSString *deviceID;
+//@property (nonatomic,copy)NSString *deviceID;
 @property (nonatomic,copy)NSString *name;
 @property (nonatomic,assign)Boolean isOn;
 @property (nonatomic,assign)LULDeviceType deviceType;
-
+@property (nonatomic,copy) NSMutableArray *deviceArr;
 @end
 
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		044C10E4204D0D4400EDE8FD /* Uility.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C10E3204D0D4400EDE8FD /* Uility.m */; };
+		046086592056875B00BE44B3 /* DataStoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 046086582056875B00BE44B3 /* DataStoreHelper.m */; };
 		12D9ABAA542B33DA473C7F87 /* libPods-linkuslightUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D59185B580240E147DFE2D3E /* libPods-linkuslightUITests.a */; };
 		204C86C51FAF0CF900CFA50C /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204C86C31FAF0CF900CFA50C /* CollectionViewCell.m */; };
 		204C86C61FAF0CF900CFA50C /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 204C86C41FAF0CF900CFA50C /* CollectionViewCell.xib */; };
@@ -129,6 +130,8 @@
 /* Begin PBXFileReference section */
 		044C10E2204D0D4400EDE8FD /* Uility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Uility.h; sourceTree = "<group>"; };
 		044C10E3204D0D4400EDE8FD /* Uility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Uility.m; sourceTree = "<group>"; };
+		046086572056875B00BE44B3 /* DataStoreHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStoreHelper.h; sourceTree = "<group>"; };
+		046086582056875B00BE44B3 /* DataStoreHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStoreHelper.m; sourceTree = "<group>"; };
 		04E5BA99205294310008E021 /* HomerSearchDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomerSearchDelegate.h; sourceTree = "<group>"; };
 		04E5BA9A205294310008E021 /* Slaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slaver.h; sourceTree = "<group>"; };
 		04E5BA9B205294310008E021 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
@@ -665,6 +668,8 @@
 				207799FE1FA42FE40095ED0C /* HLAlertView */,
 				209AD8F81F867E270062830A /* Category */,
 				209AD90B1F867E270062830A /* Constraint.h */,
+				046086572056875B00BE44B3 /* DataStoreHelper.h */,
+				046086582056875B00BE44B3 /* DataStoreHelper.m */,
 				044C10E2204D0D4400EDE8FD /* Uility.h */,
 				044C10E3204D0D4400EDE8FD /* Uility.m */,
 				209AD90C1F867E270062830A /* Keychain */,
@@ -1253,6 +1258,7 @@
 				209AD9231F867E270062830A /* NSData+Base64.m in Sources */,
 				20B09E151FB160B700301F8E /* LLCircularView.m in Sources */,
 				20A71DD31FAE05D0000C543B /* LLSelectGroupTypeAlterView.m in Sources */,
+				046086592056875B00BE44B3 /* DataStoreHelper.m in Sources */,
 				209AD92D1F867E270062830A /* PassWordTool.m in Sources */,
 				C549A11E1FE178300076C8A0 /* WhiteLight.m in Sources */,
 				209AD9541F8763510062830A /* LoginViewController.m in Sources */,

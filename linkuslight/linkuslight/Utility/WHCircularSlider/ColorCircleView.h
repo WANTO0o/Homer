@@ -12,6 +12,9 @@
 
 @interface ColorCircleView : UIView
 
+@property(nonatomic,assign)NSInteger minimumValue;
+@property(nonatomic,assign)NSInteger maximumValue;
+@property(nonatomic,assign)int currentValue;
 @property (nonatomic ,copy) void (^colorBlock)(UIColor *);
 
 @end
