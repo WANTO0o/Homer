@@ -43,7 +43,15 @@
     [_deviceList removeObject:Device];
 }
 
-
+-(void) replace:(DeviceInfo *)Device{
+    for (NSInteger index = 0; index < self.deviceList.count; index++) {
+        DeviceInfo *deviceInfo = self.deviceList[index];
+        if ([Device.deviceID isEqualToString:deviceInfo.deviceID]) {
+            [self.deviceList replaceObjectAtIndex:index withObject:Device];
+            break;
+        }
+    }
+}
 
 /**
  整合设备列表

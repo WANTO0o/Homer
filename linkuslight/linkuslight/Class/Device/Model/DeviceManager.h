@@ -18,6 +18,7 @@
 
 -(void) add:(DeviceInfo *)Device;
 -(void) del:(DeviceInfo *)Device;
+-(void) replace:(DeviceInfo *)Device;
 
 /**
  整合设备列表

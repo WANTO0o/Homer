@@ -16,8 +16,11 @@
 #import "HomerRemoteCtrl.h"
 #import "Uility.h"
 #import "ColorCircleView.h"
+#import "DeviceManager.h"
 
-@interface LightControlViewController ()<LLCircularViewDelegate>
+@interface LightControlViewController ()<LLCircularViewDelegate,HomerRemoteCtrlDelegate>
+
+
 
 @property(assign, nonatomic)BOOL isRightMenuShow;
 
@@ -51,6 +54,8 @@
 
 @property (retain, nonatomic) ColorLight *colorLight;
 
+@property (nonatomic, assign) HomerRemoteCtrl *homerRemoteCtrl;
+
 @end
 
 @implementation LightControlViewController
@@ -58,16 +63,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
-    
+    self.homerRemoteCtrl = [HomerRemoteCtrl sharedManager];
+
     [self initView];
+    
+    if (self.lightControlDeviceType == LightControlDeviceTypeSingle) {
+        //单个设备
+        if(self.DeviceInfo.linkState == LULDeviceLinkStateCloud || self.DeviceInfo.linkState == LULDeviceLinkStateBoth){
+            //远程设备需要重新获取列表
+            [Uility showLoadingToView:self.view];
+            [self.homerRemoteCtrl searchDevice];
+        }else{
+             //本地设备初始化
+            _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
+        }
+    }else{//分组一个或多个设备
+        
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self.navigationController.topViewController.navigationItem setTitle:_DeviceInfo.name];
+    if(self.lightControlDeviceType == LightControlDeviceTypeSingle){
+        [self.navigationController.topViewController.navigationItem setTitle:_DeviceInfo.name];
+    }else if(self.lightControlDeviceType == LightControlDeviceTypeGroup){
+         [self.navigationController.topViewController.navigationItem setTitle:_groupInfo.name];
+    }
+
     //self.navigationController.navigationBar.tintColor = nil;
     //self.navigationController.navigationBar.backgroundColor = nil;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
@@ -84,20 +106,6 @@
     [YCXMenu dismissMenu];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 #pragma mark - ButtionClickedAction
 - (IBAction)didAlarmButtionClicked:(id)sender {
     [self showClockView];
@@ -205,6 +213,15 @@
     self.lightenessSlider.continuous = NO;
 }
 
+- (void)refreshViewWithDevice:(DeviceInfo *)device{
+    if (device.isOn) {
+        [_deviceOnButton.layer setBackgroundColor:kBackgroundColor.CGColor];
+        [_deviceOFFButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
+    }else{
+        [_deviceOnButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
+        [_deviceOFFButton.layer setBackgroundColor:kBackgroundColor.CGColor];
+    }
+}
 
 - (void)transform {
     
@@ -399,16 +416,43 @@
 }
 
 - (void)turnDeviceOn:(Boolean)isOn {
-    
+   
     if (isOn) {
-        [_colorLight turnOn];
+        if (self.lightControlDeviceType == LightControlDeviceTypeSingle) {
+            if (self.DeviceInfo.linkState == LULDeviceLinkStateCloud) {
+                 [Uility showLoadingToView:self.view];
+                [self.homerRemoteCtrl turnLight:self.DeviceInfo.deviceID State:isOn];
+            }else{
+                [_colorLight turnOn];
+            }
+        }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
+            for (DeviceInfo *deviceInfo in self.groupInfo.deviceArr) {
+                if (deviceInfo.linkState == LULDeviceLinkStateCloud) {//组别
+                    [Uility showLoadingToView:self.view];
+//                    [self.homerRemoteCtrl turnLight:deviceInfo.deviceID State:isOn];
+                }else{
+                    [_colorLight turnOn];
+                }
+            }
+        }
+
         [_deviceOnButton.layer setBackgroundColor:kBackgroundColor.CGColor];
         [_deviceOFFButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
     } else {
-        [_colorLight turnOff];
+        if (self.lightControlDeviceType == LightControlDeviceTypeSingle) {
+            if (self.DeviceInfo.linkState == LULDeviceLinkStateCloud) {
+                [self.homerRemoteCtrl turnLight:self.DeviceInfo.deviceID State:isOn];
+            }else{
+                [_colorLight turnOff];
+            }
+        }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
+            ;
+        }
+  
         [_deviceOnButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
         [_deviceOFFButton.layer setBackgroundColor:kBackgroundColor.CGColor];
     }
+ 
 }
 
 
@@ -490,6 +534,33 @@
     DebugLog(@"Current Value %d", currentValue);
     [_colorLight setColorTemp:currentValue];
     //DebugLog(@"HSV2 is :%f,%f,%f,%f",hsv.hu,hsv.sa,hsv.br,hsv.al);
+}
+#pragma mark - HomerRemoteCtrlDelegate
+-(void) remoteSearchDevice:(NSMutableArray *)devList {
+
+    for (ColorLight *light in devList) {
+        if ([[light deviceInfo].deviceID isEqualToString:self.DeviceInfo.deviceID]) {
+            LULDeviceLinkState linkState = self.DeviceInfo.linkState;
+            self.DeviceInfo = [light deviceInfo];
+            self.DeviceInfo.linkState = linkState;
+            [[DeviceManager sharedManager] replace:self.DeviceInfo];
+            [self refreshViewWithDevice:self.DeviceInfo];
+            //当前操作的设备
+            break;
+        }
+       
+    }
+    [Uility hideLoadingView:self.view];
+}
+
+-(void) transferSuccess{
+    [Uility hideLoadingView:self.view];
+    DebugLog(@"请求成功");
+}
+
+-(void) transferFailWithMsg:(NSError *)failMsg{
+    [Uility showError:@"请求失败，请稍后尝试" toView:self.view];
+     DebugLog(@"请求失败，%@",failMsg);
 }
 
 @end
