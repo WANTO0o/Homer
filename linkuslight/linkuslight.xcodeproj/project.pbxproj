@@ -385,10 +385,10 @@
 		20779A031FA5ACA40095ED0C /* UICircularSlider */ = {
 			isa = PBXGroup;
 			children = (
-				20779A041FA5ACB70095ED0C /* LZCircularSlider.h */,
-				20779A051FA5ACB70095ED0C /* LZCircularSlider.m */,
 				20B09E131FB160B700301F8E /* LLCircularView.h */,
 				20B09E141FB160B700301F8E /* LLCircularView.m */,
+				20779A041FA5ACB70095ED0C /* LZCircularSlider.h */,
+				20779A051FA5ACB70095ED0C /* LZCircularSlider.m */,
 			);
 			path = UICircularSlider;
 			sourceTree = "<group>";
@@ -1478,7 +1478,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.homer.smartelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e8d78f71-f2c1-491c-b680-17bb599d57f8";
+				PROVISIONING_PROFILE = "0061a140-7cd2-4200-9120-c4d7ce5e6711";
 				PROVISIONING_PROFILE_SPECIFIER = SmartELF;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

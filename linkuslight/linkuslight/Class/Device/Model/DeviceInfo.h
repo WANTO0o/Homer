@@ -35,12 +35,6 @@ typedef NS_ENUM(NSInteger, LULDeviceType) {
 @property (nonatomic,copy)NSString *desc;
 
 
-/**
- 暂时通过这种方式存储本地device
- */
-@property (nonatomic,strong) Device  *device;
-
-
 @end
 
 @interface GroupInfo : NSObject

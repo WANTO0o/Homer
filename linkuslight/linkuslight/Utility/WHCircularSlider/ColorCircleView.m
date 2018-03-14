@@ -9,7 +9,14 @@
 #import "ColorCircleView.h"
 #import "Uility.h"
 
-@interface ColorCircleView ()
+#define  ToRad(ang)  ((M_PI *(ang)) / 180)//度数转化为弧度
+#define  ToAng(rad)  ( (180.0 * (rad)) / M_PI )//弧度转化为度数
+#define SQR(x)         ( (x) * (x) )g
+@interface ColorCircleView (){
+    CGFloat angle;
+//    CGFloat radius;
+    
+}
 @property (nonatomic, assign, getter=isOn) BOOL On;
 @property (nonatomic, assign) CGPoint point;
 @property (nonatomic, assign) CGPoint pointCenter;
@@ -31,7 +38,7 @@
     self = [super init];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
- 
+//        radius = self.frame.size.width/2-20;
     }
     return self;
 }
@@ -67,6 +74,8 @@
         _pointImage = pointImg;
         pointImg.image = [UIImage imageNamed:@"pointer_orange"];
         pointImg.bounds = CGRectMake(0, 0, 30, 30);
+         _pointCenter = relative(kCenter, kRadius, 0);
+        pointImg.center = [self pointFromAngle:60];
         [self addSubview:pointImg];
     }
     
@@ -119,6 +128,29 @@
     }
 }
 
+-(CGPoint)maskPointFromAngle:(int)angleInt{
+    
+    //Define the Circle center
+//    CGPoint centerPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    //Define The point position on the circumference
+    CGPoint result;
+    CGFloat y = kCenter.y + (kRadius-_lineWidth/3)*sin(ToRad(angleInt));
+    CGFloat x = kCenter.x + (kRadius-_lineWidth/3)*cos(ToRad(angleInt));
+    result =CGPointMake(x, y);
+    return result;
+}
+
+-(CGPoint)pointFromAngle:(int)angleInt{
+    
+    //Define the Circle center
+//    CGPoint centerPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    //Define The point position on the circumference
+    CGPoint result;
+    CGFloat y = kCenter.y + (kRadius)*sin(ToRad(angleInt));
+    CGFloat x = kCenter.x + (kRadius)*cos(ToRad(angleInt));
+    result =CGPointMake(x, y);
+    return result;
+}
 CGPoint relative(CGPoint point, CGFloat x, CGFloat y)
 {
     return CGPointMake(point.x + x, point.y + y);

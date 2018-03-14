@@ -87,12 +87,16 @@
     for (DeviceInfo *device in self.devices) {
         if (device.isOn) {
             ColorLight *colorLight = [[ColorLight alloc] initWithDeviceInfo:device];
-            [colorLight setBrightness:10];//暂时设置固定值
+//            [colorLight setBrightness:10];//暂时设置固定值
             if ((device.linkState == LULDeviceLinkStateWiFi) || (device.linkState == LULDeviceLinkStateBoth)) {//本地设置
 //               Homer set
-                [device.device setColorBrightness:colorLight.Color_Brightness];
+                [colorLight setColor_Brightness:10];
             }else if (device.linkState == LULDeviceLinkStateCloud){//wifi获取的列表处理
-                [[HomerRemoteCtrl sharedManager]setLightHSV:colorLight];
+                [[HomerRemoteCtrl sharedManager]setLightHSV:colorLight success:^(id resp){
+                    ;
+                } failure:^(NSError *error) {
+                    ;
+                }];
             }
         }
     }

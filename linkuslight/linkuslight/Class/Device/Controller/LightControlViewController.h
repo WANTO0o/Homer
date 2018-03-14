@@ -23,4 +23,6 @@ typedef NS_ENUM(NSUInteger,LightControlDeviceType) {
 @property (nonatomic, assign) LightControlDeviceType  lightControlDeviceType;
 
 @property (nonatomic, copy) void(^deleteDeviceBlock)(DeviceInfo *);
+
+@property (nonatomic, copy) void(^backActionBlock)();
 @end

@@ -14,6 +14,9 @@ typedef NS_ENUM(NSInteger, LULLightType) {
     LULLightTypeColourLight
 };
 
+typedef void  (^successBlock)(id resp);
+typedef void  (^failureBlock)(NSError *error);
+
 @interface ColorLight : NSObject
 
 @property (nonatomic, assign) uint32_t Color_H;
@@ -28,17 +31,23 @@ typedef NS_ENUM(NSInteger, LULLightType) {
 @property (nonatomic, assign) LULLightType lightType;
 @property (nonatomic, retain) DeviceInfo *deviceInfo;
 
+
+//@property (nonatomic, copy) successBlock success;
+//@property (nonatomic, copy) failureBlock failure;
+//获取设备状态
+- (void)getDeviceStatusSuccess:(successBlock)success failure:(failureBlock)failure;
+
 -(id) initWithDeviceInfo:(DeviceInfo*) devInfo;
 // 开灯
--(void) turnOn;
+-(void) turnOnSuccess:(successBlock)success failure:(failureBlock)failure;
 // 关灯
--(void) turnOff;
+-(void) turnOffSuccess:(successBlock)success failure:(failureBlock)failure;
 // 设置HSB颜色
--(void) setColorH:(uint32_t)colorH S:(uint32_t)colorS B:(uint32_t)colorB;
+-(void) setColorH:(uint32_t)colorH S:(uint32_t)colorS B:(uint32_t)colorB Success:(successBlock)success failure:(failureBlock)failure;
 // 设置白光色温模式的色温值，
--(void) setColorTemp:(uint16_t)colorTemp;
+-(void) setColorTemp:(uint16_t)colorTemp Success:(successBlock)success failure:(failureBlock)failure;
 // 设置亮度，可调范围为0～100
--(void) setBrightness:(uint8_t)brightness;
+-(void) setBrightness:(uint8_t)brightness Success:(successBlock)success failure:(failureBlock)failure;
 
 // 以下方法后续应该考虑设计为设备类型通用
 // 绑定到云端

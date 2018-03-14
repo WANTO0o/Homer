@@ -10,7 +10,7 @@ target 'linkuslight' do
 	source 'https://github.com/CocoaPods/Specs.git'
 	platform :ios, '7.0'
 	pod 'AFNetworking', '~> 2.5'
-    pod 'MJRefresh'
+    pod 'MJRefresh', '~> 3.1.12'
     pod 'Canvas', '~> 0.1.2'
     pod 'YYCache', '~> 1.0.4'
     

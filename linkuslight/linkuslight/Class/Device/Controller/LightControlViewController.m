@@ -54,7 +54,7 @@
 
 @property (retain, nonatomic) ColorLight *colorLight;
 
-@property (nonatomic, assign) HomerRemoteCtrl *homerRemoteCtrl;
+//@property (nonatomic, assign) HomerRemoteCtrl *homerRemoteCtrl;
 
 @end
 
@@ -63,23 +63,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.homerRemoteCtrl = [HomerRemoteCtrl sharedManager];
-
+//    self.homerRemoteCtrl = [HomerRemoteCtrl sharedManager];
+//    self.homerRemoteCtrl.delegate = self;
+    _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
     [self initView];
-    
-    if (self.lightControlDeviceType == LightControlDeviceTypeSingle) {
-        //单个设备
-        if(self.DeviceInfo.linkState == LULDeviceLinkStateCloud || self.DeviceInfo.linkState == LULDeviceLinkStateBoth){
-            //远程设备需要重新获取列表
-            [Uility showLoadingToView:self.view];
-            [self.homerRemoteCtrl searchDevice];
-        }else{
-             //本地设备初始化
-            _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
-        }
-    }else{//分组一个或多个设备
-        
-    }
+    [self getDeviceStatus];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -106,7 +94,36 @@
     [YCXMenu dismissMenu];
 }
 
+- (void)getDeviceStatus{
+    if (self.lightControlDeviceType == LightControlDeviceTypeSingle) {
+        //单个设备
+        if(self.DeviceInfo.linkState == LULDeviceLinkStateCloud || self.DeviceInfo.linkState == LULDeviceLinkStateBoth){
+            //远程设备需要重新获取列表
+            [Uility showLoadingToView:self.view];
+            [_colorLight getDeviceStatusSuccess:^(id response) {
+                NSString *msg = response[@"ret"];
+                if ([msg containsString:@"Device is offline"]) {
+                    [Uility hideLoadingView:self.view];
+                    [Uility showError:@"设备已离线" toView:self.view];
+                    return ;
+                }
+                //设备在线，刷新视图
+                [self refreshViewWithDevice:self.colorLight];
+                [Uility hideLoadingView:self.view];
+            } failure:^(id response) {
+                [Uility showError:@"获取状态失败，请稍后尝试" toView:self.view];;
+            }];
+        }else{
+            //本地设备初始化
+            _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
+        }
+    }else{//分组一个或多个设备
+        
+    }
+}
+
 #pragma mark - ButtionClickedAction
+/**闹钟*/
 - (IBAction)didAlarmButtionClicked:(id)sender {
     [self showClockView];
 }
@@ -119,18 +136,20 @@
     [self turnAlarmOn:NO];
 }
 
+/**切换彩灯*/
 - (IBAction)didlightTurnColourButtonClicked:(id)sender {
     [self turnLight:YES];
 }
 
+/**切换白灯*/
 - (IBAction)didlightTurnWhiteButtonClicked:(id)sender {
     [self turnLight:NO];
 }
-//设备开
+/**打开设备*/
 - (IBAction)diddeviceOnButtonClicked:(id)sender {
     [self turnDeviceOn:YES];
 }
-//设备关
+/**关闭设备*/
 - (IBAction)diddeviceOFFButtonClicked:(id)sender {
     [self turnDeviceOn:NO];
 }
@@ -138,8 +157,33 @@
 - (void)sliderEndChangeValue:(id)sender {
     //亮度变化
    DebugLog(@"亮度：%f",_lightenessSlider.value);
-    [_colorLight setBrightness:(uint8_t)_lightenessSlider.value];
+    if (self.lightControlDeviceType == LightControlDeviceTypeSingle) {
+        [Uility showLoadingToView:self.view];
+        [_colorLight setBrightness:(uint8_t)_lightenessSlider.value Success:^(id resp){
+            [Uility hideLoadingView:self.view];
+            [self analycisResp:resp];
+
+          
+        } failure:^(NSError *error) {
+            [Uility showError:@"网络请求失败" toView:self.view];
+        }];
+    }else{
+        
+    }
+    
     _brightnessLable.text = [NSString stringWithFormat:@"亮度：%d",(int)_lightenessSlider.value];
+}
+
+- (void)analycisResp:(id)resp{
+    if ([resp isKindOfClass:[NSDictionary class]]) {
+        NSString *ret = resp[@"ret"];
+        if ([ret containsString:@"Device is offline"]) {
+            [Uility showError:@"设备已离线" toView:self.view];
+        }else if([ret containsString:@"ok"]){
+            [Uility showSuccess:@"设置成功" toView:self.view];
+        }
+        
+    }
 }
 
 #pragma mark Private
@@ -186,11 +230,14 @@
     [_deviceOFFButton.layer setCornerRadius:20.0];
     [_deviceOFFButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     
-    if (_LightType == LULLightSliderTypeWhiteLight) {
+
+    if (self.DeviceInfo.deviceType == LULLightSliderTypeWhiteLight) {
         [self turnLight:NO];
     } else {
         [self turnLight:YES];
     }
+    
+
     
     
     /*_lightBrightnessSlider = [[LZCircularSlider alloc] initWithFrame:_lightenessSlider.frame];
@@ -213,14 +260,29 @@
     self.lightenessSlider.continuous = NO;
 }
 
-- (void)refreshViewWithDevice:(DeviceInfo *)device{
-    if (device.isOn) {
+
+/**
+ 赋值视图
+ */
+- (void)refreshViewWithDevice:(ColorLight *)colorLight{
+    //设备开关
+    if (colorLight.deviceInfo.isOn) {
         [_deviceOnButton.layer setBackgroundColor:kBackgroundColor.CGColor];
         [_deviceOFFButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
     }else{
         [_deviceOnButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
         [_deviceOFFButton.layer setBackgroundColor:kBackgroundColor.CGColor];
     }
+    //亮度
+     _brightnessLable.text = [NSString stringWithFormat:@"亮度：%d%%",(int)colorLight.Color_Brightness];
+    _lightenessSlider.value = (int)colorLight.Color_Brightness;
+    //白彩灯
+    if (self.DeviceInfo.deviceType == LULLightSliderTypeWhiteLight) {
+        [self turnLight:NO];
+    } else {
+        [self turnLight:YES];
+    }
+    
 }
 
 - (void)transform {
@@ -250,6 +312,9 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     
     [self.navigationController popViewControllerAnimated:YES];
+    if (self.backActionBlock) {
+        self.backActionBlock();
+    }
 }
 
 - (void)showClockView {
@@ -415,23 +480,30 @@
     }
 }
 
+
 - (void)turnDeviceOn:(Boolean)isOn {
-   
     if (isOn) {
         if (self.lightControlDeviceType == LightControlDeviceTypeSingle) {
-            if (self.DeviceInfo.linkState == LULDeviceLinkStateCloud) {
-                 [Uility showLoadingToView:self.view];
-                [self.homerRemoteCtrl turnLight:self.DeviceInfo.deviceID State:isOn];
-            }else{
-                [_colorLight turnOn];
-            }
+            [Uility showLoadingToView:self.view];
+            [_colorLight turnOnSuccess:^(id resp){
+                [Uility hideLoadingView:self.view];
+                [self analycisResp:resp];
+
+            } failure:^(NSError *error) {
+//                DebugLog(@"");
+            }];
         }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
             for (DeviceInfo *deviceInfo in self.groupInfo.deviceArr) {
-                if (deviceInfo.linkState == LULDeviceLinkStateCloud) {//组别
-                    [Uility showLoadingToView:self.view];
-//                    [self.homerRemoteCtrl turnLight:deviceInfo.deviceID State:isOn];
+                if (deviceInfo.linkState == LULDeviceLinkStateCloud) {//分组
+                
                 }else{
-                    [_colorLight turnOn];
+                    [Uility showLoadingToView:self.view];
+                    [_colorLight turnOnSuccess:^(id resp){
+                        [Uility hideLoadingView:self.view];
+                        [self analycisResp:resp];
+                    } failure:^(NSError *error) {
+                        ;
+                    }];
                 }
             }
         }
@@ -440,11 +512,13 @@
         [_deviceOFFButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
     } else {
         if (self.lightControlDeviceType == LightControlDeviceTypeSingle) {
-            if (self.DeviceInfo.linkState == LULDeviceLinkStateCloud) {
-                [self.homerRemoteCtrl turnLight:self.DeviceInfo.deviceID State:isOn];
-            }else{
-                [_colorLight turnOff];
-            }
+            [Uility showLoadingToView:self.view];
+            [_colorLight turnOffSuccess:^(id resp){
+                [Uility hideLoadingView:self.view];
+                [self analycisResp:resp];
+            } failure:^(NSError *error) {
+                ;
+            }];
         }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
             ;
         }
@@ -455,7 +529,7 @@
  
 }
 
-
+/**切换白彩灯背景*/
 - (void)turnSlider{
     
     CGRect fram = _lightView.frame;
@@ -502,15 +576,21 @@
             struct HSV hsv;
             
             [col getHue:&hsv.hu saturation:&hsv.sa brightness:&hsv.br alpha:&hsv.al];
-            
-            [weakSelf.colorLight setColorH:(hsv.hu*360) S:(hsv.sa*100) B:(hsv.br*100)];
+                 [Uility showLoadingToView:self.view];
+                 [weakSelf.colorLight setColorH:(hsv.hu*360) S:(hsv.sa*100) B:(hsv.br*100)Success:^(id resp){
+                    [Uility hideLoadingView:self.view];
+                    [self analycisResp:resp];
+
+                 } failure:^(NSError *error) {
+                    ;
+                 }];
             DebugLog(@"HSV is :%f,%f,%f,%f",hsv.hu,hsv.sa,hsv.br,hsv.al);
 
         };
         
     }
 
-    if (_LightType == LULLightSliderTypeWhiteLight) {
+    if (self.LightType == LULLightSliderTypeWhiteLight) {
         [self.colorCircleSlider removeFromSuperview];
         [self.view addSubview:_whiteLightSlider];
     } else {
@@ -532,35 +612,48 @@
     
     //[_colorLight setColorH:(hsv.hu*360) S:(hsv.sa*100) B:(hsv.br*100)];
     DebugLog(@"Current Value %d", currentValue);
-    [_colorLight setColorTemp:currentValue];
+    [Uility showLoadingToView:self.view];
+    [_colorLight setColorTemp:currentValue Success:^(id resp){
+        [Uility hideLoadingView:self.view];
+        [self analycisResp:resp];
+    } failure:^(NSError *error) {
+        ;
+    }];
     //DebugLog(@"HSV2 is :%f,%f,%f,%f",hsv.hu,hsv.sa,hsv.br,hsv.al);
 }
 #pragma mark - HomerRemoteCtrlDelegate
--(void) remoteSearchDevice:(NSMutableArray *)devList {
+//-(void) remoteSearchDevice:(NSMutableArray *)devList {
+//
+//    for (ColorLight *light in devList) {
+//        if ([[light deviceInfo].deviceID isEqualToString:self.DeviceInfo.deviceID]) {
+//            LULDeviceLinkState linkState = self.DeviceInfo.linkState;
+//            self.DeviceInfo = [light deviceInfo];
+//            self.DeviceInfo.linkState = linkState;
+//            self.colorLight = light;
+//            if (self.DeviceInfo.deviceType == LULDeviceLinkStateWhiteLight) {
+//                self.LightType = LULLightSliderTypeWhiteLight;
+//            } else {
+//                self.LightType = LULLightSliderTypeColourLight;
+//            }
+//            [[DeviceManager sharedManager] replace:self.DeviceInfo];
+//            [self refreshViewWithDevice:self.colorLight];
+//            //当前操作的设备
+//            break;
+//        }
+//
+//    }
+//    [Uility hideLoadingView:self.view];
+//}
 
-    for (ColorLight *light in devList) {
-        if ([[light deviceInfo].deviceID isEqualToString:self.DeviceInfo.deviceID]) {
-            LULDeviceLinkState linkState = self.DeviceInfo.linkState;
-            self.DeviceInfo = [light deviceInfo];
-            self.DeviceInfo.linkState = linkState;
-            [[DeviceManager sharedManager] replace:self.DeviceInfo];
-            [self refreshViewWithDevice:self.DeviceInfo];
-            //当前操作的设备
-            break;
-        }
-       
-    }
-    [Uility hideLoadingView:self.view];
-}
-
--(void) transferSuccess{
-    [Uility hideLoadingView:self.view];
-    DebugLog(@"请求成功");
-}
-
--(void) transferFailWithMsg:(NSError *)failMsg{
-    [Uility showError:@"请求失败，请稍后尝试" toView:self.view];
-     DebugLog(@"请求失败，%@",failMsg);
-}
+//-(void) transferSuccess{
+//    [Uility hideLoadingView:self.view];
+//    DebugLog(@"请求成功");
+//}
+//
+//-(void) transferFailWithMsg:(NSError *)failMsg{
+//    [Uility hideLoadingView:self.view];
+//    [Uility showError:@"请求失败，请稍后尝试" toView:self.view];
+//     DebugLog(@"请求失败，%@",failMsg);
+//}
 
 @end

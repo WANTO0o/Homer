@@ -25,12 +25,26 @@
 @property (assign) id<HomerRemoteCtrlDelegate> delegate;
 
 -(void) searchDevice;
+- (void)getDeviceStatus:(NSString *)deviceId
+                success:(void (^)( id response))success
+                failure:(void (^)( id response))failure;
 
--(void) turnLight:(NSString *)lightID State:(Boolean)state;
+-(void) turnLight:(NSString *)lightID
+            State:(Boolean)state
+          success:(successBlock)success
+          failure:(failureBlock)failure;
 
--(void) setLightHSV:(ColorLight *)light;
--(void) setLightTemperature:(ColorLight *)light;
--(void) setLightBrightness:(ColorLight *)light;
+-(void) setLightHSV:(ColorLight *)light
+            success:(successBlock)success
+            failure:(failureBlock)failure;
+
+-(void) setLightTemperature:(ColorLight *)light
+                    success:(successBlock)success
+                    failure:(failureBlock)failure;
+
+-(void) setLightBrightness:(ColorLight *)light
+                   success:(successBlock)success
+                   failure:(failureBlock)failure;
 
 // 以下方法可基于设备通用，因此不传入ColorLight
 -(void) addDevice:(DeviceInfo *)devInfo;

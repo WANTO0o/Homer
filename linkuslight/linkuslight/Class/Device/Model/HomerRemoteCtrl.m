@@ -98,7 +98,21 @@
     }];
 }
 
--(void)turnLight:(NSString *)lightID State:(Boolean)state {
+- (void)getDeviceStatus:(NSString *)devId
+                success:(void (^)( id response))success
+                failure:(void (^)( id response))failure{
+    NSDictionary *paramAppliance = @{
+                                     @"applianceId" : devId,
+                                     };
+    NSDictionary *params = @{
+                             @"userId" : self.amznUserID,
+                             @"option" : @"GetDevInfo",
+                             @"appliance" : paramAppliance
+                             };
+     [self transferHttpSessionWithParameter:params success:success failure:failure];
+}
+
+-(void)turnLight:(NSString *)lightID State:(Boolean)state success:(successBlock)success failure:(failureBlock)failure{
     NSLog(@"turnLight");
     
     NSString *optionStr = @"";
@@ -118,10 +132,10 @@
                              @"appliance" : paramAppliance
                              };
     
-    [self transferHttpSessionWithParameter:params];
+    [self transferHttpSessionWithParameter:params success:success failure:failure];
 }
 
--(void) setLightHSV:(ColorLight *)light {
+-(void) setLightHSV:(ColorLight *)light success:(successBlock)success failure:(failureBlock)failure{
     NSString *devId = light.deviceInfo.deviceID;
     NSDictionary *paramColor = @{
                                  @"hue" : [NSNumber numberWithUnsignedInteger:light.Color_H],
@@ -140,10 +154,10 @@
                              @"appliance" : paramAppliance
                              };
     
-    [self transferHttpSessionWithParameter:params];
+        [self transferHttpSessionWithParameter:params success:success failure:failure];
 }
 
--(void) setLightTemperature:(ColorLight *)light {
+-(void) setLightTemperature:(ColorLight *)light success:(successBlock)success failure:(failureBlock)failure{
     NSString *devId = light.deviceInfo.deviceID;
     NSDictionary *paramTemperature = @{
                                        @"value" : [NSNumber numberWithUnsignedInteger:light.Color_Temp]
@@ -157,10 +171,10 @@
                              @"option" : @"SetColorTemperature",
                              @"appliance" : paramAppliance
                              };
-    [self transferHttpSessionWithParameter:params];
+        [self transferHttpSessionWithParameter:params success:success failure:failure];
 }
 
--(void) setLightBrightness:(ColorLight *)light {
+-(void) setLightBrightness:(ColorLight *)light success:(successBlock)success failure:(failureBlock)failure{
     NSString *devId = light.deviceInfo.deviceID;
     
     NSDictionary *paramBrightness = @{
@@ -175,10 +189,10 @@
                              @"option" : @"SetPercentage",
                              @"appliance" : paramAppliance
                              };
-    [self transferHttpSessionWithParameter:params];
+        [self transferHttpSessionWithParameter:params success:success failure:failure];
 }
 
--(void)addDevice:(DeviceInfo *)devInfo {
+-(void)addDevice:(DeviceInfo *)devInfo{
     NSArray *paramApplianceTypes = [[NSArray alloc] initWithObjects:@"LIGHT", nil];
     
     NSDictionary *paramDevice = @{
@@ -235,6 +249,21 @@
                       }];
     
     
+}
+
+
+
+-(void) transferHttpSessionWithParameter:(NSDictionary *)params
+                                 success:(void (^)( id response))success
+                                 failure:(void (^)( id response))failure{
+    [_httpSessionManager POST:self.apiGateWayURL parameters:params
+                      success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+                          DebugLog(@"ok");
+                          success(responseObject);
+                      }  failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                          DebugLog(@"%请求失败@---", error);
+                          failure(error);
+                      }];
 }
 
 @end

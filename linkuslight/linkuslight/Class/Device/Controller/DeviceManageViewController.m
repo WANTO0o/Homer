@@ -377,6 +377,7 @@
     LightControlViewController *controller = [[LightControlViewController alloc] init];
     controller.isDevice = YES;
     controller.DeviceInfo = devInfo;
+    controller.lightControlDeviceType = LightControlDeviceTypeSingle;
     if (devInfo.deviceType == LULDeviceLinkStateWhiteLight) {
         controller.LightType = LULLightSliderTypeWhiteLight;
     } else {
@@ -393,22 +394,22 @@
     [self setHidesBottomBarWhenPushed:NO];
 }
 
-- (void)showLightViewWithDeviceType:(LULDeviceType)deviceType{
-    
-    LightControlViewController *controller = [[LightControlViewController alloc] init];
-    controller.isDevice = YES;
-    if (deviceType == LULDeviceLinkStateWhiteLight) {
-        controller.LightType = LULLightSliderTypeWhiteLight;
-    } else {
-        controller.LightType = LULLightSliderTypeColourLight;
-    }
-    
-    [self setHidesBottomBarWhenPushed:YES];
-
-    [self.navigationController pushViewController:controller animated:YES];
-    [self setHidesBottomBarWhenPushed:NO];
-
-}
+//- (void)showLightViewWithDeviceType:(LULDeviceType)deviceType{
+//
+//    LightControlViewController *controller = [[LightControlViewController alloc] init];
+//    controller.isDevice = YES;
+////    if (deviceType == LULDeviceLinkStateWhiteLight) {
+////        controller.LightType = LULLightSliderTypeWhiteLight;
+////    } else {
+////        controller.LightType = LULLightSliderTypeColourLight;
+////    }
+//
+//    [self setHidesBottomBarWhenPushed:YES];
+//
+//    [self.navigationController pushViewController:controller animated:YES];
+//    [self setHidesBottomBarWhenPushed:NO];
+//
+//}
 
 - (void)showSocketView {
     SocketDeviceViewController *controller = [[SocketDeviceViewController alloc] init];
@@ -461,7 +462,7 @@
         devFind.hasStatuFlag = NO;
         devFind.hasClockFlag = YES;
         devFind.linkState = LULDeviceLinkStateWiFi;
-        devFind.device = result;
+//        devFind.device = result;
 
 //        [_devices addObject:devFind];
         // TODO: 是否需要判断_tipsView当前是否存在于Superview中，再做remove的动作
