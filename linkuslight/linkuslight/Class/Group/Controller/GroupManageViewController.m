@@ -19,6 +19,7 @@
 #import "LLSelectGroupTypeAlterView.h"
 #import "UINavigationBar+BackgroundColor.h"
 #import "DataStoreHelper.h"
+#import "Uility.h"
 
 @interface GroupManageViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -231,6 +232,10 @@
         //取消按钮点击事件
         NSLog(@"取消");
     } SureBtClcik:^(NSString *groupName){
+        if([groupName isEqualToString:@""]){
+            [Uility showError:@"分组名称不能为空" toView:self.view];
+            return ;
+        }
         self.addGroupName = [groupName copy];
         //确定按钮点击事件
         NSLog(@"确定");
@@ -318,10 +323,10 @@
 
         switch (dev.deviceType) {
             case LULDeviceLinkStateColourLight:
-                [self showLightViewWithDeviceType:dev.deviceType];
+                [self showLightViewWithDeviceType:dev.deviceType Group:dev];
                 break;
             case LULDeviceLinkStateWhiteLight:
-                [self showLightViewWithDeviceType:dev.deviceType];
+                [self showLightViewWithDeviceType:dev.deviceType Group:dev];
                 break;
             case LULDeviceLinkStateSocket:
                 [self showSocketView];
@@ -346,10 +351,12 @@
     return NO;
 }
 
-- (void)showLightViewWithDeviceType:(LULDeviceType)deviceType {
+- (void)showLightViewWithDeviceType:(LULDeviceType)deviceType Group:(GroupInfo *)group{
     
     LightControlViewController *controller = [[LightControlViewController alloc] init];
     controller.isDevice = NO;
+    controller.groupInfo = group;
+    controller.lightControlDeviceType = LightControlDeviceTypeGroup;
     if (deviceType == LULDeviceLinkStateWhiteLight) {
         controller.LightType = LULLightSliderTypeWhiteLight;
     } else {

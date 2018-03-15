@@ -15,7 +15,7 @@
     [aCoder encodeObject:self.deviceID forKey:@"ip"];
     [aCoder encodeObject:self.name forKey:@"macAddr"];
     [aCoder encodeObject:self.desc forKey:@"desc"];
-    [aCoder encodeBool:self.isOn forKey:@"isOn"];
+    [aCoder encodeBool:self.IsOn forKey:@"isOn"];
     [aCoder encodeBool:self.hasClockFlag forKey:@"hasClockFlag"];
     [aCoder encodeBool:self.hasStatuFlag forKey:@"hasStatuFlag"];
     [aCoder encodeInt:self.linkState forKey:@"linkState"];

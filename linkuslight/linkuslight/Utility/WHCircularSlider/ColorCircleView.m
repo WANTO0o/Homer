@@ -75,7 +75,7 @@
         pointImg.image = [UIImage imageNamed:@"pointer_orange"];
         pointImg.bounds = CGRectMake(0, 0, 30, 30);
          _pointCenter = relative(kCenter, kRadius, 0);
-        pointImg.center = [self pointFromAngle:60];
+        pointImg.center = [self pointFromAngle:130];
         [self addSubview:pointImg];
     }
     

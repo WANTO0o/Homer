@@ -46,21 +46,24 @@
 }
 
 -(void) setColorH:(uint32_t)colorH S:(uint32_t)colorS B:(uint32_t)colorB Success:(successBlock)success failure:(failureBlock)failure{
-    _Color_H = colorH;
-    _Color_S = colorS;
-    _Color_B = colorB;
+    self.deviceInfo.Color_H = colorH;
+    self.deviceInfo.Color_S = colorS;
+    self.deviceInfo.Color_B = colorB;
+//    _Color_S = colorS;
+//    _Color_B = colorB;
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
-        DebugLog(@"ColorH:%d, ColorS:%d, ColorB:%d", _Color_H, _Color_S, _Color_B);
-        [_device controlColorH:colorH S:colorS B:_Color_Brightness];
+        DebugLog(@"ColorH:%d, ColorS:%d, ColorB:%d", colorH, colorS, colorB);
+        [_device controlColorH:colorH S:colorS B:self.deviceInfo.Color_Brightness];
     } else if (_deviceInfo.linkState & LULDeviceLinkStateCloud) {
         [self.homerRemoteCtrl setLightHSV:self success:success failure:failure];
     }
 }
 
 - (void) turnOffSuccess:(successBlock)success failure:(failureBlock)failure {
+    _deviceInfo.IsOn = NO;
     DebugLog(@"ColorLight turnOff");
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
-        switch (_lightType) {
+        switch (self.deviceInfo.lightType) {
             case LULLightTypeWhiteLight:
                 [_device controlColorTemperature:0];
                 break;
@@ -70,7 +73,7 @@
                 break;
         }
     } else if (_deviceInfo.linkState & LULDeviceLinkStateCloud) {
-        switch (self.lightType) {
+        switch (self.deviceInfo.lightType) {
             case LULLightTypeWhiteLight:
             case LULLightTypeColourLight:
                 [self.homerRemoteCtrl turnLight:[self.deviceInfo deviceID] State:false  success:success failure:failure];
@@ -82,19 +85,21 @@
 }
 
 -(void) turnOnSuccess:(successBlock)success failure:(failureBlock)failure {
+    _deviceInfo.IsOn = YES;
     DebugLog(@"ColorLight turnOn");
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
-        switch (_lightType) {
+        success(@"");
+        switch (self.deviceInfo.lightType) {
             case LULLightTypeWhiteLight:
-                [_device controlColorTemperature:_Color_Temp];
+                [_device controlColorTemperature:_deviceInfo.Color_Temp];
                 break;
             case LULLightTypeColourLight:
-                [_device controlColorH:_Color_H S:_Color_S B:_Color_Brightness];
+                [_device controlColorH:_deviceInfo.Color_H S:_deviceInfo.Color_S B:_deviceInfo.Color_Brightness];
             default:
                 break;
         }
     } else if (_deviceInfo.linkState & LULDeviceLinkStateCloud) {
-        switch (self.lightType) {
+        switch (self.deviceInfo.lightType) {
             case LULLightTypeWhiteLight:
             case LULLightTypeColourLight:
                 [self.homerRemoteCtrl turnLight:[self.deviceInfo deviceID] State:true success:success failure:failure];
@@ -106,19 +111,21 @@
 }
 
 -(void) setColorTemp:(uint16_t)colorTemp Success:(successBlock)success failure:(failureBlock)failure{
-    _Color_Temp = colorTemp;
+    _deviceInfo.Color_Temp = colorTemp;
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
         [_device controlColorTemperature:colorTemp];
+        success(@"");
     } else if (_deviceInfo.linkState & LULDeviceLinkStateCloud) {
         [self.homerRemoteCtrl setLightTemperature:self success:success failure:failure];
     }
 }
 
 -(void) setBrightness:(uint8_t)brightness Success:(successBlock)success failure:(failureBlock)failure{
-    _Color_Brightness = brightness;
+    _deviceInfo.Color_Brightness = brightness;
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
-        DebugLog(@"brightness: %d", _Color_Brightness);
+        DebugLog(@"brightness: %d", brightness);
         [_device setColorBrightness:brightness];
+        success(@"");
     } else if (_deviceInfo.linkState & LULDeviceLinkStateCloud) {
         [self.homerRemoteCtrl setLightBrightness:self success:success failure:failure];
     }
@@ -129,46 +136,56 @@
     tmpDevInfo.deviceID = self.deviceInfo.deviceID;
     tmpDevInfo.name = name;
     tmpDevInfo.desc = desc;
-    [self.homerRemoteCtrl updateDeviceInfo:tmpDevInfo];
+    [self.homerRemoteCtrl updateDeviceInfo: tmpDevInfo Success:success failure:failure];
 }
 
 - (void)getDeviceStatusSuccess:(successBlock)success failure:(failureBlock)failure{
     /**直接拷贝获取列表的解析，可能有问题*/
     [self.homerRemoteCtrl getDeviceStatus:self.deviceInfo.deviceID success:^(id response) {
-        
+//        {
+//            brightness = 38;
+//            color =     {
+//                brightness = "0.38"; 明亮度
+//                hue = 344; //色调
+//                saturation = 1; 饱和度
+//            };
+//            colorTemperatureInKelvin = 0;
+//            powerState = ON;
+//            ret = ok;
+//        }
+       
         NSDictionary *dict = (NSDictionary *)response;
         DebugLog(@"searchDevice %@", dict);
-        
-        NSObject *objAppliances = [dict objectForKey:@"appliances"];
-        //NSLog(@"%@--%@", [objAppliances class], objAppliances);
-        NSArray *dictArray = (NSArray *)objAppliances;
-        for (NSObject *obj in dictArray) {
-            //NSLog(@"%@", [obj class]);
-            NSDictionary *dictItem = (NSDictionary *)obj;
-            
-            DeviceInfo *devInfo = [[DeviceInfo alloc] init];
-            devInfo.linkState = LULDeviceLinkStateCloud;
-            devInfo.isOn = true;
-            for (NSString *objItem in [dictItem keyEnumerator]) {
-                NSString *value = [dictItem valueForKey:objItem];
-                DebugLog(@"key:%@ value:%@", objItem, value);
-                if([objItem isEqualToString:@"friendlyName"]) {
-                    devInfo.name = value;
-                } else if([objItem isEqualToString:@"macAddr"]) {
-                    devInfo.macAddr = value;
-                } else if ([objItem isEqualToString:@"friendlyDescription"]) {
-                    devInfo.desc = value;
-                } else if ([objItem isEqualToString:@"applianceId"]) {
-                    devInfo.deviceID = value;
-                } else if ([objItem isEqualToString:@"applianceTypes"]) {
-                    // TODO: appliance Types
-                }
+        if ([dict[@"ret"] isEqualToString:@"ok"]) {
+            if ( [dict[@"powerState"] isEqualToString:@"ON"]) {
+                self.deviceInfo.IsOn = YES;
+            }else{
+                self.deviceInfo.IsOn = NO;
             }
-            
-            self.deviceInfo = devInfo;
-            success(response);
-            break;
-        }
+            _deviceInfo.Color_Temp = [dict[@"colorTemperatureInKelvin"] unsignedIntValue];
+            if (_deviceInfo.Color_Temp == 0) {
+                _deviceInfo.lightType = LULLightTypeColourLight;
+            }else{
+                _deviceInfo.lightType = LULLightTypeWhiteLight;
+            }
+            _deviceInfo.Color_Brightness = [dict[@"brightness"] unsignedIntValue];
+            NSDictionary *colorDict =dict[@"color"];
+            _deviceInfo.Color_H = [colorDict[@"hue"] unsignedIntValue];
+            _deviceInfo.Color_S = [colorDict[@"saturation"] unsignedIntValue] *100;
+            _deviceInfo.Color_B = [colorDict[@"brightness"] unsignedIntValue] *100;
+//            self.Color_Brightness = [colorDict[@"hue"] unsignedIntValue];
+//            self. = colorDict[@"hue"];
+//            if () {
+//                
+//            }
+//            if (self.Color_Brightness) {
+//
+//            }
+//            NSObject *objAppliances = [dict objectForKey:@"appliances"];
+            //NSLog(@"%@--%@", [objAppliances class], objAppliances);
+//                success(response);
+//                break;
+            }
         success(response);
     } failure:^(id response) {
         failure(response);

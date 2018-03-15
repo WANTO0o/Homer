@@ -13,7 +13,7 @@
 @interface DeviceManager : NSObject
 
 @property (atomic, strong) NSMutableArray *deviceList;
-
+@property (atomic, strong) NSMutableArray *colorLightList;
 +(DeviceManager *) sharedManager;
 
 -(void) add:(DeviceInfo *)Device;

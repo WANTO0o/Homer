@@ -138,9 +138,9 @@
 -(void) setLightHSV:(ColorLight *)light success:(successBlock)success failure:(failureBlock)failure{
     NSString *devId = light.deviceInfo.deviceID;
     NSDictionary *paramColor = @{
-                                 @"hue" : [NSNumber numberWithUnsignedInteger:light.Color_H],
-                                 @"saturation" : [NSNumber numberWithUnsignedInteger:(light.Color_S/100)],
-                                 @"brightness" : [NSNumber numberWithUnsignedInteger:(light.Color_B/100)]
+                                 @"hue" : [NSNumber numberWithUnsignedInteger:light.deviceInfo.Color_H],
+                                 @"saturation" : [NSNumber numberWithUnsignedInteger:(light.deviceInfo.Color_S/100)],
+                                 @"brightness" : [NSNumber numberWithUnsignedInteger:(light.deviceInfo.Color_B/100)]
                                  };
     
     NSDictionary *paramAppliance = @{
@@ -160,7 +160,7 @@
 -(void) setLightTemperature:(ColorLight *)light success:(successBlock)success failure:(failureBlock)failure{
     NSString *devId = light.deviceInfo.deviceID;
     NSDictionary *paramTemperature = @{
-                                       @"value" : [NSNumber numberWithUnsignedInteger:light.Color_Temp]
+                                       @"value" : [NSNumber numberWithUnsignedInteger:light.deviceInfo.Color_Temp]
                                        };
     NSDictionary *paramAppliance = @{
                                      @"applianceId" : devId,
@@ -178,7 +178,7 @@
     NSString *devId = light.deviceInfo.deviceID;
     
     NSDictionary *paramBrightness = @{
-                                      @"value": [NSNumber numberWithUnsignedInteger:light.Color_Brightness]
+                                      @"value": [NSNumber numberWithUnsignedInteger:light.deviceInfo.Color_Brightness]
                                       };
     NSDictionary *paramAppliance = @{
                                      @"applianceId" : devId,
@@ -212,7 +212,9 @@
     [self transferHttpSessionWithParameter:params];
 }
 
--(void)delDevice:(DeviceInfo *)devInfo {
+-(void)delDevice:(DeviceInfo *)devInfo
+         success:(void (^)( id response))success
+         failure:(void (^)( id response))failure{
     NSDictionary *paramAppliance = @{
                                      @"applianceId": devInfo.deviceID
                                      };
@@ -221,10 +223,10 @@
                              @"option": @"DelDevice",
                              @"appliance": paramAppliance
                              };
-    [self transferHttpSessionWithParameter:params];
+    [self transferHttpSessionWithParameter:params success:success failure:failure];
 }
 
--(void)updateDeviceInfo:(DeviceInfo *)devInfo {
+-(void)updateDeviceInfo:(DeviceInfo *)devInfo Success:(successBlock)success failure:(failureBlock)failure{
     NSDictionary *paramAppliance = @{
                                      @"applianceId": devInfo.deviceID,
                                      @"friendlyName": devInfo.name,
@@ -235,7 +237,7 @@
                             @"option": @"UpdateDevInfo",
                             @"appliance": paramAppliance
                             };
-    [self transferHttpSessionWithParameter:params];
+    [self transferHttpSessionWithParameter:params success:success failure:failure];
 }
 
 -(void) transferHttpSessionWithParameter:(NSDictionary *)params {

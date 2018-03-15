@@ -12,6 +12,7 @@
 #import "DataStoreHelper.h"
 #import "HomerRemoteCtrl.h"
 #import "Homer.h"
+#import "UIColor-Extensions.h"
 
 @interface DeviceListViewController ()<UITableViewDelegate, UITableViewDataSource,DeviceTableViewCellDelegate>
 
@@ -62,7 +63,7 @@
 - (void)createGroupAction{
     NSMutableArray *tempArr = [NSMutableArray array];
     for (DeviceInfo *device in self.devices) {
-        if (device.isOn) {
+        if (device.IsOn) {
             [tempArr addObject:device];
         }
     }
@@ -84,25 +85,23 @@
  设备关联场景
  */
 - (void)createScenceAction{
+    [Uility showLoadingToView:self.view];
     for (DeviceInfo *device in self.devices) {
-        if (device.isOn) {
+        if (device.IsOn) {
             ColorLight *colorLight = [[ColorLight alloc] initWithDeviceInfo:device];
-//            [colorLight setBrightness:10];//暂时设置固定值
-            if ((device.linkState == LULDeviceLinkStateWiFi) || (device.linkState == LULDeviceLinkStateBoth)) {//本地设置
-//               Homer set
-                [colorLight setColor_Brightness:10];
-            }else if (device.linkState == LULDeviceLinkStateCloud){//wifi获取的列表处理
-                [[HomerRemoteCtrl sharedManager]setLightHSV:colorLight success:^(id resp){
-                    ;
-                } failure:^(NSError *error) {
-                    ;
-                }];
-            }
+            int brihtness = 50;//暂定为50
+            [colorLight setBrightness:brihtness Success:^(id resp) {
+                
+            } failure:^(NSError *error) {
+                ;
+            }];
         }
     }
-    [Uility showSuccess:@"设置成功" toView:self.view];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-           [self backUPView];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [Uility hideLoadingView:self.view];
+        [Uility showSuccess:@"设置成功" toView:self.view];
+        [self backUPView];
     });
  
 }

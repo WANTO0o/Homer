@@ -48,7 +48,9 @@
 
 // 以下方法可基于设备通用，因此不传入ColorLight
 -(void) addDevice:(DeviceInfo *)devInfo;
--(void) delDevice:(DeviceInfo *)devInfo;
--(void) updateDeviceInfo:(DeviceInfo *)devInfo;
+-(void) delDevice:(DeviceInfo *)devInfo
+          success:(void (^)( id response))success
+          failure:(void (^)( id response))failure;;
+-(void) updateDeviceInfo:(DeviceInfo *)devInfo Success:(successBlock)success failure:(failureBlock)failure;
 
 @end

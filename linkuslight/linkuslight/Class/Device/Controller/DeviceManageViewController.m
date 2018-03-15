@@ -388,6 +388,10 @@
         [self.deviceTableView reloadData];
         [Uility showSuccess:@"删除成功" toView:self.view];
     };
+    controller.backActionBlock = ^{
+        //修改，重新刷新视图
+        [self.deviceTableView reloadData];
+    };
     [self setHidesBottomBarWhenPushed:YES];
     
     [self.navigationController pushViewController:controller animated:YES];

@@ -33,15 +33,15 @@
 
 - (IBAction)didBCSelectedButtonClicked:(id)sender {
     if (self.Delegate) {
-        _deviceInfo.isOn = !_deviceInfo.isOn;
-        [self.Delegate didCellClicked:self IsOn:_deviceInfo.isOn];
+        _deviceInfo.IsOn = !_deviceInfo.IsOn;
+        [self.Delegate didCellClicked:self IsOn:_deviceInfo.IsOn];
     }
 }
 
 - (IBAction)didSelectedButtonClicked:(id)sender {
     if (self.Delegate) {
-        _deviceInfo.isOn = !_deviceInfo.isOn;
-        [self.Delegate didCellClicked:self IsOn:_deviceInfo.isOn];
+        _deviceInfo.IsOn = !_deviceInfo.IsOn;
+        [self.Delegate didCellClicked:self IsOn:_deviceInfo.IsOn];
     }
 }
 
@@ -80,7 +80,7 @@
             break;
     }
     
-    if (device.isOn) {
+    if (device.IsOn) {
         [self.statusButton setTitle:@"●" forState:UIControlStateNormal];
         [self.statusButton setTitleColor:[UIColor colorWithRed:255/255.0 green:205/255.0 blue:0/255.0 alpha:1/1.0] forState:UIControlStateNormal];
     } else {

@@ -54,7 +54,7 @@
     if (device.hasClockFlag) {
         
         UIImage *clkimg = [UIImage imageNamed:@"addition_icon_alarm"];
-        if (device.isOn) {
+        if (device.IsOn) {
             self.clockImg.image = clkimg;
         } else {
             self.clockImg.image = [clkimg rt_tintedImageWithColor:[UIColor colorWithRed:0.7922 green:0.8157 blue:0.8392 alpha:1.0]];
@@ -65,7 +65,7 @@
     
     if (device.hasStatuFlag) {
         UIImage *staimg = [UIImage imageNamed:@"addition_icon_morning"];
-        if (device.isOn) {
+        if (device.IsOn) {
             self.statusImg.image = staimg;
         } else {
             self.statusImg.image = [staimg rt_tintedImageWithColor:[UIColor colorWithRed:0.8681 green:0.8962 blue:0.9261 alpha:1.0]];
@@ -77,7 +77,7 @@
     // 如果两个状态都在，左边显示wifi，右边显示云
     UIImage *cloudImg = [UIImage imageNamed:@"Cloud data"];
     UIImage *wifiImg = [UIImage imageNamed:@"wifi"];
-    if (device.isOn) {
+    if (device.IsOn) {
         if(device.linkState == LULDeviceLinkStateBoth)
         {
             [self.linkStateImgLeft setHidden:false];
@@ -96,7 +96,7 @@
 
     
     UIImage *ltimg = [UIImage imageNamed:@"addition_icon_succeed"];
-    if (device.isOn) {
+    if (device.IsOn) {
         self.lightImg.image = ltimg;
         self.titleLable.textColor = [UIColor blackColor];
     } else {
