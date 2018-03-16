@@ -295,6 +295,7 @@
     //白彩灯
     if (self.LightType == LULLightSliderTypeWhiteLight) {
         [self turnLight:NO];
+        //_whiteLightSlider.currentValue = colorLight.deviceInfo
     } else {
         [self turnLight:YES];
     }

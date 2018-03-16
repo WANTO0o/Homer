@@ -114,20 +114,6 @@
         UIView *theView = _groupTableView.backgroundView;
         [theView addSubview:_tipsView];
     }
-    //Footer
-    UILabel *comnameLable = [[UILabel alloc] initWithFrame:(CGRectMake(0, tableFrame.size.height-30, kScreen_Width, 20))];
-    comnameLable.textAlignment = NSTextAlignmentCenter;
-    comnameLable.textColor = [UIColor blackColor];
-    comnameLable.font = [UIFont systemFontOfSize:12];
-    comnameLable.text = @"凌科斯科技（深圳）有限公司";
-    [theView addSubview:comnameLable];
-    
-    UILabel *comLinkLable = [[UILabel alloc] initWithFrame:(CGRectMake(0, tableFrame.size.height-13, kScreen_Width, 17))];
-    comLinkLable.textAlignment = NSTextAlignmentCenter;
-    comLinkLable.textColor = [UIColor colorWithRed:0.3686 green:0.6 blue:0.9333 alpha:1.0];
-    comLinkLable.font = [UIFont systemFontOfSize:11];
-    comLinkLable.text = @"www.linkustek.com";
-    [theView addSubview:comLinkLable];
     
     _groupTableView.backgroundView = theView;
     //默认【下拉刷新】
