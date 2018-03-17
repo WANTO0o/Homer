@@ -189,14 +189,18 @@
             case 3:
                 // 关于
             {
-                NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-                NSString *ver = [NSString stringWithFormat:@"Version: %@ Build: %@",
-                                  [infoDict objectForKey:@"CFBundleShortVersionString"],
-                                  [infoDict objectForKey:@"CFBundleVersion"]];
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"关于" message:ver preferredStyle:UIAlertControllerStyleAlert];
-                //增加确定按钮；
-                [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-                [self presentViewController:alertController animated:true completion:nil];
+                DebugLog(@"关于");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+                    NSString *ver = [NSString stringWithFormat:@"Version: %@ Build: %@",
+                                     [infoDict objectForKey:@"CFBundleShortVersionString"],
+                                     [infoDict objectForKey:@"CFBundleVersion"]];
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"关于" message:ver preferredStyle:UIAlertControllerStyleAlert];
+                    //增加确定按钮；
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+                    [self presentViewController:alertController animated:true completion:nil]; ;
+                });
+
                 break;
             }
             case 4:

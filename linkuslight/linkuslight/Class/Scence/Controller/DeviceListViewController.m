@@ -28,7 +28,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    _devices = [DeviceManager sharedManager].deviceList;
+    _devices = [NSMutableArray array];
+    for (DeviceInfo *device in [DeviceManager sharedManager].deviceList) {
+        if(device.deviceType == self.deviceType){
+            [_devices addObject:device];
+        }
+    }
+//    _devices = [DeviceManager sharedManager].deviceList;
 //    [self initData];
 }
 

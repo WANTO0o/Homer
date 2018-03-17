@@ -5,7 +5,6 @@
 //  Created by Mac on 2018/3/12.
 //  Copyright © 2018年 linkustek. All rights reserved.
 //
-
 #import "DataStoreHelper.h"
 #import "YYCache.h"
 @interface DataStoreHelper()
@@ -13,6 +12,7 @@
 @end
 
 @implementation DataStoreHelper
+
 + (instancetype)shareInstance{
     static DataStoreHelper *helper;
     static dispatch_once_t onceToken;
