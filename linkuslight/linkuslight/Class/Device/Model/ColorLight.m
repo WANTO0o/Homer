@@ -54,6 +54,9 @@
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
         DebugLog(@"ColorH:%d, ColorS:%d, ColorB:%d", colorH, colorS, colorB);
         [_device controlColorH:colorH S:colorS B:self.deviceInfo.Color_Brightness];
+        if (success != nil) {
+            success(@"");
+        }
     } else if (_deviceInfo.linkState & LULDeviceLinkStateCloud) {
         [self.homerRemoteCtrl setLightHSV:self success:success failure:failure];
     }
@@ -63,6 +66,9 @@
     _deviceInfo.IsOn = NO;
     DebugLog(@"ColorLight turnOff");
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
+        if (success != nil) {
+            success(@"");
+        }
         switch (self.deviceInfo.lightType) {
             case LULLightTypeWhiteLight:
                 [_device controlColorTemperature:0];
@@ -88,7 +94,9 @@
     _deviceInfo.IsOn = YES;
     DebugLog(@"ColorLight turnOn");
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
-        success(@"");
+        if (success != nil) {
+            success(@"");
+        }
         switch (self.deviceInfo.lightType) {
             case LULLightTypeWhiteLight:
                 [_device controlColorTemperature:_deviceInfo.Color_Temp];
@@ -114,7 +122,9 @@
     _deviceInfo.Color_Temp = colorTemp;
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
         [_device controlColorTemperature:colorTemp];
-        success(@"");
+        if (success != nil) {
+            success(@"");
+        }
     } else if (_deviceInfo.linkState & LULDeviceLinkStateCloud) {
         [self.homerRemoteCtrl setLightTemperature:self success:success failure:failure];
     }
@@ -125,7 +135,9 @@
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
         DebugLog(@"brightness: %d", brightness);
         [_device setColorBrightness:brightness];
-        success(@"");
+        if (success != nil) {
+            success(@"");
+        }
     } else if (_deviceInfo.linkState & LULDeviceLinkStateCloud) {
         [self.homerRemoteCtrl setLightBrightness:self success:success failure:failure];
     }

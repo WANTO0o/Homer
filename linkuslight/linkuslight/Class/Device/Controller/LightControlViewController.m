@@ -113,7 +113,7 @@
                 [self refreshViewWithDevice:self.colorLight];
                 [Uility hideLoadingView:self.view];
             } failure:^(id response) {
-                [Uility showError:@"获取状态失败，请稍后尝试" toView:self.view];;
+                [Uility showError:@"获取状态失败，请稍后尝试" toView:self.view];
             }];
         }else{
             [self refreshViewWithDevice:self.colorLight];
@@ -411,7 +411,7 @@
         });
 
     } failure:^(id response) {
-        ;
+        [Uility showError:@"网络请求失败" toView:self.view];
     }];
 
 }
@@ -562,7 +562,7 @@
                 [self analycisResp:resp];
 
             } failure:^(NSError *error) {
-//                DebugLog(@"");
+                [Uility showError:@"网络请求失败" toView:self.view];
             }];
         }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
             [Uility showLoadingToView:self.view];
@@ -586,7 +586,7 @@
                 [Uility hideLoadingView:self.view];
                 [self analycisResp:resp];
             } failure:^(NSError *error) {
-                ;
+                [Uility showError:@"网络请求失败" toView:self.view];
             }];
         }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
             [Uility showLoadingToView:self.view];

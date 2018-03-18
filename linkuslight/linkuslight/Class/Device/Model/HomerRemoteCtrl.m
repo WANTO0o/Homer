@@ -261,10 +261,14 @@
     [_httpSessionManager POST:self.apiGateWayURL parameters:params
                       success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
                           DebugLog(@"ok");
-                          success(responseObject);
+                          if(success != nil) {
+                              success(responseObject);
+                          }
                       }  failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                           DebugLog(@"%请求失败@---", error);
-                          failure(error);
+                          if (failure != nil) {
+                              failure(error);
+                          }
                       }];
 }
 

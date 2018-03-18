@@ -96,23 +96,28 @@
         if (device.IsOn) {
             ColorLight *colorLight = [[ColorLight alloc] initWithDeviceInfo:device];
             if (self.sceneType == ScenceTypeMorning) {
-                int brihtness = 50;//暂定为50
-                [colorLight setBrightness:brihtness Success:^(id resp) {
+                [colorLight setColorH:39 S:100 B:6000 Success:nil failure:nil];
+                [colorLight setBrightness:60 Success:^(id resp) {
                     
                 } failure:^(NSError *error) {
                     ;
                 }];
-                ;
-            }else  if (self.sceneType == ScenceTypeSettingSky) {
-                ;
+                
             }else  if (self.sceneType == ScenceTypeSettingSun) {
-                ;
+                [colorLight setColorH:28 S:100 B:5000 Success:nil failure:nil];
+                [colorLight setBrightness:80 Success:nil failure:nil];
             }else  if (self.sceneType == ScenceTypeSettingMoon) {
-                ;
+                [colorLight setColorH:232 S:100 B:5300 Success:nil failure:nil];
+                [colorLight setBrightness:30 Success:nil failure:nil];
+            }else  if (self.sceneType == ScenceTypeSettingSky) {
+                [colorLight setColorH:185 S:100 B:7200 Success:nil failure:nil];
+                [colorLight setBrightness:90 Success:nil failure:nil];
             }else  if (self.sceneType == ScenceTypeSettingRomantic) {
-                ;
+                [colorLight setColorH:9 S:100 B:8300 Success:nil failure:nil];
+                [colorLight setBrightness:20 Success:nil failure:nil];
             }else  if (self.sceneType == ScenceTypeSettingMovie) {
-                ;
+                [colorLight setColorH:40 S:100 B:5200 Success:nil failure:nil];
+                [colorLight setBrightness:20 Success:nil failure:nil];
             }
        
         }
