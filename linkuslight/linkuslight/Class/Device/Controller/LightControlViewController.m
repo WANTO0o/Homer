@@ -171,7 +171,8 @@
     }else if(self.lightControlDeviceType == LightControlDeviceTypeGroup){
         [Uility showLoadingToView:self.view];
         for (DeviceInfo *device in self.groupInfo.deviceArr) {
-            [_colorLight setBrightness:(uint8_t)_lightenessSlider.value Success:^(id resp){
+            ColorLight *colorLight = [[ColorLight alloc]initWithDeviceInfo:device];
+            [colorLight setBrightness:(uint8_t)_lightenessSlider.value Success:^(id resp){
             } failure:^(NSError *error) {
             }];
         }
@@ -566,7 +567,8 @@
         }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
             [Uility showLoadingToView:self.view];
             for (DeviceInfo *deviceInfo in self.groupInfo.deviceArr) {//分组
-                [_colorLight turnOnSuccess:^(id resp){
+                 ColorLight *color =[[ ColorLight alloc]initWithDeviceInfo:deviceInfo];
+                [color turnOnSuccess:^(id resp){
                 } failure:^(NSError *error) {
                 }];
             }
@@ -589,7 +591,8 @@
         }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
             [Uility showLoadingToView:self.view];
             for (DeviceInfo *deviceInfo in self.groupInfo.deviceArr) {//分组
-                [_colorLight turnOffSuccess:^(id resp){
+                ColorLight *color =[[ ColorLight alloc]initWithDeviceInfo:deviceInfo];
+                [color turnOffSuccess:^(id resp){
                 } failure:^(NSError *error) {
                 }];
             }

@@ -14,10 +14,20 @@ typedef NS_ENUM(NSUInteger,FunctionType){
     FunctionTypeCreatGroup,
     FunctionTypeCreatScence,
 };
+
+typedef NS_ENUM(NSUInteger,ScenceType){
+    ScenceTypeMorning,
+    ScenceTypeSettingSun,
+    ScenceTypeSettingMoon,
+    ScenceTypeSettingSky,
+    ScenceTypeSettingRomantic,
+    ScenceTypeSettingMovie,
+};
 @interface DeviceListViewController : UIViewController
 
 @property (nonatomic, strong) NSString *groupName;
 @property (nonatomic, assign)LULDeviceType deviceType;
 @property (nonatomic, assign)FunctionType funcionType;
+@property (nonatomic, assign)ScenceType sceneType;
 
 @end

@@ -95,12 +95,26 @@
     for (DeviceInfo *device in self.devices) {
         if (device.IsOn) {
             ColorLight *colorLight = [[ColorLight alloc] initWithDeviceInfo:device];
-            int brihtness = 50;//暂定为50
-            [colorLight setBrightness:brihtness Success:^(id resp) {
-                
-            } failure:^(NSError *error) {
+            if (self.sceneType == ScenceTypeMorning) {
+                int brihtness = 50;//暂定为50
+                [colorLight setBrightness:brihtness Success:^(id resp) {
+                    
+                } failure:^(NSError *error) {
+                    ;
+                }];
                 ;
-            }];
+            }else  if (self.sceneType == ScenceTypeSettingSky) {
+                ;
+            }else  if (self.sceneType == ScenceTypeSettingSun) {
+                ;
+            }else  if (self.sceneType == ScenceTypeSettingMoon) {
+                ;
+            }else  if (self.sceneType == ScenceTypeSettingRomantic) {
+                ;
+            }else  if (self.sceneType == ScenceTypeSettingMovie) {
+                ;
+            }
+       
         }
     }
 
