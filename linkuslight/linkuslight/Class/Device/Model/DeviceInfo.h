@@ -62,7 +62,14 @@ typedef NS_ENUM(NSInteger, LULLightType) {
 @property (nonatomic,copy) NSMutableArray *deviceArr;
 @end
 
-
+typedef NS_ENUM(NSUInteger,ScenceType){
+    ScenceTypeMorning = 0,
+    ScenceTypeSettingSun,
+    ScenceTypeSettingMoon,
+    ScenceTypeSettingSky,
+    ScenceTypeSettingRomantic,
+    ScenceTypeSettingMovie,
+};
 @interface ScenceInfo : NSObject
 
 @property (nonatomic,copy)NSString *scenceID;

@@ -20,7 +20,8 @@
 @property (nonatomic, retain) NSMutableArray *scenceTitle;
 @property (nonatomic, retain) NSMutableArray *scenceBackground;
 @property (nonatomic, retain) NSMutableArray *scenceICom;
-
+@property (nonatomic, assign) NSInteger selectIndex;
+@property (nonatomic, strong) NSMutableArray *scenceTypeList;
 @end
 
 @implementation ScenceManageViewController
@@ -71,6 +72,8 @@
     _scenceTitle = [NSMutableArray arrayWithObjects:@"清晨",@"夕阳",@"夜色",@"天空",@"浪漫",@"电影", nil];
     _scenceBackground = [NSMutableArray arrayWithObjects:@"addition_bg_morning",@"addition_bg_sunset",@"addition_bg_night",@"addition_bg_sky",@"addition_bg_romance",@"addition_bg_film", nil];
     _scenceICom = [NSMutableArray arrayWithObjects:@"addition_icon_morning",@"addition_icon_sunset",@"addition_icon_night",@"addition_icon_sky",@"addition_icon_romance",@"addition_icon_film", nil];
+    
+    _scenceTypeList = [NSMutableArray arrayWithObjects:@(ScenceTypeMorning), @(ScenceTypeSettingSun), @(ScenceTypeSettingMoon), @(ScenceTypeSettingSky), @(ScenceTypeSettingRomantic), @(ScenceTypeSettingMovie), nil];
     self.scenceList = [NSMutableArray arrayWithCapacity:1];
     
     ScenceInfo *scence1 = [[ScenceInfo alloc] init];
@@ -199,12 +202,13 @@
     [lsll showLLAlertView:self.view];
 }
 
-- (void)showDeviceListView:(LULDeviceType)deviceType {
+- (void)showDeviceListView:(LULDeviceType)deviceType{
     
     dispatch_async(dispatch_get_main_queue(), ^{
         DeviceListViewController *controller = [[DeviceListViewController alloc] init];
         controller.deviceType = deviceType;
         controller.funcionType = FunctionTypeCreatScence;
+        controller.sceneType = [_scenceTypeList[self.selectIndex]integerValue];
         [self setHidesBottomBarWhenPushed:YES];
         
         [self.navigationController pushViewController:controller animated:YES];
@@ -251,7 +255,7 @@
          default:
          break;
          }*/
-        
+        self.selectIndex = indexPath.row;
         [self gotoSelectGroupTypeView:indexPath.row];
     };
     
