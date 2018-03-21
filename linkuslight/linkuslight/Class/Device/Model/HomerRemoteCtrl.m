@@ -192,14 +192,17 @@
         [self transferHttpSessionWithParameter:params success:success failure:failure];
 }
 
--(void)addDevice:(DeviceInfo *)devInfo{
+-(void)addDevice:(DeviceInfo *)devInfo
+         success:(void (^)( id response))success
+         failure:(void (^)( id response))failure
+    {
     NSArray *paramApplianceTypes = [[NSArray alloc] initWithObjects:@"LIGHT", nil];
     
     NSDictionary *paramDevice = @{
                                   @"applianceId": devInfo.deviceID,
                                   @"applianceTypes" : paramApplianceTypes,
                                   @"friendlyName" : devInfo.name,
-                                  @"friendlyDescription" : devInfo.desc,
+                                  @"friendlyDescription" : (devInfo.desc == nil) ? devInfo.name : devInfo.desc,
                                   @"macAddr" : devInfo.macAddr
                                   };
     NSArray *paramAppliances = [[NSArray alloc] initWithObjects:paramDevice, nil];
@@ -209,7 +212,7 @@
                              @"appliances" : paramAppliances
                              };
     
-    [self transferHttpSessionWithParameter:params];
+    [self transferHttpSessionWithParameter:params success:success failure:failure];
 }
 
 -(void)delDevice:(DeviceInfo *)devInfo
@@ -260,12 +263,12 @@
                                  failure:(void (^)( id response))failure{
     [_httpSessionManager POST:self.apiGateWayURL parameters:params
                       success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
-                          DebugLog(@"ok");
+                          DebugLog(@"httpResponse success: %@", responseObject);
                           if(success != nil) {
                               success(responseObject);
                           }
                       }  failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                          DebugLog(@"%请求失败@---", error);
+                          DebugLog(@"httpResponse fail: %@", error);
                           if (failure != nil) {
                               failure(error);
                           }

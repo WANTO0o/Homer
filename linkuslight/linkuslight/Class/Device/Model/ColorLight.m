@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "HomerRemoteCtrl.h"
 
-@interface ColorLight()<HomerRemoteCtrlDelegate>
+@interface ColorLight()
 
 @property (nonatomic, copy) Device *device;
 @property (nonatomic, assign) HomerRemoteCtrl *homerRemoteCtrl;
@@ -28,14 +28,14 @@
     return self;
 }
 
--(void) bindToCloud {
+-(void) bindToCloudSuccess:(successBlock)success failure:(failureBlock)failure {
     if(_deviceInfo.linkState & LULDeviceLinkStateCloud) {
         DebugLog(@"Device already bind to cloud");
         return;
     }
     
     [self setMacAddr];
-    [self.homerRemoteCtrl addDevice:_deviceInfo];
+    [[HomerRemoteCtrl sharedManager] addDevice:_deviceInfo success:success failure:failure];
 }
 
 -(void)setMacAddr {

@@ -347,9 +347,16 @@
     
     NSMutableArray *items;
     if (_isDevice) {
-        items = [NSMutableArray arrayWithObjects:@"本地升级",@"重置设备",@"删除设备",@"修改设备名称", nil];
+        if(_DeviceInfo.linkState == LULDeviceLinkStateWiFi)
+        {
+            items = [NSMutableArray arrayWithObjects:@"绑定到云端", @"固件升级", @"重置设备", @"修改设备名称",@"固件版本", nil];
+        } else if (_DeviceInfo.linkState == LULDeviceLinkStateCloud) {
+            items = [NSMutableArray arrayWithObjects:@"解除绑定" ,@"修改设备名称", nil];
+        } else {
+            items = [NSMutableArray arrayWithObjects:@"固件升级", @"解除绑定", @"重置设备",@"修改设备名称", @"固件版本", nil];
+        }
     } else {
-        items = [NSMutableArray arrayWithObjects:@"批量升级",@"批量重置",@"删除分组",@"修改分组名称", nil];
+        items = [NSMutableArray arrayWithObjects:@"固件升级",@"批量重置",@"删除分组",@"修改分组名称", nil];
     }
     
     NSMutableArray *menuitems = [NSMutableArray arrayWithCapacity:1];
@@ -370,13 +377,13 @@
         [YCXMenu dismissMenu];
     } else {
         [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 55, 60, 50, 0) menuItems:menuitems selected:^(NSInteger index, YCXMenuItem *item) {
-            if([item.title isEqualToString:@"本地升级"]) {
+            if([item.title isEqualToString:@"固件升级"]) {
                 [self updateFirmware];
             } else if ([item.title isEqualToString:@"批量升级"]) {
                 [self updateFirmware];
             } else if ([item.title isEqualToString:@"重置设备"]) {
                 [self restoreToFactory];
-            } else if ([item.title isEqualToString:@"删除设备"]) {
+            } else if ([item.title isEqualToString:@"解除绑定"]) {
                 [self delDevice];
             } else if ([item.title isEqualToString:@"删除分组"]) {
                 [self delGroup];
@@ -384,13 +391,28 @@
                 [self updateDeviceInfo];
             } else if ([item.title isEqualToString:@"修改分组名称"]) {
                 [self updateGroupInfo];
+            } else if ([item.title isEqualToString:@"绑定到云端"]) {
+                [self bindToCloud];
             }
         }];
     }
 }
 
+// 绑定到云端
+- (void)bindToCloud {
+    [Uility showLoadingToView:self.view];
+    [_colorLight bindToCloudSuccess:^(id resp) {
+        [Uility hideLoadingView:self.view];
+        [Uility showSuccess:@"绑定设备成功" toView:self.view];
+    } failure:^(NSError *error) {
+        [Uility hideLoadingView:self.view];
+        [Uility showError:@"网络请求失败" toView:self.view];
+    }];
+}
+
 // 升级固件
 - (void)updateFirmware {
+    
 }
 
 // 恢复出厂设置
@@ -411,6 +433,7 @@
         });
 
     } failure:^(id response) {
+        [Uility hideLoadingView:self.view];
         [Uility showError:@"网络请求失败" toView:self.view];
     }];
 
@@ -440,18 +463,23 @@
         }
         [Uility showLoadingToView:self.view];
         if (![newName isEqualToString:_DeviceInfo.name]) {
-            [self.colorLight updateName:newName AndDesc:[self.DeviceInfo desc] Success:^(id resp) {
+            if(_DeviceInfo.linkState != LULDeviceLinkStateWiFi) {
+                [self.colorLight updateName:newName AndDesc:[self.DeviceInfo desc] Success:^(id resp) {
+                    [self.navigationController.topViewController.navigationItem setTitle:newName];
+                    self.DeviceInfo.name = newName;
+                    self.DeviceInfo.desc = [self.DeviceInfo desc];
+                    [Uility hideLoadingView:self.view];
+                    [self analycisResp:resp];
+                } failure:^(NSError *error) {
+                    [Uility hideLoadingView:self.view];
+                    [Uility showError:@"更改设备名称失败" toView:self.view];
+                }];
+            } else {
                 [self.navigationController.topViewController.navigationItem setTitle:newName];
                 self.DeviceInfo.name = newName;
-                self.DeviceInfo.desc = [self.DeviceInfo desc];
                 [Uility hideLoadingView:self.view];
-                [self analycisResp:resp];
-            } failure:^(NSError *error) {
-                ;
-            }];
+            }
         }
-        //NSLog(@"用户名 = %@，密码 = %@",userNameTextField.text,passwordTextField.text);
-        
     }]];
     
     //增加取消按钮；

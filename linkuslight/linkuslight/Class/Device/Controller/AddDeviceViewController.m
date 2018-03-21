@@ -11,6 +11,7 @@
 #import "MBProgressHUD+Add.h"
 #import "AddDeviceViewController.h"
 #import "Homer.h"
+#import "Uility.h"
 
 @interface AddDeviceViewController () <HomerConnectDelegate>
 //@property (weak, nonatomic) IBOutlet UITextField *ssidTextField;
@@ -94,6 +95,7 @@
 
 - (IBAction)didDoneButtonClicked:(id)sender {
     _pswd = _passwordTextField.text;
+    [Uility showLoadingToView:self.view];
     [_homerCtrl connectWithApSsid:_ssid andApPwd:_pswd andTimeoutMillisecond:25000 andDelegate:self];
     
     //[MBProgressHUD showMsg:@"添加成功" imgName:@"addition_succeed" duration:1 toView:self.view];
@@ -166,6 +168,8 @@
     NSString *devIp = [result getIp];
     NSString *devId = [result getId];
     DebugLog(@"IP:%@ ID:%@", devIp, devId);
+    
+    [Uility hideLoadingView:self.view];
     
     if([devId length] == 0) {
         DebugLog(@"添加失败");

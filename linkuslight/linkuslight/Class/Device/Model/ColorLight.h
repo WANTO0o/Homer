@@ -48,7 +48,7 @@ typedef void  (^failureBlock)(NSError *error);
 
 // 以下方法后续应该考虑设计为设备类型通用
 // 绑定到云端
--(void) bindToCloud;
+-(void) bindToCloudSuccess:(successBlock)success failure:(failureBlock)failure;
 -(void) setMacAddr;
 -(void) updateName:(NSString *)name AndDesc:(NSString *)desc Success:(successBlock)success failure:(failureBlock)failure;
 
