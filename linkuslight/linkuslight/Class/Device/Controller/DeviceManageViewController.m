@@ -125,7 +125,13 @@
 //    comLinkLable.font = [UIFont systemFontOfSize:11];
 //    comLinkLable.text = @"www.linkustek.com";
 //    [theView addSubview:comLinkLable];
+    if ([_deviceTableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+        _deviceTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        _deviceTableView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
+        _deviceTableView.scrollIndicatorInsets = _deviceTableView.contentInset;
+    }
 
+    
     _deviceTableView.backgroundView = theView;
     //默认【下拉刷新】
     _deviceTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
