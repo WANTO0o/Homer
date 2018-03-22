@@ -89,7 +89,9 @@
 {
     CGPoint current = [touches.anyObject locationInView:self];
     double hypotenuse = hypot(fabs(current.x - kCenter.x),fabs(current.y - kCenter.y));
-    if (CGRectContainsPoint(self.progressImageView.frame, current) && hypotenuse >= (kRadius - 10)) {
+    //if (CGRectContainsPoint(self.progressImageView.frame, current) && hypotenuse >= (kRadius - 10))
+    if (CGRectContainsPoint(self.progressImageView.frame, current))
+    {
         self.On = YES;
     }else{
         self.On = NO;
