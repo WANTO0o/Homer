@@ -19,9 +19,7 @@
 #import "DeviceManager.h"
 #import "DataStoreHelper.h"
 
-@interface LightControlViewController ()<LLCircularViewDelegate,HomerRemoteCtrlDelegate>
-
-
+@interface LightControlViewController ()<LLCircularViewDelegate>
 
 @property(assign, nonatomic)BOOL isRightMenuShow;
 
@@ -34,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *alarmONButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *alarmOFFButton;
+@property (weak, nonatomic) IBOutlet UILabel *alarmLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *lightTurnClourButton;
 
@@ -56,6 +55,8 @@
 @property (retain, nonatomic) ColorLight *colorLight;
 
 //@property (nonatomic, assign) HomerRemoteCtrl *homerRemoteCtrl;
+@property (weak, nonatomic) IBOutlet UILabel *changeModeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stateLabel;
 
 @end
 
@@ -69,6 +70,15 @@
     _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
     [self initView];
     [self getDeviceStatus];
+
+    [_deviceOnButton setTitle:NSLocalizedString(@"on", nil) forState:UIControlStateNormal];
+    [_deviceOFFButton setTitle:NSLocalizedString(@"off", nil) forState:UIControlStateNormal];
+    [_alarmLabel setText:NSLocalizedString(@"alarm", nil)];
+    [_changeModeLabel setText:NSLocalizedString(@"mode_switch", nil)];
+    [_lightTurnClourButton setTitle:NSLocalizedString(@"dev_colorlight", nil) forState:UIControlStateNormal];
+    [_lightTurnWhiteButton setTitle:NSLocalizedString(@"dev_whitelight", nil) forState:UIControlStateNormal];
+    [_stateLabel setText:NSLocalizedString(@"state_prompt", nil)];
+    [_brightnessLable setText:NSLocalizedString(@"brightness", nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -106,14 +116,14 @@
                 if ([msg containsString:@"Device is offline"]) {
                     self.colorLight.deviceInfo.IsOn = NO;
                     [Uility hideLoadingView:self.view];
-                    [Uility showError:@"设备已离线" toView:self.view];
+                    [Uility showError:NSLocalizedString(@"dev_offline", nil) toView:self.view];
                     return ;
                 }
                 //设备在线，刷新视图
                 [self refreshViewWithDevice:self.colorLight];
                 [Uility hideLoadingView:self.view];
             } failure:^(id response) {
-                [Uility showError:@"获取状态失败，请稍后尝试" toView:self.view];
+                [Uility showError:NSLocalizedString(@"refresh_error", nil) toView:self.view];
             }];
         }else{
             [self refreshViewWithDevice:self.colorLight];
@@ -166,7 +176,7 @@
 
           
         } failure:^(NSError *error) {
-            [Uility showError:@"网络请求失败" toView:self.view];
+            [Uility showError:NSLocalizedString(@"refresh_error", nil) toView:self.view];
         }];
     }else if(self.lightControlDeviceType == LightControlDeviceTypeGroup){
         [Uility showLoadingToView:self.view];
@@ -181,16 +191,18 @@
         });
     }
     
-    _brightnessLable.text = [NSString stringWithFormat:@"亮度：%d",(int)_lightenessSlider.value];
+    _brightnessLable.text = [NSString stringWithFormat:@"%@：%d",
+                             NSLocalizedString(@"brightness", nil),
+                             (int)_lightenessSlider.value];
 }
 
 - (void)analycisResp:(id)resp{
     if ([resp isKindOfClass:[NSDictionary class]]) {
         NSString *ret = resp[@"ret"];
         if ([ret containsString:@"Device is offline"]) {
-            [Uility showError:@"设备已离线" toView:self.view];
+            [Uility showError:NSLocalizedString(@"dev_offline", nil) toView:self.view];
         }else if([ret containsString:@"ok"]){
-            [Uility showSuccess:@"设置成功" toView:self.view];
+            [Uility showSuccess:NSLocalizedString(@"setting_success", nil) toView:self.view];
         }
         
     }
@@ -285,7 +297,9 @@
     }
     //亮度
     
-     _brightnessLable.text = [NSString stringWithFormat:@"亮度：%d%%",(int)colorLight.deviceInfo.Color_Brightness];
+     _brightnessLable.text = [NSString stringWithFormat:@"%@：%d%%",
+                              NSLocalizedString(@"brightness", nil),
+                              (int)colorLight.deviceInfo.Color_Brightness];
     _lightenessSlider.value = colorLight.deviceInfo.Color_Brightness;
     
     if (self.colorLight.deviceInfo.lightType == LULLightTypeWhiteLight) {
@@ -315,10 +329,11 @@
     
     self.navigationItem.leftBarButtonItem = leftItem;
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"更多"
-                                                                  style:UIBarButtonItemStyleDone
-                                                                 target:self
-                                                                 action:@selector(showmenu)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]
+                                  initWithTitle:NSLocalizedString(@"item_more", nil)
+                                  style:UIBarButtonItemStyleDone
+                                  target:self
+                                  action:@selector(showmenu)];
     rightItem.tintColor = [UIColor whiteColor];
     
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -346,17 +361,49 @@
 - (void)showmenu {
     
     NSMutableArray *items;
+    
+    NSString *bindCloud = NSLocalizedString(@"item_cloud_bind", nil);
+    NSString *firmwareUpdate = NSLocalizedString(@"item_firmware_update", nil);
+    NSString *devReset = NSLocalizedString(@"item_dev_reset", nil);
+    NSString *devRename = NSLocalizedString(@"item_dev_rename", nil);
+    NSString *firmwareVersion = NSLocalizedString(@"item_firmware_ver", nil);
+    NSString *removeCloud = NSLocalizedString(@"item_cloud_remove", nil);
+    NSString *groupRename = NSLocalizedString(@"item_group_rename", nil);
+    NSString *groupDel = NSLocalizedString(@"item_group_del", nil);
+    NSString *groupUpdate = NSLocalizedString(@"item_group_update", nil);
+    NSString *groupReset = NSLocalizedString(@"item_group_reset", nil);
+    
     if (_isDevice) {
         if(_DeviceInfo.linkState == LULDeviceLinkStateWiFi)
         {
-            items = [NSMutableArray arrayWithObjects:@"绑定到云端", @"固件升级", @"重置设备", @"修改设备名称",@"固件版本", nil];
+            items = [NSMutableArray arrayWithObjects:
+                     bindCloud,
+                     firmwareUpdate,
+                     devReset,
+                     devRename,
+                     firmwareVersion,
+                     nil];
         } else if (_DeviceInfo.linkState == LULDeviceLinkStateCloud) {
-            items = [NSMutableArray arrayWithObjects:@"解除绑定" ,@"修改设备名称", nil];
+            items = [NSMutableArray arrayWithObjects:
+                     removeCloud,
+                     devRename,
+                     nil];
         } else {
-            items = [NSMutableArray arrayWithObjects:@"固件升级", @"解除绑定", @"重置设备",@"修改设备名称", @"固件版本", nil];
+            items = [NSMutableArray arrayWithObjects:
+                     firmwareUpdate,
+                     removeCloud,
+                     devReset,
+                     devRename,
+                     firmwareVersion,
+                     nil];
         }
     } else {
-        items = [NSMutableArray arrayWithObjects:@"固件升级",@"批量重置",@"删除分组",@"修改分组名称", nil];
+        items = [NSMutableArray arrayWithObjects:
+                 groupUpdate,
+                 groupReset,
+                 groupRename,
+                 groupDel,
+                 nil];
     }
     
     NSMutableArray *menuitems = [NSMutableArray arrayWithCapacity:1];
@@ -377,21 +424,21 @@
         [YCXMenu dismissMenu];
     } else {
         [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 55, 60, 50, 0) menuItems:menuitems selected:^(NSInteger index, YCXMenuItem *item) {
-            if([item.title isEqualToString:@"固件升级"]) {
+            if([item.title isEqualToString:firmwareUpdate]) {
                 [self updateFirmware];
-            } else if ([item.title isEqualToString:@"批量升级"]) {
+            } else if ([item.title isEqualToString:groupUpdate]) {
                 [self updateFirmware];
-            } else if ([item.title isEqualToString:@"重置设备"]) {
+            } else if ([item.title isEqualToString:devReset]) {
                 [self restoreToFactory];
-            } else if ([item.title isEqualToString:@"解除绑定"]) {
+            } else if ([item.title isEqualToString:removeCloud]) {
                 [self delDevice];
-            } else if ([item.title isEqualToString:@"删除分组"]) {
+            } else if ([item.title isEqualToString:groupDel]) {
                 [self delGroup];
-            } else if ([item.title isEqualToString:@"修改设备名称"]) {
+            } else if ([item.title isEqualToString:devRename]) {
                 [self updateDeviceInfo];
-            } else if ([item.title isEqualToString:@"修改分组名称"]) {
+            } else if ([item.title isEqualToString:groupRename]) {
                 [self updateGroupInfo];
-            } else if ([item.title isEqualToString:@"绑定到云端"]) {
+            } else if ([item.title isEqualToString:bindCloud]) {
                 [self bindToCloud];
             }
         }];
@@ -403,10 +450,10 @@
     [Uility showLoadingToView:self.view];
     [_colorLight bindToCloudSuccess:^(id resp) {
         [Uility hideLoadingView:self.view];
-        [Uility showSuccess:@"绑定设备成功" toView:self.view];
+        [Uility showSuccess:NSLocalizedString(@"setting_success", nil) toView:self.view];
     } failure:^(NSError *error) {
         [Uility hideLoadingView:self.view];
-        [Uility showError:@"网络请求失败" toView:self.view];
+        [Uility showError:NSLocalizedString(@"setting_fail", nil) toView:self.view];
     }];
 }
 
@@ -424,7 +471,7 @@
     [Uility showLoadingToView:self.view];
     [[HomerRemoteCtrl sharedManager] delDevice:_DeviceInfo success:^(id response) {
         [Uility hideLoadingView:self.view];
-        [Uility showSuccess:@"删除设备成功" toView:self.view];
+        [Uility showSuccess:NSLocalizedString(@"setting_success", nil) toView:self.view];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (self.deleteDeviceBlock) {
                 self.deleteDeviceBlock(self.DeviceInfo);
@@ -434,7 +481,7 @@
 
     } failure:^(id response) {
         [Uility hideLoadingView:self.view];
-        [Uility showError:@"网络请求失败" toView:self.view];
+        [Uility showError:NSLocalizedString(@"setting_fail", nil) toView:self.view];
     }];
 
 }
@@ -442,7 +489,7 @@
 // 删除分组
 - (void)delGroup {
     [[DataStoreHelper shareInstance]deleteGroup:self.groupInfo];
-    [Uility showSuccess:@"删除成功" toView:self.view];
+    [Uility showSuccess:NSLocalizedString(@"setting_success", nil) toView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.navigationController popViewControllerAnimated:YES];
     });
@@ -451,14 +498,14 @@
 // 更新设备信息
 - (void)updateDeviceInfo {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入设备名称" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"alert", nil) message:NSLocalizedString(@"setting_enter_devname", nil) preferredStyle:UIAlertControllerStyleAlert];
     //增加确定按钮；
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //获取第1个输入框；
         UITextField *nameTextField = alertController.textFields.firstObject;
         NSString *newName = nameTextField.text;
         if ([newName isEqualToString:@""]) {
-            [Uility showError:@"设备名字不能为空" toView:self.view];
+            [Uility showError:NSLocalizedString(@"setting_devname_not_null", nil) toView:self.view];
             return ;
         }
         [Uility showLoadingToView:self.view];
@@ -472,7 +519,7 @@
                     [self analycisResp:resp];
                 } failure:^(NSError *error) {
                     [Uility hideLoadingView:self.view];
-                    [Uility showError:@"更改设备名称失败" toView:self.view];
+                    [Uility showError:NSLocalizedString(@"setting_fail", nil) toView:self.view];
                 }];
             } else {
                 [self.navigationController.topViewController.navigationItem setTitle:newName];
@@ -483,7 +530,7 @@
     }]];
     
     //增加取消按钮；
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleDefault handler:nil]];
     
     //定义输入框；
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -495,26 +542,28 @@
 
 // 更新分组信息
 - (void)updateGroupInfo {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入分组名称" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:NSLocalizedString(@"alert", nil)
+                                          message:NSLocalizedString(@"setting_enter_groupname", nil)
+                                          preferredStyle:UIAlertControllerStyleAlert];
     //增加确定按钮；
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //获取第1个输入框；
         UITextField *nameTextField = alertController.textFields.firstObject;
         NSString *newName = nameTextField.text;
         if ([newName isEqualToString:@""]) {
-            [Uility showError:@"分组名字不能为空" toView:self.view];
+            [Uility showError:NSLocalizedString(@"setting_groupname_not_null", nil) toView:self.view];
             return ;
         }
         _groupInfo.name = newName;
         [[DataStoreHelper shareInstance]updateGroup:_groupInfo];
         [self.navigationController.topViewController.navigationItem setTitle:_groupInfo.name];
-        [Uility showSuccess:@"修改成功" toView:self.view];
-        //NSLog(@"用户名 = %@，密码 = %@",userNameTextField.text,passwordTextField.text);
+        [Uility showSuccess:NSLocalizedString(@"setting_success", nil) toView:self.view];
         
     }]];
     
     //增加取消按钮；
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleDefault handler:nil]];
     
     //定义输入框；
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -590,7 +639,7 @@
                 [self analycisResp:resp];
 
             } failure:^(NSError *error) {
-                [Uility showError:@"网络请求失败" toView:self.view];
+                [Uility showError:NSLocalizedString(@"setting_fail", nil) toView:self.view];
             }];
         }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
             [Uility showLoadingToView:self.view];
@@ -614,7 +663,7 @@
                 [Uility hideLoadingView:self.view];
                 [self analycisResp:resp];
             } failure:^(NSError *error) {
-                [Uility showError:@"网络请求失败" toView:self.view];
+                [Uility showError:NSLocalizedString(@"setting_fail", nil) toView:self.view];
             }];
         }else if (self.lightControlDeviceType == LightControlDeviceTypeGroup){
             [Uility showLoadingToView:self.view];

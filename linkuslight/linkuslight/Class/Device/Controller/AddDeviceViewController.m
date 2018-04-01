@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *addStateText;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UILabel *ssidLabel;
+@property (weak, nonatomic) IBOutlet UILabel *infoText;
+@property (weak, nonatomic) IBOutlet UILabel *mulLabel;
 
 @property (nonatomic, copy) NSString *ssid;
 @property (nonatomic, copy) NSString *pswd;
@@ -38,12 +40,15 @@
     
     [self initView];
     // Do any additional setup after loading the view from its nib.
+    [_doneButton setTitle:NSLocalizedString(@"ok", nil) forState:UIControlStateNormal];
+    [_infoText setText:NSLocalizedString(@"add_dev_prompt", nil)];
+    [_mulLabel setText:NSLocalizedString(@"add_mul_dev", nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController.topViewController.navigationItem setTitle:@"添加设备"];
+    [self.navigationController.topViewController.navigationItem setTitle:NSLocalizedString(@"add_dev_title", nil)];
     //self.navigationController.navigationBar.tintColor = nil;
     //self.navigationController.navigationBar.backgroundColor = nil;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
@@ -109,7 +114,7 @@
     [self.view setBackgroundColor:[UIColor colorWithRed:0.3975 green:0.6503 blue:1.0 alpha:1.0]];
     UIColor *color = [UIColor whiteColor];
     _ssidLabel.text = [_homerCtrl getSsid];
-    _passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:@{NSForegroundColorAttributeName: color}];
+    _passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"enter_pswd", nil) attributes:@{NSForegroundColorAttributeName: color}];
     
     UIView *rightVeiw = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     UIImageView* xImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_addition_password_not"]];
@@ -173,7 +178,7 @@
     
     if([devId length] == 0) {
         DebugLog(@"添加失败");
-        [MBProgressHUD showMsg:@"添加失败" imgName:@"addition_be defeated" duration:3 toView:self.view];
+        [MBProgressHUD showMsg:NSLocalizedString(@"add_dev_fail", nil) imgName:@"addition_be defeated" duration:3 toView:self.view];
     } else {
         if (self.addBolck) {
             DeviceInfo *devFind = [[DeviceInfo alloc] init];
@@ -188,7 +193,7 @@
         }
         
         DebugLog(@"添加成功");
-        NSString *msg = [NSString stringWithFormat:@"添加成功 %@", devIp];
+        NSString *msg = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"add_dev_success", nil), devIp];
         [MBProgressHUD showMsg:msg imgName:@"addition_succeed" duration:3 toView:self.view];
         [self backUPView];
     }

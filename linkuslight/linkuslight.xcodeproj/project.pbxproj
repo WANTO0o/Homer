@@ -106,6 +106,8 @@
 		C549A11E1FE178300076C8A0 /* WhiteLight.m in Sources */ = {isa = PBXBuildFile; fileRef = C549A11D1FE178300076C8A0 /* WhiteLight.m */; };
 		C54C97731FE616EC0012360A /* LoginWithAmazon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54C97721FE616EC0012360A /* LoginWithAmazon.framework */; };
 		C5A16BB31FDB96A600707D69 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D35B661FD84D3600EF22A7 /* CFNetwork.framework */; };
+		C5C7039B207075B100958DF4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5C7039D207075B100958DF4 /* InfoPlist.strings */; };
+		C5C703A1207076F200958DF4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5C703A3207076F200958DF4 /* Localizable.strings */; };
 		C5D35B6B1FD8509300EF22A7 /* libHomer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D35B691FD8509200EF22A7 /* libHomer.a */; };
 		C5F167BE1FFA741C00EB66D6 /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F167BD1FFA741C00EB66D6 /* DeviceManager.m */; };
 /* End PBXBuildFile section */
@@ -306,6 +308,12 @@
 		C549A11D1FE178300076C8A0 /* WhiteLight.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteLight.m; sourceTree = "<group>"; };
 		C54C97721FE616EC0012360A /* LoginWithAmazon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoginWithAmazon.framework; path = LoginWithAmazon/LoginWithAmazon.framework; sourceTree = "<group>"; };
 		C5A16BB01FDB904500707D69 /* linkuslight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = linkuslight.entitlements; sourceTree = "<group>"; };
+		C5C70397207074D600958DF4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		C5C70398207074D600958DF4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		C5C7039C207075B100958DF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C5C7039E207075CA00958DF4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C5C703A2207076F200958DF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C5C703A4207076F600958DF4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C5D35B661FD84D3600EF22A7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		C5D35B691FD8509200EF22A7 /* libHomer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHomer.a; sourceTree = "<group>"; };
 		C5D35B6A1FD8509200EF22A7 /* Homer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Homer.h; sourceTree = "<group>"; };
@@ -444,6 +452,8 @@
 			isa = PBXGroup;
 			children = (
 				209AD8C21F8605CE0062830A /* Info.plist */,
+				C5C703A3207076F200958DF4 /* Localizable.strings */,
+				C5C7039D207075B100958DF4 /* InfoPlist.strings */,
 				209AD8B21F8605CE0062830A /* main.m */,
 				209AD9601F877AB90062830A /* PrefixHeader.pch */,
 			);
@@ -1026,6 +1036,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 209AD8A51F8605CE0062830A;
 			productRefGroup = 209AD8AF1F8605CE0062830A /* Products */;
@@ -1053,9 +1064,11 @@
 				207799F31FA2283B0095ED0C /* SocketDeviceViewController.xib in Resources */,
 				20B09E051FB051EC00301F8E /* DeviceListTableViewCell.xib in Resources */,
 				204C86C61FAF0CF900CFA50C /* CollectionViewCell.xib in Resources */,
+				C5C7039B207075B100958DF4 /* InfoPlist.strings in Resources */,
 				20B09E0F1FB0619100301F8E /* DeviceListViewController.xib in Resources */,
 				209AD93A1F8756880062830A /* GroupManageViewController.xib in Resources */,
 				209AD9501F8757580062830A /* MenuViewController.xib in Resources */,
+				C5C703A1207076F200958DF4 /* Localizable.strings in Resources */,
 				209AD9301F867E270062830A /* LICENSE in Resources */,
 				209AD9731F87CF4A0062830A /* LICENSE in Resources */,
 				209AD97C1F87CF720062830A /* LICENSE in Resources */,
@@ -1356,6 +1369,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				209AD8BB1F8605CE0062830A /* Base */,
+				C5C70397207074D600958DF4 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			path = ../../..;
@@ -1365,9 +1379,28 @@
 			isa = PBXVariantGroup;
 			children = (
 				209AD8C01F8605CE0062830A /* Base */,
+				C5C70398207074D600958DF4 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			path = ../../..;
+			sourceTree = "<group>";
+		};
+		C5C7039D207075B100958DF4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5C7039C207075B100958DF4 /* en */,
+				C5C7039E207075CA00958DF4 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C5C703A3207076F200958DF4 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5C703A2207076F200958DF4 /* en */,
+				C5C703A4207076F600958DF4 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1377,6 +1410,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1422,6 +1456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

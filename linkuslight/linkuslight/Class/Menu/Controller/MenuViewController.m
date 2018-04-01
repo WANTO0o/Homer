@@ -93,7 +93,13 @@
 
 - (void)initData {
     
-    _menus = [NSMutableArray arrayWithObjects:@"用户",@"配置",@"帮助",@"关于",@"退出登录", nil];
+    _menus = [NSMutableArray arrayWithObjects:
+              NSLocalizedString(@"menu_user", nil),
+              NSLocalizedString(@"menu_setting", nil),
+              NSLocalizedString(@"menu_help", nil),
+              NSLocalizedString(@"menu_about", nil),
+              NSLocalizedString(@"menu_logout", nil),
+              nil];
     _menusImg = [NSMutableArray arrayWithObjects:@"",@"personal_icon_setting",@"personal_icon_regard",@"personal_icon_hape",
                  @"personal_icon_setting", nil];
 }
@@ -195,9 +201,9 @@
                     NSString *ver = [NSString stringWithFormat:@"Version: %@ Build: %@",
                                      [infoDict objectForKey:@"CFBundleShortVersionString"],
                                      [infoDict objectForKey:@"CFBundleVersion"]];
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"关于" message:ver preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"menu_about", nil) message:ver preferredStyle:UIAlertControllerStyleAlert];
                     //增加确定按钮；
-                    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+                    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil) style:UIAlertActionStyleDefault handler:nil]];
                     [self presentViewController:alertController animated:true completion:nil]; ;
                 });
 

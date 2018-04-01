@@ -123,19 +123,19 @@ void UncaughtExceptionHandler(NSException *exception){
     DeviceManageViewController *deviceController = [[DeviceManageViewController alloc] init];
     deviceController.view.backgroundColor = [UIColor whiteColor];
     UINavigationController *deviceNav = [[UINavigationController alloc] initWithRootViewController:deviceController];
-    deviceNav.tabBarItem.title = @"设备列表";
+    deviceNav.tabBarItem.title = NSLocalizedString(@"main_devlist", nil);
     deviceNav.tabBarItem.image = [UIImage imageNamed:@"tab_device list"];
     
     GroupManageViewController *groupController = [[GroupManageViewController alloc] init];
     groupController.view.backgroundColor = [UIColor whiteColor];
     UINavigationController *groupNav = [[UINavigationController alloc] initWithRootViewController:groupController];
-    groupNav.tabBarItem.title = @"组别";
+    groupNav.tabBarItem.title = NSLocalizedString(@"main_group", nil);
     groupNav.tabBarItem.image = [UIImage imageNamed:@"tab_group"];
     
     ScenceManageViewController *scenceViewController = [[ScenceManageViewController alloc] init];
     scenceViewController.view.backgroundColor = [UIColor whiteColor];
     UINavigationController *scenceNav = [[UINavigationController alloc] initWithRootViewController:scenceViewController];
-    scenceNav.tabBarItem.title = @"场景";
+    scenceNav.tabBarItem.title = NSLocalizedString(@"main_scene", nil);
     scenceNav.tabBarItem.image = [UIImage imageNamed:@"tab_scene"];
     
     UITabBarController *mainTabbar = [[UITabBarController alloc] init];

@@ -69,7 +69,15 @@
     _scenceBackground = [NSMutableArray arrayWithCapacity:1];
     _scenceICom = [NSMutableArray arrayWithCapacity:1];*/
     
-    _scenceTitle = [NSMutableArray arrayWithObjects:@"清晨",@"夕阳",@"夜色",@"天空",@"浪漫",@"电影", nil];
+    _scenceTitle = [NSMutableArray arrayWithObjects:
+                    NSLocalizedString(@"scene_morning", nil),
+                    NSLocalizedString(@"scene_sunset", nil),
+                    NSLocalizedString(@"scene_night", nil),
+                    NSLocalizedString(@"scene_sky", nil),
+                    NSLocalizedString(@"scene_romantic", nil),
+                    NSLocalizedString(@"scene_movie", nil),
+                    nil];
+    
     _scenceBackground = [NSMutableArray arrayWithObjects:@"addition_bg_morning",@"addition_bg_sunset",@"addition_bg_night",@"addition_bg_sky",@"addition_bg_romance",@"addition_bg_film", nil];
     _scenceICom = [NSMutableArray arrayWithObjects:@"addition_icon_morning",@"addition_icon_sunset",@"addition_icon_night",@"addition_icon_sky",@"addition_icon_romance",@"addition_icon_film", nil];
     
@@ -173,7 +181,7 @@
 
 - (void)gotoSelectGroupTypeView:(NSInteger)scenceID {
     
-    LLSelectGroupTypeAlterView *lsll=[[LLSelectGroupTypeAlterView alloc] initWithTitle:@"请选择要应用的设备类型" SureTitle:@"确定" CancelBtClcik:^{
+    LLSelectGroupTypeAlterView *lsll=[[LLSelectGroupTypeAlterView alloc] initWithTitle:NSLocalizedString(@"info_devType", nil) SureTitle:NSLocalizedString(@"ok", nil) CancelBtClcik:^{
         //取消按钮点击事件
         NSLog(@"取消");
     } SureBtClcik:^(NSInteger selectDeviceTag) {
@@ -236,7 +244,6 @@
     [cell refreshWithBackground:_scenceBackground[indexPath.row] Icon:_scenceICom[indexPath.row] Title:_scenceTitle[indexPath.row] ScenceInfo:scence];
     
     return cell;
-    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -256,7 +263,8 @@
          break;
          }*/
         self.selectIndex = indexPath.row;
-        [self gotoSelectGroupTypeView:indexPath.row];
+        //[self gotoSelectGroupTypeView:indexPath.row];
+        [self showDeviceListView:LULDeviceLinkStateColourLight];
     };
     
 }

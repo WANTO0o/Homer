@@ -37,7 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController.topViewController.navigationItem setTitle:@"定时"];
+    [self.navigationController.topViewController.navigationItem setTitle:NSLocalizedString(@"timer_title", nil)];
     //self.navigationController.navigationBar.tintColor = nil;
     //self.navigationController.navigationBar.backgroundColor = nil;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];

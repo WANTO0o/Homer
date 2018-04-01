@@ -98,14 +98,14 @@
     actionnameLable.textAlignment = NSTextAlignmentCenter;
     actionnameLable.textColor = [UIColor colorWithRed:0.4052 green:0.4052 blue:0.4052 alpha:1.0];
     actionnameLable.font = [UIFont systemFontOfSize:18];
-    actionnameLable.text = @"没有分组";
+    actionnameLable.text = NSLocalizedString(@"no_group", nil);
     [_tipsView addSubview:actionnameLable];
 
     UILabel *actioncommentnameLable = [[UILabel alloc] initWithFrame:(CGRectMake(42, 227, 200, 20))];
     actioncommentnameLable.textAlignment = NSTextAlignmentCenter;
     actioncommentnameLable.textColor = [UIColor colorWithRed:0.4052 green:0.4052 blue:0.4052 alpha:1.0];
     actioncommentnameLable.font = [UIFont systemFontOfSize:13];
-    actioncommentnameLable.text = @"您可以通过添加分组来管理设备";
+    actioncommentnameLable.text = NSLocalizedString(@"no_group_prompt", nil);
     [_tipsView addSubview:actioncommentnameLable];
     
     if (_groups.count > 0) {
@@ -235,7 +235,7 @@
 
 - (void)gotoSelectGroupTypeView {
     
-    LLSelectGroupTypeAlterView *lsll=[[LLSelectGroupTypeAlterView alloc] initWithTitle:@"设备类型" SureTitle:@"确定" CancelBtClcik:^{
+    LLSelectGroupTypeAlterView *lsll=[[LLSelectGroupTypeAlterView alloc] initWithTitle:NSLocalizedString(@"info_devType", nil) SureTitle:NSLocalizedString(@"ok", nil) CancelBtClcik:^{
         //取消按钮点击事件
         NSLog(@"取消");
     } SureBtClcik:^(NSInteger selectDeviceTag) {

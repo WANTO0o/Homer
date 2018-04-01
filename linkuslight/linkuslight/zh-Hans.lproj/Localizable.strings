@@ -1,0 +1,89 @@
+/* 
+  Localizable.strings
+  linkuslight
+
+  Created by Zex on 2018/4/1.
+  Copyright © 2018年 linkustek. All rights reserved.
+*/
+
+"login_amazon" = "亚马逊账号登录";
+"main_devlist" = "设备列表";
+"main_group" = "组别";
+"main_scene" = "场景";
+"menu_user" = "用户";
+"menu_setting" = "设置";
+"menu_help" = "帮助";
+"menu_about" = "关于";
+"menu_logout" = "退出登录";
+"ok" = "确定";
+"cancel" = "取消";
+"alert" = "注意";
+"info_devType" = "设备类型";
+"dev_colorlight" = "彩灯";
+"dev_whitelight" = "白灯";
+"dev_plug" = "开关";
+"no_dev" = "没有设备";
+"no_dev_prompt" = "您可以通过添加设备来控制设备";
+
+
+// 设备
+"brightness" = "亮度";
+"on" = "开启";
+"off" = "关闭";
+"alarm" = "定时";
+"mode_switch" = "白彩灯切换";
+"state_prompt" = "设备开关";
+
+// 删除设备
+"del_dev_success" = "删除成功";
+"del_dev_fail" = "删除失败";
+
+// 添加设备
+"add_dev_title" = "添加设备";
+"add_dev_success" = "添加成功";
+"add_dev_fail" = "添加失败";
+"enter_pswd" = "请输入密码";
+"dev_offline" = "设备已离线";
+"add_mul_dev" = "多个设备";
+
+// Refresh & Setting
+"refresh_error" = "获取数据失败，请稍后重试";
+"setting_success" = "操作成功";
+"setting_fail" = "操作失败";
+"setting_devname_not_null" = "设备名称不能为空";
+"setting_enter_devname" = "请输入设备名称";
+"setting_enter_groupname" = "请输入分组名称";
+"setting_groupname_not_null" = "分组名称不能为空";
+
+// 更多菜单
+"item_more" = "更多";
+"item_cloud_bind" = "绑定到云端";
+"item_cloud_remove" = "解除云端绑定";
+
+"item_firmware_update" = "固件升级";
+"item_dev_reset" = "重置设备";
+"item_dev_rename" = "设备重命名";
+"item_firmware_ver" = "固件版本";
+
+"item_group_update" = "批量升级";
+"item_group_reset" = "批量重置";
+"item_group_del" = "删除分组";
+"item_group_rename" = "修改分组名称";
+
+// 插座
+"socket_title" = "设置插座";
+
+// 定时
+"timer_title" = "定时";
+
+// Group
+"no_group" = "没有分组";
+"no_group_prompt" = "通过添加分组来进行设备批量管理";
+
+// 场景
+"scene_morning" = "清晨";
+"scene_sunset" = "夕阳";
+"scene_night" = "夜色";
+"scene_sky" = "天空";
+"scene_romantic" = "浪漫";
+"scene_movie" = "电影";

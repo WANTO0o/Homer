@@ -49,7 +49,7 @@
     self.localDevices = [NSMutableArray array];
     self.remoteDevices = [NSMutableArray array];
     [self initView];
-//    [self initData];
+    //[self initData];
     [_deviceTableView.mj_header beginRefreshing];
 }
 
@@ -95,14 +95,14 @@
     actionnameLable.textAlignment = NSTextAlignmentCenter;
     actionnameLable.textColor = [UIColor colorWithRed:0.4052 green:0.4052 blue:0.4052 alpha:1.0];
     actionnameLable.font = [UIFont systemFontOfSize:18];
-    actionnameLable.text = @"没有设备";
+    actionnameLable.text = NSLocalizedString(@"no_device", nil);
     [_tipsView addSubview:actionnameLable];
     
     UILabel *actioncommentnameLable = [[UILabel alloc] initWithFrame:(CGRectMake(42, 227, 200, 20))];
     actioncommentnameLable.textAlignment = NSTextAlignmentCenter;
     actioncommentnameLable.textColor = [UIColor colorWithRed:0.4052 green:0.4052 blue:0.4052 alpha:1.0];
     actioncommentnameLable.font = [UIFont systemFontOfSize:13];
-    actioncommentnameLable.text = @"您可以通过添加设备来控制设备";
+    actioncommentnameLable.text = NSLocalizedString(@"no_device_prompt", nil);
     [_tipsView addSubview:actioncommentnameLable];
     
     if ([DeviceManager sharedManager].deviceList.count > 0) {
@@ -300,7 +300,7 @@
 
 - (void)gotoSelectGroupTypeView {
     
-    LLSelectGroupTypeAlterView *lsll=[[LLSelectGroupTypeAlterView alloc] initWithTitle:@"设备类型" SureTitle:@"确定" CancelBtClcik:^{
+    LLSelectGroupTypeAlterView *lsll=[[LLSelectGroupTypeAlterView alloc] initWithTitle:NSLocalizedString(@"info_devType", nil) SureTitle:NSLocalizedString(@"ok", nil) CancelBtClcik:^{
         //取消按钮点击事件
         NSLog(@"取消");
     } SureBtClcik:^(NSInteger selectDeviceTag) {
@@ -392,7 +392,7 @@
     controller.deleteDeviceBlock = ^(DeviceInfo *device) {
         [[DeviceManager sharedManager]del:device];
         [self.deviceTableView reloadData];
-        [Uility showSuccess:@"删除成功" toView:self.view];
+        [Uility showSuccess:NSLocalizedString(@"del_dev_success", nil) toView:self.view];
     };
     controller.backActionBlock = ^{
         //修改，重新刷新视图
@@ -519,7 +519,7 @@
 -(void)transferFailWithMsg:(NSError *)failMsg {
     DebugLog(@"getDeviceFailed");
     [self endRefresh];
-    [Uility showError:@"获取数据失败，请重新尝试" toView:self.view];
+    [Uility showError:NSLocalizedString(@"refresh_error", nil) toView:self.view];
     self.getLocalDevice = YES;
 }
 

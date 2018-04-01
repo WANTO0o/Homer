@@ -1,0 +1,89 @@
+/* 
+  Localizable.strings
+  linkuslight
+
+  Created by Zex on 2018/4/1.
+  Copyright © 2018年 linkustek. All rights reserved.
+*/
+
+"login_amazon" = "Login With Amazon";
+"main_devlist" = "List";
+"main_group" = "Group";
+"main_scene" = "Scene";
+"menu_user" = "User";
+"menu_setting" = "Settings";
+"menu_help" = "Help";
+"menu_about" = "About";
+"menu_logout" = "Logout";
+"ok" = "OK";
+"cancel" = "Cancel";
+"info_devType" = "Dev Type";
+"dev_colorlight" = "Color";
+"dev_whitelight" = "White";
+"dev_plug" = "Plug";
+"noDevice" = "No Available Device";
+"noDevice_Prompt" = "You can add device and then control it";
+
+// 设备
+"brightness" = "Brightness";
+"on" = "On";
+"off" = "Off";
+"alarm" = "Clock";
+"mode_switch" = "Mode Switch";
+"state_prompt" = "Device State";
+
+// 删除设备
+"del_dev_success" = "Delete success";
+"del_dev_fail" = "Fail to delete";
+
+// 添加设备
+"add_dev_title" = "Add Device";
+"add_dev_success" = "Add success";
+"add_dev_fail" = "Fail to add device";
+"enter_pswd" = "Password";
+"dev_offline" = "The device is off-line";
+"add_dev_prompt" = "Make sure the device is twinkling before you click";
+"add_mul_dev" = "Multi device";
+
+// Refresh & Setting
+"refresh_error" = "Failed to fetch data, try again please.";
+"setting_success" = "Setting success";
+"setting_fail" = "Setting fail";
+"setting_devname_not_null" = "Name cannot be null";
+"setting_enter_devname" = "Type in name for device";
+"setting_enter_groupname" = "Type in name for group";
+"setting_groupname_not_null" = "The name of group cannot be null";
+
+// 更多菜单
+"item_more" = "More";
+"item_cloud_bind" = "Bind to cloud";
+"item_cloud_remove" = "Nobind from cloud";
+
+"item_firmware_update" = "Firmware Update";
+"item_dev_reset" = "Reset Factory";
+"item_dev_rename" = "Rename";
+"item_firmware_ver" = "Firmware Ver";
+
+"item_group_update" = "Multi-Update";
+"item_group_reset" = "Multi-Reset";
+"item_group_del" = "Delete Group";
+"item_group_rename" = "Rename Group";
+
+// 插座
+"socket_title" = "Socket";
+
+// 定时
+"timer_title" = "Timer";
+
+// Group
+"no_group" = "No Group";
+"no_group_prompt" = "Add group for multi-devices control.";
+
+// 场景
+"scene_morning" = "Morning";
+"scene_sunset" = "Sunset";
+"scene_night" = "Night";
+"scene_sky" = "Sky";
+"scene_romantic" = "Romantic";
+"scene_movie" = "Movie";
+

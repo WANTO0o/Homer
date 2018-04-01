@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="addStateImg" destination="LOn-GA-Bkv" id="i4R-ll-NAl"/>
                 <outlet property="doneButton" destination="Lsw-wO-ZAD" id="PUY-rG-Fej"/>
+                <outlet property="infoText" destination="DND-Sp-3vY" id="zpL-Xm-sbd"/>
+                <outlet property="mulLabel" destination="aCc-ya-2r4" id="GsY-1i-RMY"/>
                 <outlet property="mutButton" destination="wSx-Ui-iXE" id="3FH-EP-Pjp"/>
                 <outlet property="passwordTextField" destination="v84-gI-AIg" id="7Ja-hy-K70"/>
                 <outlet property="ssidLabel" destination="VJH-8u-hnh" id="HbW-v4-UwF"/>

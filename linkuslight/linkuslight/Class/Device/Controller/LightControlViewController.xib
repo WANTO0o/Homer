@@ -12,15 +12,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LightControlViewController">
             <connections>
+                <outlet property="alarmLabel" destination="2aa-RP-EfY" id="276-yJ-b59"/>
                 <outlet property="alarmOFFButton" destination="0PI-r8-LBN" id="bSa-cH-Oog"/>
                 <outlet property="alarmONButton" destination="8Mg-Eq-EsW" id="YZs-YB-G9N"/>
                 <outlet property="brightnessLable" destination="IOD-bD-6oW" id="JAa-cN-0xm"/>
+                <outlet property="changeModeLabel" destination="gZr-JR-hNa" id="69f-ZH-fIk"/>
                 <outlet property="deviceOFFButton" destination="QFc-zu-SIe" id="9Cm-4J-DnD"/>
                 <outlet property="deviceOnButton" destination="0kv-oJ-9tl" id="iKo-9C-GiB"/>
                 <outlet property="lightTurnClourButton" destination="7hc-9p-rxr" id="IQx-hD-A7f"/>
                 <outlet property="lightTurnWhiteButton" destination="8pC-qO-vKO" id="f2Y-Gh-pxt"/>
                 <outlet property="lightView" destination="rrc-M3-kFR" id="fjg-Y6-hMd"/>
                 <outlet property="lightenessSlider" destination="qWg-IC-Nk0" id="lio-Xs-1WL"/>
+                <outlet property="stateLabel" destination="UGy-QG-Koe" id="Faq-M2-Sgl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -18,5 +18,13 @@
 
 - (Boolean)NeedLogin;
 
+-(void) addUser:(LOLUser *)userInfo
+        success:(void (^)(id response))success
+        failure:(void (^)(id response))failure;
+
+-(void) updateUser:(LOLUser *)userInfo
+           success:(void (^)(id response))success
+           failure:(void (^)(id response))failure;
+
 
 @end

@@ -77,7 +77,7 @@
         mutlightLab.textAlignment = NSTextAlignmentLeft;
         mutlightLab.font = [UIFont systemFontOfSize:15];
         mutlightLab.textColor = [UIColor darkGrayColor];
-        mutlightLab.text = @"彩灯";
+        mutlightLab.text = NSLocalizedString(@"dev_colorlight", nil);
         [self.alertView addSubview:mutlightLab];
         
         self.mutlightBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -112,7 +112,7 @@
         whitelightLab.textAlignment = NSTextAlignmentLeft;
         whitelightLab.font = [UIFont systemFontOfSize:15];
         whitelightLab.textColor = [UIColor darkGrayColor];
-        whitelightLab.text = @"白灯";
+        whitelightLab.text = NSLocalizedString(@"dev_whitelight", nil);
         [self.alertView addSubview:whitelightLab];
         
         self.whitelightBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -146,7 +146,7 @@
         socketLab.textAlignment = NSTextAlignmentLeft;
         socketLab.font = [UIFont systemFontOfSize:15];
         socketLab.textColor = [UIColor darkGrayColor];
-        socketLab.text = @"开关";
+        socketLab.text = NSLocalizedString(@"dev_plug", nil);
         [self.alertView addSubview:socketLab];
         
         self.socketBtn = [UIButton buttonWithType:UIButtonTypeSystem];

@@ -25,9 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self initView];
     
-
+    [_loginButton setTitle:NSLocalizedString(@"login_amazon", nil) forState:UIControlStateNormal];
+    [self initView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,8 +63,8 @@
 - (IBAction)didLoginButtonClicked:(id)sender {
     
     // Make authorize call to SDK to get authorization from the user. While making the call you can specify the scopes for which the user authorization is needed.
-//    [(AppDelegate*)[UIApplication sharedApplication].delegate showMainPage];
-//    return ;
+    //[(AppDelegate*)[UIApplication sharedApplication].delegate showMainPage];
+    //return ;
     // Build an authorize request.
     [Uility showLoadingToView:self.view];
     AMZNAuthorizeRequest *request = [[AMZNAuthorizeRequest alloc] init];
@@ -82,7 +82,6 @@
 {
     LOLUser *user = [[LOLUser alloc] init];
     
-  
     NSLog(@"call requestHandler");
     
     AMZNAuthorizationRequestHandler requestHandler = ^(AMZNAuthorizeResult * result, BOOL userDidCancel, NSError * error) {
@@ -115,6 +114,9 @@
             
             NSLog(@"User Name: %@", user.userName);
             NSLog(@"User email: %@", user.userEmail);
+            
+            // 检查用户是否已经注册
+            
             
             [[LULSessionManager manager] SaveUserData:user];
             [self dismissViewControllerAnimated:YES completion:nil];
