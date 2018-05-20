@@ -37,7 +37,7 @@
     
     [super viewWillAppear:animated];
     
-    [self.navigationController.topViewController.navigationItem setTitle:@"LINKUS LIGHT"];
+    [self.navigationController.topViewController.navigationItem setTitle:@"SMART ELF"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

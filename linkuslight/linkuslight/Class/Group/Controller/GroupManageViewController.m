@@ -61,7 +61,7 @@
     
     [super viewDidAppear:animated];
     
-    [self.navigationController.topViewController.navigationItem setTitle:@"LINKUS LIGHT"];
+    [self.navigationController.topViewController.navigationItem setTitle:@"SMART ELF"];
     [self.groupTableView.mj_header beginRefreshing];
 
 }
