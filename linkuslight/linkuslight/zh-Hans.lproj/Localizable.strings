@@ -79,8 +79,15 @@
 // Group
 "no_group" = "没有分组";
 "no_group_prompt" = "通过添加分组来进行设备批量管理";
+"group_name" = "分组名称";
+"next_step"= "下一步";
+"group_cannot_empty" = "分组名称不能为空";
 
 // 场景
+"scene_lightmusic" = "轻音乐";
+"scene_rockmusic" = "摇滚音乐";
+"scene_popularmusic" = "流行音乐";
+
 "scene_morning" = "清晨";
 "scene_sunset" = "夕阳";
 "scene_night" = "夜色";

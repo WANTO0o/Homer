@@ -43,6 +43,8 @@
     
     [self setKeyBoard];
     
+    [self showLoginPage];
+    
     if([[LULSessionManager manager] NeedLogin])
     {
         [self showLoginPage];

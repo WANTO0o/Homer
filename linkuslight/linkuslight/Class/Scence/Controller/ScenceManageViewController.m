@@ -61,7 +61,7 @@
     [self.scenceCollectionView registerNib:[UINib nibWithNibName:@"CollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"ScenceCollectionViewCell"];
 
     //默认【下拉刷新】
-    _scenceCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+//    _scenceCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
 }
 
 - (void)initData {
@@ -70,6 +70,9 @@
     _scenceICom = [NSMutableArray arrayWithCapacity:1];*/
     
     _scenceTitle = [NSMutableArray arrayWithObjects:
+                    NSLocalizedString(@"scene_lightmusic", nil),
+                    NSLocalizedString(@"scene_rockmusic", nil),
+                    NSLocalizedString(@"scene_popularmusic", nil),
                     NSLocalizedString(@"scene_morning", nil),
                     NSLocalizedString(@"scene_sunset", nil),
                     NSLocalizedString(@"scene_night", nil),
@@ -78,8 +81,8 @@
                     NSLocalizedString(@"scene_movie", nil),
                     nil];
     
-    _scenceBackground = [NSMutableArray arrayWithObjects:@"addition_bg_morning",@"addition_bg_sunset",@"addition_bg_night",@"addition_bg_sky",@"addition_bg_romance",@"addition_bg_film", nil];
-    _scenceICom = [NSMutableArray arrayWithObjects:@"addition_icon_morning",@"addition_icon_sunset",@"addition_icon_night",@"addition_icon_sky",@"addition_icon_romance",@"addition_icon_film", nil];
+    _scenceBackground = [NSMutableArray arrayWithObjects:@"addition_bg_morning",@"addition_bg_morning",@"addition_bg_morning",@"addition_bg_morning",@"addition_bg_sunset",@"addition_bg_night",@"addition_bg_sky",@"addition_bg_romance",@"addition_bg_film", nil];
+    _scenceICom = [NSMutableArray arrayWithObjects:@"addition_icon_morning",@"addition_icon_morning",@"addition_icon_morning",@"addition_icon_morning",@"addition_icon_sunset",@"addition_icon_night",@"addition_icon_sky",@"addition_icon_romance",@"addition_icon_film", nil];
     
     _scenceTypeList = [NSMutableArray arrayWithObjects:@(ScenceTypeMorning), @(ScenceTypeSettingSun), @(ScenceTypeSettingMoon), @(ScenceTypeSettingSky), @(ScenceTypeSettingRomantic), @(ScenceTypeSettingMovie), nil];
     self.scenceList = [NSMutableArray arrayWithCapacity:1];

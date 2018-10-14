@@ -95,13 +95,17 @@
     
     _menus = [NSMutableArray arrayWithObjects:
               NSLocalizedString(@"menu_user", nil),
-              NSLocalizedString(@"menu_setting", nil),
-              NSLocalizedString(@"menu_help", nil),
+              //NSLocalizedString(@"menu_setting", nil),
+              //NSLocalizedString(@"menu_help", nil),
               NSLocalizedString(@"menu_about", nil),
               NSLocalizedString(@"menu_logout", nil),
               nil];
-    _menusImg = [NSMutableArray arrayWithObjects:@"",@"personal_icon_setting",@"personal_icon_regard",@"personal_icon_hape",
-                 @"personal_icon_setting", nil];
+    _menusImg = [NSMutableArray arrayWithObjects:@"",
+                 //@"personal_icon_setting",
+                 //@"personal_icon_regard",
+                 @"personal_icon_hape",
+                 @"personal_icon_setting",
+                 nil];
 }
 
 - (void)showLoginPage {
@@ -181,49 +185,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < _menus.count) {
-        
-        switch (indexPath.row) {
-            case 0:
-                // 用户信息
-                break;
-            case 1:
-                // 配置
-                break;
-            case 2:
-                // 帮助
-                break;
-            case 3:
-                // 关于
-            {
-                DebugLog(@"关于");
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-                    NSString *ver = [NSString stringWithFormat:@"Version: %@ Build: %@",
-                                     [infoDict objectForKey:@"CFBundleShortVersionString"],
-                                     [infoDict objectForKey:@"CFBundleVersion"]];
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"menu_about", nil) message:ver preferredStyle:UIAlertControllerStyleAlert];
-                    //增加确定按钮；
-                    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil) style:UIAlertActionStyleDefault handler:nil]];
-                    [self presentViewController:alertController animated:true completion:nil]; ;
-                });
-
-                break;
-            }
-            case 4:
-                // 退出登录
-            {
-                [Uility showLoadingToView:self.view];
-                [[AMZNAuthorizationManager sharedManager] signOut:^(NSError * _Nullable error) {
-                    // Your additional logic after the user authorization state is cleared.
-                    [Uility hideLoadingView:self.view];
-                    [Uility setAutoLogin:NO];
-                    [self showLoginPage];
-                }];
-                break;
-            }
-            default:
-                NSLog(@"didSelectRowAtIndexRow:%ld",(long)indexPath.row);
-                break;
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSString *cellLabel = [cell.textLabel text];
+        if([cellLabel isEqualToString:NSLocalizedString(@"menu_user", nil)]) {
+            
+        }  else if ([cellLabel isEqualToString:NSLocalizedString(@"menu_about", nil)]) {
+            DebugLog(@"关于");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+                NSString *ver = [NSString stringWithFormat:@"Version: %@ Build: %@",
+                                 [infoDict objectForKey:@"CFBundleShortVersionString"],
+                                 [infoDict objectForKey:@"CFBundleVersion"]];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"menu_about", nil) message:ver preferredStyle:UIAlertControllerStyleAlert];
+                //增加确定按钮；
+                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil) style:UIAlertActionStyleDefault handler:nil]];
+                [self presentViewController:alertController animated:true completion:nil];
+            });
+        } else if ([cellLabel isEqualToString:NSLocalizedString(@"menu_logout", nil)]) {
+            [[AMZNAuthorizationManager sharedManager] signOut:^(NSError * _Nullable error) {
+                // Your additional logic after the user authorization state is cleared.
+                [Uility hideLoadingView:self.view];
+                [Uility setAutoLogin:NO];
+                [self showLoginPage];
+            }];
         }
     };
 }

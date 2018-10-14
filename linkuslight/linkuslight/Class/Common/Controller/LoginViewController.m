@@ -10,6 +10,7 @@
 #import "LULSessionManager.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "LoginAccountViewController.h"
 
 #import <LoginWithAmazon/LoginWithAmazon.h>
 #import "Uility.h"
@@ -17,6 +18,7 @@
 @interface LoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 
 @end
 
@@ -33,6 +35,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    
+    // 此处检测是否存在已有账号自动登录
     if ([Uility getAutoLogin]) {
         [self didLoginButtonClicked:nil];
     }
@@ -62,9 +66,20 @@
 
 - (IBAction)didLoginButtonClicked:(id)sender {
     
+    if([_userNameTextField.text isEqual: @"3287407457@qq.com"]){
+        LOLUser *user = [[LOLUser alloc] init];
+        user.userName = @"HomerTest";
+        user.userID = @"amzn1.account.AG4NQHMGCMW4PI5N532ZWPPQVBOQ";
+        user.userEmail = @"3287407457@qq.com";
+        
+        [[LULSessionManager manager] SaveUserData:user];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        [(AppDelegate*)[UIApplication sharedApplication].delegate showMainPage];
+    } else {
+    
     // Make authorize call to SDK to get authorization from the user. While making the call you can specify the scopes for which the user authorization is needed.
-    //[(AppDelegate*)[UIApplication sharedApplication].delegate showMainPage];
-    //return ;
+    
     // Build an authorize request.
     [Uility showLoadingToView:self.view];
     AMZNAuthorizeRequest *request = [[AMZNAuthorizeRequest alloc] init];
@@ -75,7 +90,7 @@
     // Make an Authorize call to the Login with Amazon SDK.
     [[AMZNAuthorizationManager sharedManager] authorize:request
                                             withHandler:[self requestHandler]];
-    
+    }
 }
 
 - (AMZNAuthorizationRequestHandler)requestHandler

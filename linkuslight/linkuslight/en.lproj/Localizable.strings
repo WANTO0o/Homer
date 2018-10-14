@@ -30,7 +30,7 @@
 "off" = "Off";
 "alarm" = "Clock";
 "mode_switch" = "Mode Switch";
-"state_prompt" = "Device State";
+"state_prompt" = "State";
 
 // 删除设备
 "del_dev_success" = "Delete success";
@@ -78,8 +78,15 @@
 // Group
 "no_group" = "No Group";
 "no_group_prompt" = "Add group for multi-devices control.";
+"group_name" = "GroupName";
+"next_step"= "Next";
+"group_cannot_empty" = "The group name cannot be empty.";
 
 // 场景
+"scene_lightmusic" = "Light";
+"scene_rockmusic" = "Rock";
+"scene_popularmusic" = "Popular";
+
 "scene_morning" = "Morning";
 "scene_sunset" = "Sunset";
 "scene_night" = "Night";

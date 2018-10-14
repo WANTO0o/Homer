@@ -213,13 +213,13 @@
 }
 
 - (void)gotoAddView {
-    
-    LLInputGroupNameAlterView *lll = [[LLInputGroupNameAlterView alloc] initWithTitle:@"分组名称" SureTitle:@"下一步" CancelBtClcik:^{
+    NSLocalizedString(@"no_group_prompt", nil);
+    LLInputGroupNameAlterView *lll = [[LLInputGroupNameAlterView alloc] initWithTitle:NSLocalizedString(@"group_name", nil) SureTitle:NSLocalizedString(@"next_step", nil) CancelBtClcik:^{
         //取消按钮点击事件
         NSLog(@"取消");
     } SureBtClcik:^(NSString *groupName){
         if([groupName isEqualToString:@""]){
-            [Uility showError:@"分组名称不能为空" toView:self.view];
+            [Uility showError:NSLocalizedString(@"group_cannot_empty", nil) toView:self.view];
             return ;
         }
         self.addGroupName = [groupName copy];

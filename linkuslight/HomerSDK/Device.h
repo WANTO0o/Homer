@@ -165,6 +165,28 @@ typedef NS_ENUM(NSInteger, eRegularAction) {
  */
 -(Boolean) disableRegular:(Byte)regularId;
 
+typedef NS_ENUM(NSInteger, eSceneMode) {
+    None = 0, // 关闭场景
+    OneColorGradually = 1, // 单色渐变
+    ColorsGradually = 2, // 多色渐变
+    ColorsChange = 3, // 多色跳变
+    ColorsShining = 4 // 多色频闪
+};
+
+/**
+ *  配置场景
+ *  @param mode 场景模式
+ *  @param speed 速度，单位ms
+ *  @param brightness 亮度，0-100
+ *  @param colorNum 颜色数量，0-7
+ *  @param colorArray 色相数组
+ */
+-(Boolean) setSceneMode:(eSceneMode)mode
+                  Speed:(int)speed
+             Brightness:(int)brightness
+               ColorNum:(int)colorNum
+                 Colors:(NSMutableArray*)colorArray;
+
 /**
  *  获取设备版本
  *
@@ -194,5 +216,18 @@ typedef NS_ENUM(NSInteger, eRegularAction) {
  *  @return 成功返回YES 失败NO
  */
 -(Boolean) resetFactaury;
+
+// No publish
+-(Boolean) writeAuthWithChipId:(int)chipId;
+
+-(Boolean) cleanAuth;
+
+typedef NS_ENUM(NSInteger, EAuthState) {
+    AuthSuccess = 0,
+    HasAuth = 1,
+    AuthFail = -1
+};
+
+-(EAuthState) writeAuth;
 
 @end
