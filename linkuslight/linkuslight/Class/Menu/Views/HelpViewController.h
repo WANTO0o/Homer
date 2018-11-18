@@ -1,0 +1,17 @@
+//
+//  HelpViewController.h
+//  linkuslight
+//
+//  Created by Zex on 2018/11/17.
+//  Copyright © 2018 linkustek. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface HelpViewController : UIViewController
+
+@end
+
+NS_ASSUME_NONNULL_END

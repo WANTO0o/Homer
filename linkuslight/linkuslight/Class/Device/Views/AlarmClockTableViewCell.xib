@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="AlarmClockTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上午" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngK-R4-atn" userLabel="Time Text Label">
+                        <rect key="frame" x="31" y="24" width="53" height="32"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                        <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6:31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cO8-TG-Zli">
+                        <rect key="frame" x="89" y="-4.5" width="94" height="60.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HHl-R5-rzC">
+                        <rect key="frame" x="298" y="24.5" width="51" height="31"/>
+                    </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="闹钟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JxZ-Bm-fhf" userLabel="Time Tag Label">
+                        <rect key="frame" x="31" y="56" width="29" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="JxZ-Bm-fhf" firstAttribute="top" secondItem="ngK-R4-atn" secondAttribute="bottom" id="FMt-b2-Kgs"/>
+                    <constraint firstItem="ngK-R4-atn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="JhU-hS-S4i"/>
+                    <constraint firstItem="cO8-TG-Zli" firstAttribute="leading" secondItem="ngK-R4-atn" secondAttribute="trailing" constant="5" id="Pdm-Cw-9va"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="HHl-R5-rzC" secondAttribute="trailing" constant="12" id="R4K-fO-IXH"/>
+                    <constraint firstItem="JxZ-Bm-fhf" firstAttribute="leading" secondItem="ngK-R4-atn" secondAttribute="leading" id="XAa-ce-Uj2"/>
+                    <constraint firstItem="ngK-R4-atn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="iAJ-8V-aaA"/>
+                    <constraint firstItem="HHl-R5-rzC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nhj-DN-G1r"/>
+                    <constraint firstItem="cO8-TG-Zli" firstAttribute="bottom" secondItem="ngK-R4-atn" secondAttribute="bottom" id="xVf-Oz-Med"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="timeLabel" destination="cO8-TG-Zli" id="Tfb-Ae-MiV"/>
+                <outlet property="timeSwitch" destination="HHl-R5-rzC" id="gnk-v8-FVO"/>
+                <outlet property="timeTagLabel" destination="JxZ-Bm-fhf" id="nfe-8j-szy"/>
+                <outlet property="timeTextLabel" destination="ngK-R4-atn" id="cZH-Ck-mz9"/>
+            </connections>
+            <point key="canvasLocation" x="157.59999999999999" y="124.58770614692655"/>
+        </tableViewCell>
+    </objects>
+</document>

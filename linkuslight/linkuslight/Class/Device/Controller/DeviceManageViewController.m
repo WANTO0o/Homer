@@ -49,8 +49,8 @@
     self.localDevices = [NSMutableArray array];
     self.remoteDevices = [NSMutableArray array];
     [self initView];
-    //[self initData];
-    [_deviceTableView.mj_header beginRefreshing];
+    [self initData];
+    //[_deviceTableView.mj_header beginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -249,13 +249,13 @@
 }
 
 - (void) transform {
-    /*UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                 style:UIBarButtonItemStyleDone
-                                                                target:nil
-                                                                action:nil];
-    backItem.tintColor = [UIColor whiteColor];
-    
-    self.navigationItem.backBarButtonItem = backItem;*/
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil)
+//                                                                 style:UIBarButtonItemStyleDone
+//                                                                target:self
+//                                                                action:nil];
+//    backItem.tintColor = [UIColor whiteColor];
+//
+//    self.navigationItem.backBarButtonItem = backItem;
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_leftbar"]
                                                                  style:UIBarButtonItemStyleDone
@@ -272,7 +272,7 @@
     rightItem.tintColor = [UIColor whiteColor];
     
     self.navigationItem.rightBarButtonItem = rightItem;
-    self.navigationItem.backBarButtonItem = nil;
+    //self.navigationItem.backBarButtonItem = nil;
     
 
 }

@@ -42,4 +42,8 @@
 圆心到点的距离>?半径
  */
 + (BOOL)point:(CGPoint)point inCircleRect:(CGRect)rect;
+
+// 将当前时间字符串转为UTCDate, 输入：2018-03-27 07:44:05
++ (NSDate *)UTCDateFromLocalString:(NSString *)localString;
+
 @end

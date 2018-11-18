@@ -18,6 +18,7 @@
 #import "ColorCircleView.h"
 #import "DeviceManager.h"
 #import "DataStoreHelper.h"
+#import "AlarmClockTableVC.h"
 
 @interface LightControlViewController ()<LLCircularViewDelegate>
 
@@ -69,7 +70,8 @@
 //    self.homerRemoteCtrl.delegate = self;
     _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
     [self initView];
-    [self getDeviceStatus];
+    // DEBUG:
+    // [self getDeviceStatus];
 
     [_deviceOnButton setTitle:NSLocalizedString(@"on", nil) forState:UIControlStateNormal];
     [_deviceOFFButton setTitle:NSLocalizedString(@"off", nil) forState:UIControlStateNormal];
@@ -319,7 +321,15 @@
 
 - (void)transform {
     
-    self.navigationItem.backBarButtonItem = nil;
+    //self.navigationItem.backBarButtonItem = nil;
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil)
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:nil];
+    backItem.tintColor = [UIColor whiteColor];
+    
+    self.navigationItem.backBarButtonItem = backItem;
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_button"]
                                                                  style:UIBarButtonItemStyleDone
@@ -337,8 +347,6 @@
     rightItem.tintColor = [UIColor whiteColor];
     
     self.navigationItem.rightBarButtonItem = rightItem;
-    self.navigationItem.backBarButtonItem = nil;
-
 }
 
 - (void)backUPView {
@@ -351,9 +359,11 @@
 }
 
 - (void)showClockView {
-    ClockViewController *controller = [[ClockViewController alloc] init];
-    [self setHidesBottomBarWhenPushed:YES];
+    //ClockViewController *controller = [[ClockViewController alloc] init];
+    AlarmClockTableVC *controller = [[AlarmClockTableVC alloc] init];
     
+    [self setHidesBottomBarWhenPushed:YES];
+
     [self.navigationController pushViewController:controller animated:YES];
     //[self setHidesBottomBarWhenPushed:NO];
 }

@@ -54,4 +54,12 @@
     return dis <= radius;
     
 }
+
+// 将当前时间字符串转为UTCDate, 输入：2018-03-27 07:44:05
++ (NSDate *)UTCDateFromLocalString:(NSString *)localString {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date = [dateFormatter dateFromString:localString];
+    return date;
+}
 @end

@@ -105,11 +105,22 @@
 		C549A11B1FE1756A0076C8A0 /* ColorLight.m in Sources */ = {isa = PBXBuildFile; fileRef = C549A11A1FE1756A0076C8A0 /* ColorLight.m */; };
 		C549A11E1FE178300076C8A0 /* WhiteLight.m in Sources */ = {isa = PBXBuildFile; fileRef = C549A11D1FE178300076C8A0 /* WhiteLight.m */; };
 		C54C97731FE616EC0012360A /* LoginWithAmazon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54C97721FE616EC0012360A /* LoginWithAmazon.framework */; };
+		C55E587A2186A0FC007B3A10 /* ClockViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C55E58792186A0FC007B3A10 /* ClockViewModel.m */; };
+		C55E58B12186FBB3007B3A10 /* AlarmClockTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C55E58AF2186FBB3007B3A10 /* AlarmClockTableVC.m */; };
+		C55E58B22186FBB3007B3A10 /* AlarmClockTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C55E58B02186FBB3007B3A10 /* AlarmClockTableVC.xib */; };
+		C55E58BA218707B5007B3A10 /* AlarmClockTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C55E58B8218707B5007B3A10 /* AlarmClockTableViewCell.m */; };
+		C55E58BB218707B5007B3A10 /* AlarmClockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C55E58B9218707B5007B3A10 /* AlarmClockTableViewCell.xib */; };
+		C5725555218DDA6600BA311E /* AlarmClockEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5725553218DDA6600BA311E /* AlarmClockEditViewController.m */; };
+		C5725556218DDA6600BA311E /* AlarmClockEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5725554218DDA6600BA311E /* AlarmClockEditViewController.xib */; };
+		C5725562218ED0B500BA311E /* AlarmClockRepeatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5725560218ED0B500BA311E /* AlarmClockRepeatTableViewCell.m */; };
+		C5725563218ED0B500BA311E /* AlarmClockRepeatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5725561218ED0B500BA311E /* AlarmClockRepeatTableViewCell.xib */; };
 		C5A16BB31FDB96A600707D69 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D35B661FD84D3600EF22A7 /* CFNetwork.framework */; };
 		C5C7039B207075B100958DF4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5C7039D207075B100958DF4 /* InfoPlist.strings */; };
 		C5C703A1207076F200958DF4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5C703A3207076F200958DF4 /* Localizable.strings */; };
 		C5D35B6B1FD8509300EF22A7 /* libHomer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D35B691FD8509200EF22A7 /* libHomer.a */; };
 		C5F167BE1FFA741C00EB66D6 /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F167BD1FFA741C00EB66D6 /* DeviceManager.m */; };
+		C5FA3687219F2839005C6AFB /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA3685219F2839005C6AFB /* HelpViewController.m */; };
+		C5FA3688219F2839005C6AFB /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5FA3686219F2839005C6AFB /* HelpViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -306,6 +317,20 @@
 		C549A11C1FE178300076C8A0 /* WhiteLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteLight.h; sourceTree = "<group>"; };
 		C549A11D1FE178300076C8A0 /* WhiteLight.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteLight.m; sourceTree = "<group>"; };
 		C54C97721FE616EC0012360A /* LoginWithAmazon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoginWithAmazon.framework; path = LoginWithAmazon/LoginWithAmazon.framework; sourceTree = "<group>"; };
+		C55E58782186A0FC007B3A10 /* ClockViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClockViewModel.h; sourceTree = "<group>"; };
+		C55E58792186A0FC007B3A10 /* ClockViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClockViewModel.m; sourceTree = "<group>"; };
+		C55E58AE2186FBB3007B3A10 /* AlarmClockTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmClockTableVC.h; sourceTree = "<group>"; };
+		C55E58AF2186FBB3007B3A10 /* AlarmClockTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmClockTableVC.m; sourceTree = "<group>"; };
+		C55E58B02186FBB3007B3A10 /* AlarmClockTableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmClockTableVC.xib; sourceTree = "<group>"; };
+		C55E58B7218707B5007B3A10 /* AlarmClockTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmClockTableViewCell.h; sourceTree = "<group>"; };
+		C55E58B8218707B5007B3A10 /* AlarmClockTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmClockTableViewCell.m; sourceTree = "<group>"; };
+		C55E58B9218707B5007B3A10 /* AlarmClockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmClockTableViewCell.xib; sourceTree = "<group>"; };
+		C5725552218DDA6600BA311E /* AlarmClockEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmClockEditViewController.h; sourceTree = "<group>"; };
+		C5725553218DDA6600BA311E /* AlarmClockEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmClockEditViewController.m; sourceTree = "<group>"; };
+		C5725554218DDA6600BA311E /* AlarmClockEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmClockEditViewController.xib; sourceTree = "<group>"; };
+		C572555F218ED0B500BA311E /* AlarmClockRepeatTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmClockRepeatTableViewCell.h; sourceTree = "<group>"; };
+		C5725560218ED0B500BA311E /* AlarmClockRepeatTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmClockRepeatTableViewCell.m; sourceTree = "<group>"; };
+		C5725561218ED0B500BA311E /* AlarmClockRepeatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmClockRepeatTableViewCell.xib; sourceTree = "<group>"; };
 		C5A16BB01FDB904500707D69 /* linkuslight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = linkuslight.entitlements; sourceTree = "<group>"; };
 		C5C70397207074D600958DF4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		C5C70398207074D600958DF4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -318,6 +343,9 @@
 		C5D35B6A1FD8509200EF22A7 /* Homer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Homer.h; sourceTree = "<group>"; };
 		C5F167BC1FFA741C00EB66D6 /* DeviceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
 		C5F167BD1FFA741C00EB66D6 /* DeviceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceManager.m; sourceTree = "<group>"; };
+		C5FA3684219F2839005C6AFB /* HelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		C5FA3685219F2839005C6AFB /* HelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		C5FA3686219F2839005C6AFB /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		D59185B580240E147DFE2D3E /* libPods-linkuslightUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-linkuslightUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E81A1647B8F3677AE1CB5C3F /* Pods-linkuslightUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-linkuslightUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-linkuslightUITests/Pods-linkuslightUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EFD09927B3EE6865ED51DA50 /* Pods-linkuslightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-linkuslightTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-linkuslightTests/Pods-linkuslightTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -577,6 +605,8 @@
 				C5F167BD1FFA741C00EB66D6 /* DeviceManager.m */,
 				C52946992000AE3E0057A99E /* HomerRemoteCtrl.h */,
 				C529469A2000AE3E0057A99E /* HomerRemoteCtrl.m */,
+				C55E58782186A0FC007B3A10 /* ClockViewModel.h */,
+				C55E58792186A0FC007B3A10 /* ClockViewModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -596,6 +626,18 @@
 				209AD9631F877BBE0062830A /* DeviceTableViewCell.xib */,
 				20B09E031FB051EC00301F8E /* DeviceListTableViewCell.xib */,
 				20B09E0D1FB0619100301F8E /* DeviceListViewController.xib */,
+				C55E58AE2186FBB3007B3A10 /* AlarmClockTableVC.h */,
+				C55E58AF2186FBB3007B3A10 /* AlarmClockTableVC.m */,
+				C55E58B02186FBB3007B3A10 /* AlarmClockTableVC.xib */,
+				C55E58B7218707B5007B3A10 /* AlarmClockTableViewCell.h */,
+				C55E58B8218707B5007B3A10 /* AlarmClockTableViewCell.m */,
+				C55E58B9218707B5007B3A10 /* AlarmClockTableViewCell.xib */,
+				C5725552218DDA6600BA311E /* AlarmClockEditViewController.h */,
+				C5725553218DDA6600BA311E /* AlarmClockEditViewController.m */,
+				C5725554218DDA6600BA311E /* AlarmClockEditViewController.xib */,
+				C572555F218ED0B500BA311E /* AlarmClockRepeatTableViewCell.h */,
+				C5725560218ED0B500BA311E /* AlarmClockRepeatTableViewCell.m */,
+				C5725561218ED0B500BA311E /* AlarmClockRepeatTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -819,6 +861,9 @@
 				20BFF7CD1F8A411E002FFD52 /* MenuUserTableViewCell.h */,
 				20BFF7CE1F8A411E002FFD52 /* MenuUserTableViewCell.m */,
 				20BFF7CF1F8A411E002FFD52 /* MenuUserTableViewCell.xib */,
+				C5FA3684219F2839005C6AFB /* HelpViewController.h */,
+				C5FA3685219F2839005C6AFB /* HelpViewController.m */,
+				C5FA3686219F2839005C6AFB /* HelpViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1055,8 +1100,12 @@
 			files = (
 				20EE48111F9B5D86007B02E7 /* AddDeviceViewController.xib in Resources */,
 				20A71DDD1FAE07EC000C543B /* GroupTableViewCell.xib in Resources */,
+				C55E58BB218707B5007B3A10 /* AlarmClockTableViewCell.xib in Resources */,
 				20BFF7D11F8A411E002FFD52 /* MenuUserTableViewCell.xib in Resources */,
+				C55E58B22186FBB3007B3A10 /* AlarmClockTableVC.xib in Resources */,
 				209AD8C11F8605CE0062830A /* LaunchScreen.storyboard in Resources */,
+				C5FA3688219F2839005C6AFB /* HelpViewController.xib in Resources */,
+				C5725556218DDA6600BA311E /* AlarmClockEditViewController.xib in Resources */,
 				20CCA6581FF4D7E400876F7A /* Assets.xcassets in Resources */,
 				207799F81FA2284E0095ED0C /* ClockViewController.xib in Resources */,
 				207799F31FA2283B0095ED0C /* SocketDeviceViewController.xib in Resources */,
@@ -1071,6 +1120,7 @@
 				209AD9731F87CF4A0062830A /* LICENSE in Resources */,
 				209AD97C1F87CF720062830A /* LICENSE in Resources */,
 				20CCA65D1FF51A0C00876F7A /* ColorPickerController.xib in Resources */,
+				C5725563218ED0B500BA311E /* AlarmClockRepeatTableViewCell.xib in Resources */,
 				209AD8BC1F8605CE0062830A /* Main.storyboard in Resources */,
 				209AD9441F8756B60062830A /* ScenceManageViewController.xib in Resources */,
 				209AD93F1F87569C0062830A /* DeviceManageViewController.xib in Resources */,
@@ -1285,6 +1335,7 @@
 				20B09E0E1FB0619100301F8E /* DeviceListViewController.m in Sources */,
 				207799F71FA2284E0095ED0C /* ClockViewController.m in Sources */,
 				209AD8B61F8605CE0062830A /* AppDelegate.m in Sources */,
+				C55E587A2186A0FC007B3A10 /* ClockViewModel.m in Sources */,
 				209FB5471FF5F405001255CB /* WHCircularSlider.m in Sources */,
 				C5F167BE1FFA741C00EB66D6 /* DeviceManager.m in Sources */,
 				209AD9241F867E270062830A /* NSDate+convenience.m in Sources */,
@@ -1297,11 +1348,14 @@
 				209AD92C1F867E270062830A /* KeychainTool.m in Sources */,
 				209AD9251F867E270062830A /* NSObject+Common.m in Sources */,
 				209AD95F1F87766F0062830A /* DeviceInfo.m in Sources */,
+				C5725562218ED0B500BA311E /* AlarmClockRepeatTableViewCell.m in Sources */,
+				C5FA3687219F2839005C6AFB /* HelpViewController.m in Sources */,
 				209AD9281F867E270062830A /* UIBarButtonItem+Extension.m in Sources */,
 				204C86CF1FB0905100CFA50C /* YCXMenu.m in Sources */,
 				209AD8B31F8605CE0062830A /* main.m in Sources */,
 				209AD9711F87CF4A0062830A /* JDStatusBarStyle.m in Sources */,
 				209AD92F1F867E270062830A /* Reachability.m in Sources */,
+				C55E58B12186FBB3007B3A10 /* AlarmClockTableVC.m in Sources */,
 				20BFF7D01F8A411E002FFD52 /* MenuUserTableViewCell.m in Sources */,
 				209AD97D1F87CF720062830A /* MBProgressHUD+Add.m in Sources */,
 				207799F21FA2283B0095ED0C /* SocketDeviceViewController.m in Sources */,
@@ -1323,9 +1377,11 @@
 				209AD92E1F867E270062830A /* Region.m in Sources */,
 				209AD9341F867E270062830A /* UIViewController+RESideMenu.m in Sources */,
 				20EE48101F9B5D86007B02E7 /* AddDeviceViewController.m in Sources */,
+				C55E58BA218707B5007B3A10 /* AlarmClockTableViewCell.m in Sources */,
 				209098801F8E4ED600017A72 /* UIImage+RTTint.m in Sources */,
 				209AD9291F867E270062830A /* UIImage+ImageScaleSize.m in Sources */,
 				20CCA65C1FF51A0C00876F7A /* ColorPickerController.m in Sources */,
+				C5725555218DDA6600BA311E /* AlarmClockEditViewController.m in Sources */,
 				209AD92A1F867E270062830A /* UILabel+Extension.m in Sources */,
 				C529469B2000AE3E0057A99E /* HomerRemoteCtrl.m in Sources */,
 			);

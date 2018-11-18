@@ -17,6 +17,7 @@
 @interface DeviceListViewController ()<UITableViewDelegate, UITableViewDataSource,DeviceTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *devicesTableView;
+@property (weak, nonatomic) IBOutlet UIButton *applyBtn;
 
 @property (nonatomic,retain)UIView *tipsView;
 @property (nonatomic,retain)NSMutableArray *devices;
@@ -194,6 +195,9 @@
     [theView addSubview:comLinkLable];*/
     
     _devicesTableView.backgroundView = theView;
+    
+    [_applyBtn setTitle:NSLocalizedString(@"apply", nil) forState:UIControlStateNormal];
+    
     [self transform];
 }
 

@@ -12,6 +12,7 @@
 #import "MenuUserTableViewCell.h"
 #import <LoginWithAmazon/LoginWithAmazon.h>
 #import "Uility.h"
+#import "HelpViewController.h"
 
 @interface MenuViewController ()<UITableViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
@@ -55,6 +56,8 @@
 
 #pragma mark Private
 - (void)initView {
+    [self transform];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor redColor];
@@ -91,18 +94,28 @@
 
 }
 
+- (void) transform {
+        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil)
+                                                                     style:UIBarButtonItemStyleDone
+                                                                    target:self
+                                                                    action:nil];
+        backItem.tintColor = [UIColor whiteColor];
+    
+        self.navigationItem.backBarButtonItem = backItem;
+}
+
 - (void)initData {
     
     _menus = [NSMutableArray arrayWithObjects:
               NSLocalizedString(@"menu_user", nil),
               //NSLocalizedString(@"menu_setting", nil),
-              //NSLocalizedString(@"menu_help", nil),
+              NSLocalizedString(@"menu_help", nil),
               NSLocalizedString(@"menu_about", nil),
               NSLocalizedString(@"menu_logout", nil),
               nil];
     _menusImg = [NSMutableArray arrayWithObjects:@"",
                  //@"personal_icon_setting",
-                 //@"personal_icon_regard",
+                 @"personal_icon_regard",
                  @"personal_icon_hape",
                  @"personal_icon_setting",
                  nil];
@@ -115,6 +128,16 @@
     
     [self presentViewController:loginNav animated:YES completion:nil];
 }
+
+- (void) showHelpPage {
+    HelpViewController *helpViewController = [[HelpViewController alloc] init];
+    helpViewController.view.backgroundColor = [UIColor whiteColor];
+    UINavigationController *helpNav = [[UINavigationController alloc] initWithRootViewController:helpViewController];
+    [self presentViewController:helpNav animated:YES completion:nil];
+    //[self.navigationController pushViewController:helpViewController animated:YES];
+    //[self.navigationController pushViewController:controller animated:YES];
+}
+    
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint offset = _menuTableView.contentOffset;
@@ -208,6 +231,8 @@
                 [Uility setAutoLogin:NO];
                 [self showLoginPage];
             }];
+        } else if ([cellLabel isEqualToString:NSLocalizedString(@"menu_help", nil)]) {
+            [self showHelpPage];
         }
     };
 }

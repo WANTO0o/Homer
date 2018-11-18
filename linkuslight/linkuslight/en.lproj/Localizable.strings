@@ -23,6 +23,8 @@
 "dev_plug" = "Plug";
 "noDevice" = "No Available Device";
 "noDevice_Prompt" = "You can add device and then control it";
+"back" = "Back";
+"apply" = "Apply";
 
 // 设备
 "brightness" = "Brightness";

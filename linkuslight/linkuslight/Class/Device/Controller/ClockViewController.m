@@ -266,12 +266,26 @@
     
     self.navigationItem.leftBarButtonItem = leftItem;
     
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]
+                                  initWithTitle:NSLocalizedString(@"item_more", nil)
+                                  style:UIBarButtonItemStyleDone
+                                  target:self
+                                  action:@selector(showmenu)];
+    rightItem.tintColor = [UIColor whiteColor];
+    
+    self.navigationItem.rightBarButtonItem = rightItem;
+    self.navigationItem.backBarButtonItem = nil;
+    
 }
 
 - (void)backUPView {
     [self.navigationController.navigationBar setBackgroundImage:nil forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) showmenu {
+    
 }
 
 @end
