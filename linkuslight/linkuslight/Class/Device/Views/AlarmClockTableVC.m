@@ -59,36 +59,60 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_addition"]
                                                                   style:UIBarButtonItemStyleDone
                                                                  target:self
-                                                                 action:@selector(showAlarmClockEditView)];
+                                                                 action:@selector(addAlarmClockView)];
     rightItem.tintColor = [UIColor whiteColor];
 
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
-- (void)showAlarmClockEditViewWith:(ClockModel *)ClockModel {
-    //AlarmClockEditTableViewController *controller = [[AlarmClockEditTableViewController alloc] init];
-    //[self setHidesBottomBarWhenPushed:YES];
+- (void)addAlarmClockView {
     AlarmClockEditViewController *controller = [[AlarmClockEditViewController alloc] init];
-    controller.model = ClockModel;
+    controller.block = ^(ClockModel *model){
+        [self.viewModel addClockModel:model];
+        [self.clockTableView reloadData];
+    };
     [self.navigationController pushViewController:controller animated:YES];
-    //[self setHidesBottomBarWhenPushed:NO];
+}
+
+- (void)showAlarmClockEditViewWith:(ClockModel *)SelectClockModel {
+    AlarmClockEditViewController *controller = [[AlarmClockEditViewController alloc] init];
+    controller.model = SelectClockModel;
+    controller.block = ^(ClockModel *model){
+        [self.viewModel replaceModelAtIndex:self.clockTableView.indexPathForSelectedRow.row withModel:model];
+        [self.clockTableView reloadData];
+    };
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)initData {
     self.viewModel = [[ClockViewModel alloc] init];
     self.viewModel.clockData = [NSMutableArray array];
     
-    ClockModel *model = [[ClockModel alloc] init];
-    model.timeText = @"下午";
-    model.date = [Uility UTCDateFromLocalString:@"2018-07-11 12:11:11"];
-    model.timeClock = @"5:15";
-    model.isOn = true;
-    model.tagStr = @"周一";
+    for (int i = 0; i < self.clockArray.count; i++) {
+        ClockModel *tempModel = self.clockArray[i];
+        [_viewModel addClockModel:tempModel];
+    }
     
-    [_viewModel addClockModel:model];
+//    ClockModel *model = [[ClockModel alloc] init];
+//    model.timeText = @"下午";
+//    model.date = [Uility UTCDateFromLocalString:@"2018-07-11 12:11:11"];
+//    model.timeClock = @"5:15";
+//    model.isOn = true;
+//    model.tagStr = @"周一";
+//
+//    [_viewModel addClockModel:model];
     
     //NSLog(@"ClodckData Count %lu", (unsigned long)_viewModel.clockData.count);
 }
+
+- (IBAction)applyClicked:(UIButton *)sender {
+    if(self.block) {
+        self.block(self.viewModel.clockData);
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - Table view data source
 

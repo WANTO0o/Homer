@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Device.h"
+#import "ClockViewModel.h"
+
 typedef NS_ENUM(NSInteger, LULDeviceLinkState) {
     LULDeviceLinkStateWiFi = 0x01,
     LULDeviceLinkStateCloud = 0x10,
@@ -50,6 +52,8 @@ typedef NS_ENUM(NSInteger, LULLightType) {
 // 当前是否打开
 @property (nonatomic, assign) Boolean IsOn;
 @property (nonatomic, assign) LULLightType lightType;
+// 闹钟信息
+@property (nonatomic, copy) NSMutableArray *clockList;
 
 @end
 

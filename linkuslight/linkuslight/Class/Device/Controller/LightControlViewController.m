@@ -361,6 +361,9 @@
 - (void)showClockView {
     //ClockViewController *controller = [[ClockViewController alloc] init];
     AlarmClockTableVC *controller = [[AlarmClockTableVC alloc] init];
+    controller.block = ^(NSMutableArray *clockList) {
+        _DeviceInfo.clockList = clockList;
+    };
     
     [self setHidesBottomBarWhenPushed:YES];
 

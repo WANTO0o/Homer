@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
 
 @property (weak, nonatomic) IBOutlet UITableView *repeatTableView;
+@property (weak, nonatomic) IBOutlet UILabel *devStateInfo;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *devState;
 
 // 重复类型
 @property (nonatomic, strong) NSMutableArray *repeatTypes;
@@ -100,7 +102,19 @@
 }
 
 - (void) saveData {
+    self.model.date = _dataPicker.date;
+    self.model.repeatStrs = self.repeatTypes;
+    NSInteger selectedSegIndex = self.devState.selectedSegmentIndex;
+    if(selectedSegIndex == 0) {
+        self.model.tagStr = @"ON";
+    } else if (selectedSegIndex == 1) {
+        self.model.tagStr = @"OFF";
+    }
     
+    if(self.block) {
+        self.block(self.model);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSMutableArray *) repeatTypes {
