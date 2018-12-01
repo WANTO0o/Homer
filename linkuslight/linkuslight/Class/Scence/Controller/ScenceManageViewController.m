@@ -12,6 +12,8 @@
 #import "LLSelectGroupTypeAlterView.h"
 #import "ScenceManageViewController.h"
 #import "DeviceListViewController.h"
+#import "ColorLight.h"
+#import "Uility.h"
 
 @interface ScenceManageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *scenceCollectionView;
@@ -22,6 +24,9 @@
 @property (nonatomic, retain) NSMutableArray *scenceICom;
 @property (nonatomic, assign) NSInteger selectIndex;
 @property (nonatomic, strong) NSMutableArray *scenceTypeList;
+
+@property (retain, nonatomic) ColorLight *colorLight;
+
 @end
 
 @implementation ScenceManageViewController
@@ -31,6 +36,8 @@
     // Do any additional setup after loading the view from its nib.
     [self initView];
     [self initData];
+    
+    _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,25 +80,33 @@
                     NSLocalizedString(@"scene_lightmusic", nil),
                     NSLocalizedString(@"scene_rockmusic", nil),
                     NSLocalizedString(@"scene_popularmusic", nil),
-                    NSLocalizedString(@"scene_morning", nil),
-                    NSLocalizedString(@"scene_sunset", nil),
-                    NSLocalizedString(@"scene_night", nil),
-                    NSLocalizedString(@"scene_sky", nil),
+                    NSLocalizedString(@"scene_colorsmooth", nil),
+                    NSLocalizedString(@"scene_colorjump", nil),
+                    NSLocalizedString(@"scene_summer", nil),
+                    NSLocalizedString(@"scene_pleasant", nil),
                     NSLocalizedString(@"scene_romantic", nil),
-                    NSLocalizedString(@"scene_movie", nil),
                     nil];
     
-    _scenceBackground = [NSMutableArray arrayWithObjects:@"addition_bg_morning",@"addition_bg_morning",@"addition_bg_morning",@"addition_bg_morning",@"addition_bg_sunset",@"addition_bg_night",@"addition_bg_sky",@"addition_bg_romance",@"addition_bg_film", nil];
-    _scenceICom = [NSMutableArray arrayWithObjects:@"addition_icon_morning",@"addition_icon_morning",@"addition_icon_morning",@"addition_icon_morning",@"addition_icon_sunset",@"addition_icon_night",@"addition_icon_sky",@"addition_icon_romance",@"addition_icon_film", nil];
+    _scenceBackground = [NSMutableArray arrayWithObjects:@"addition_bg_morning",@"addition_bg_morning",@"addition_bg_morning",@"addition_bg_morning",@"addition_bg_sunset",@"addition_bg_sky",@"addition_bg_night",@"addition_bg_romance", nil];
+    _scenceICom = [NSMutableArray arrayWithObjects:@"addition_icon_morning",@"addition_icon_morning",@"addition_icon_morning",@"addition_icon_morning",@"addition_icon_sunset",@"addition_icon_sky",@"addition_icon_night",@"addition_icon_romance", nil];
     
-    _scenceTypeList = [NSMutableArray arrayWithObjects:@(ScenceTypeMorning), @(ScenceTypeSettingSun), @(ScenceTypeSettingMoon), @(ScenceTypeSettingSky), @(ScenceTypeSettingRomantic), @(ScenceTypeSettingMovie), nil];
+    _scenceTypeList = [NSMutableArray arrayWithObjects:
+                       @(ScenceLightMusic),
+                       @(ScenceRockMusic),
+                       @(ScencePopMusic),
+                       @(ScenceColorSmooth),
+                       @(ScenceColorJump),
+                       @(ScenceSummer),
+                       @(ScencePleasant),
+                       @(ScenceRomantic),
+                       nil];
     self.scenceList = [NSMutableArray arrayWithCapacity:1];
     
     ScenceInfo *scence1 = [[ScenceInfo alloc] init];
     scence1.scenceID = @"";
     scence1.name = @"清晨";
     scence1.deviceType = LULDeviceLinkStateColourLight;
-    
+
     [self.scenceList addObject:scence1];
 }
 
@@ -127,13 +142,13 @@
      
      self.navigationItem.backBarButtonItem = backItem;*/
     
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_leftbar"]
-                                                                 style:UIBarButtonItemStyleDone
-                                                                target:self
-                                                                action:@selector(gotoMenuView)];
-    leftItem.tintColor = [UIColor whiteColor];
-    
-    self.navigationItem.leftBarButtonItem = leftItem;
+//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_leftbar"]
+//                                                                 style:UIBarButtonItemStyleDone
+//                                                                target:self
+//                                                                action:@selector(gotoMenuView)];
+//    leftItem.tintColor = [UIColor whiteColor];
+//
+//    self.navigationItem.leftBarButtonItem = leftItem;
     
     /*UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_addition"]
                                                                   style:UIBarButtonItemStyleDone
@@ -250,11 +265,60 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    __block UIViewController *blockSelf = self;
     
     if (indexPath.row < _scenceTitle.count) {
+        [Uility showLoadingToView:self.view];
         
         NSLog(@"didSelectRowAtIndexRow:%ld",(long)indexPath.row);
-        
+
+        switch (indexPath.row) {
+            case 0:
+                [_colorLight setSceneMode:ScenceLightMusic Success:^(id resp){
+                    [Uility hideLoadingView:blockSelf.view];
+                } failure:nil];
+                break;
+            case 1:
+                [_colorLight setSceneMode:ScenceRockMusic Success:^(id resp){
+                    [Uility hideLoadingView:blockSelf.view];
+                } failure:nil];
+                break;
+            case 2:
+                [_colorLight setSceneMode:ScencePopMusic Success:^(id resp){
+                    [Uility hideLoadingView:blockSelf.view];
+                } failure:nil];
+                break;
+            case 3:
+                [_colorLight setSceneMode:ScenceColorSmooth Success:^(id resp){
+                    [Uility hideLoadingView:blockSelf.view];
+                } failure:nil];
+                break;
+            case 4:
+                [_colorLight setSceneMode:ScenceColorJump Success:^(id resp){
+                    [Uility hideLoadingView:blockSelf.view];
+                } failure:nil];
+                break;
+            case 5:
+                [_colorLight setBrightness:73 Success:nil failure:nil];
+                [_colorLight setColorTemp:62550 Success:^(id resp){
+                    [Uility hideLoadingView:blockSelf.view];
+                } failure:nil];
+                break;
+            case 6:
+                [_colorLight setBrightness:8 Success:nil failure:nil];
+                [_colorLight setColorTemp:570 Success:^(id resp){
+                    [Uility hideLoadingView:blockSelf.view];
+                } failure:nil];
+                break;
+            case 7:
+                [_colorLight setColorH:318 S:100 B:100 Success:^(id resp){
+                    [Uility hideLoadingView:blockSelf.view];
+                } failure:nil];
+                break;
+            default:
+                [Uility hideLoadingView:blockSelf.view];
+                break;
+        }
         /*switch (indexPath.row) {
          case 0:
          break;
@@ -267,7 +331,7 @@
          }*/
         self.selectIndex = indexPath.row;
         //[self gotoSelectGroupTypeView:indexPath.row];
-        [self showDeviceListView:LULDeviceLinkStateColourLight];
+        //[self showDeviceListView:LULDeviceLinkStateColourLight];
     };
     
 }

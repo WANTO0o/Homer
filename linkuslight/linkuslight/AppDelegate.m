@@ -142,7 +142,7 @@ void UncaughtExceptionHandler(NSException *exception){
     
     UITabBarController *mainTabbar = [[UITabBarController alloc] init];
     mainTabbar.tabBar.tintColor = [UIColor colorWithRed:0.2039 green:0.4196 blue:0.7412 alpha:1.0];
-    [mainTabbar setViewControllers:[NSArray arrayWithObjects:deviceNav,groupNav,scenceNav, nil]];
+    [mainTabbar setViewControllers:[NSArray arrayWithObjects:deviceNav,groupNav, nil]];
     
     MenuViewController *leftViewController = [[MenuViewController alloc] init];
     //leftViewController.view.backgroundColor = [UIColor colorWithRed:0.4941 green:0.6745 blue:0.949 alpha:1.0];

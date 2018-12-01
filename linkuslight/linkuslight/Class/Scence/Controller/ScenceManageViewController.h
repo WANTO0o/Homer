@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DeviceInfo.h"
 
 @interface ScenceManageViewController : UIViewController
+
+@property (nonatomic, strong) DeviceInfo *DeviceInfo;
 
 @end

@@ -67,12 +67,19 @@ typedef NS_ENUM(NSInteger, LULLightType) {
 @end
 
 typedef NS_ENUM(NSUInteger,ScenceType){
-    ScenceTypeMorning = 0,
-    ScenceTypeSettingSun,
-    ScenceTypeSettingMoon,
-    ScenceTypeSettingSky,
-    ScenceTypeSettingRomantic,
-    ScenceTypeSettingMovie,
+    ScenceLightMusic = 0,
+    ScenceRockMusic, // 摇滚
+    ScencePopMusic,  // 流行
+    ScenceColorSmooth, // 七彩渐变
+    ScenceColorJump,  // 七彩跳变
+    ScenceSummer,     // 夏日
+    ScencePleasant,   // 温馨
+    ScenceRomantic,   // 浪漫
+    ScenceMorning,
+    ScenceSettingSun,
+    ScenceMoon,
+    ScenceSky,
+    ScenceMovie,
 };
 @interface ScenceInfo : NSObject
 

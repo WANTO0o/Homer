@@ -187,6 +187,11 @@ typedef NS_ENUM(NSInteger, eSceneMode) {
                ColorNum:(int)colorNum
                  Colors:(NSMutableArray*)colorArray;
 
+/*
+ * 调试用接口， 0x01轻音乐, 0x02摇滚，0x03流行
+ */
+-(Boolean) setSceneMode:(Byte)mode;
+
 /**
  *  获取设备版本
  *

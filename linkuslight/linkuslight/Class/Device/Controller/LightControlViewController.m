@@ -19,6 +19,7 @@
 #import "DeviceManager.h"
 #import "DataStoreHelper.h"
 #import "AlarmClockTableVC.h"
+#import "ScenceManageViewController.h"
 
 @interface LightControlViewController ()<LLCircularViewDelegate>
 
@@ -326,7 +327,7 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil)
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:self
-                                                                action:nil];
+                                                                action:@selector(showHideBottomBar)];
     backItem.tintColor = [UIColor whiteColor];
     
     self.navigationItem.backBarButtonItem = backItem;
@@ -358,6 +359,10 @@
     }
 }
 
+- (void)showHideBottomBar {
+    [self setHidesBottomBarWhenPushed:NO];
+}
+
 - (void)showClockView {
     //ClockViewController *controller = [[ClockViewController alloc] init];
     AlarmClockTableVC *controller = [[AlarmClockTableVC alloc] init];
@@ -368,6 +373,7 @@
     [self setHidesBottomBarWhenPushed:YES];
 
     [self.navigationController pushViewController:controller animated:YES];
+    
     //[self setHidesBottomBarWhenPushed:NO];
 }
 
@@ -385,12 +391,14 @@
     NSString *groupDel = NSLocalizedString(@"item_group_del", nil);
     NSString *groupUpdate = NSLocalizedString(@"item_group_update", nil);
     NSString *groupReset = NSLocalizedString(@"item_group_reset", nil);
+    NSString *configScene = NSLocalizedString(@"item_scene", nil);
     
     if (_isDevice) {
         if(_DeviceInfo.linkState == LULDeviceLinkStateWiFi)
         {
             items = [NSMutableArray arrayWithObjects:
                      bindCloud,
+                     configScene,
                      firmwareUpdate,
                      devReset,
                      devRename,
@@ -403,6 +411,7 @@
                      nil];
         } else {
             items = [NSMutableArray arrayWithObjects:
+                     configScene,
                      firmwareUpdate,
                      removeCloud,
                      devReset,
@@ -412,6 +421,7 @@
         }
     } else {
         items = [NSMutableArray arrayWithObjects:
+                 configScene,
                  groupUpdate,
                  groupReset,
                  groupRename,
@@ -453,6 +463,8 @@
                 [self updateGroupInfo];
             } else if ([item.title isEqualToString:bindCloud]) {
                 [self bindToCloud];
+            } else if ([item.title isEqualToString:configScene]) {
+                [self showSceneConfig];
             }
         }];
     }
@@ -468,6 +480,13 @@
         [Uility hideLoadingView:self.view];
         [Uility showError:NSLocalizedString(@"setting_fail", nil) toView:self.view];
     }];
+}
+
+- (void)showSceneConfig {
+    ScenceManageViewController *vc = [[ScenceManageViewController alloc] init];
+    vc.DeviceInfo = _DeviceInfo;
+    [self setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:nil];
 }
 
 // 升级固件

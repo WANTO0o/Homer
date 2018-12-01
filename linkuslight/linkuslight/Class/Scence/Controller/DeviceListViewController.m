@@ -96,7 +96,7 @@
     for (DeviceInfo *device in self.devices) {
         if (device.IsOn) {
             ColorLight *colorLight = [[ColorLight alloc] initWithDeviceInfo:device];
-            if (self.sceneType == ScenceTypeMorning) {
+            if (self.sceneType == ScenceMorning) {
                 [colorLight setColorH:39 S:100 B:6000 Success:nil failure:nil];
                 [colorLight setBrightness:60 Success:^(id resp) {
                     
@@ -104,19 +104,19 @@
                     ;
                 }];
                 
-            }else  if (self.sceneType == ScenceTypeSettingSun) {
+            }else  if (self.sceneType == ScenceSettingSun) {
                 [colorLight setColorH:28 S:100 B:5000 Success:nil failure:nil];
                 [colorLight setBrightness:80 Success:nil failure:nil];
-            }else  if (self.sceneType == ScenceTypeSettingMoon) {
+            }else  if (self.sceneType == ScenceMoon) {
                 [colorLight setColorH:232 S:100 B:5300 Success:nil failure:nil];
                 [colorLight setBrightness:30 Success:nil failure:nil];
-            }else  if (self.sceneType == ScenceTypeSettingSky) {
+            }else  if (self.sceneType == ScenceSky) {
                 [colorLight setColorH:185 S:100 B:7200 Success:nil failure:nil];
                 [colorLight setBrightness:90 Success:nil failure:nil];
-            }else  if (self.sceneType == ScenceTypeSettingRomantic) {
+            }else  if (self.sceneType == ScenceRomantic) {
                 [colorLight setColorH:9 S:100 B:8300 Success:nil failure:nil];
                 [colorLight setBrightness:20 Success:nil failure:nil];
-            }else  if (self.sceneType == ScenceTypeSettingMovie) {
+            }else  if (self.sceneType == ScenceMovie) {
                 [colorLight setColorH:40 S:100 B:5200 Success:nil failure:nil];
                 [colorLight setBrightness:20 Success:nil failure:nil];
             }

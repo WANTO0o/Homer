@@ -143,6 +143,29 @@
     }
 }
 
+-(void) setSceneMode:(ScenceType)type Success:(successBlock)success failure:(failureBlock)failure {
+    if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
+        if(success != nil) {
+            success(@"");
+        }
+        if(type == ScenceLightMusic) {
+            [_device setSceneMode:0x01];
+        }
+        else if (type == ScenceRockMusic) {
+            [_device setSceneMode:0x02];
+        }
+        else if (type == ScencePopMusic) {
+            [_device setSceneMode:0x03];
+        }
+        else if (type == ScenceColorSmooth) {
+            [_device setSceneMode:0x04];
+        }
+        else if (type == ScenceColorJump) {
+            [_device setSceneMode:0x05];
+        }
+    }
+}
+
 -(void) updateName:(NSString *)name AndDesc:(NSString *)desc Success:(successBlock)success failure:(failureBlock)failure{
     DeviceInfo *tmpDevInfo = [[DeviceInfo alloc] init];
     tmpDevInfo.deviceID = self.deviceInfo.deviceID;

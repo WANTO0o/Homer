@@ -65,6 +65,7 @@
 "item_dev_reset" = "Reset Factory";
 "item_dev_rename" = "Rename";
 "item_firmware_ver" = "Firmware Ver";
+"item_scene" = "Scene";
 
 "item_group_update" = "Multi-Update";
 "item_group_reset" = "Multi-Reset";
@@ -85,14 +86,17 @@
 "group_cannot_empty" = "The group name cannot be empty.";
 
 // 场景
-"scene_lightmusic" = "Light";
-"scene_rockmusic" = "Rock";
-"scene_popularmusic" = "Popular";
+"scene_lightmusic" = "LightMusic";
+"scene_rockmusic" = "RockMusic";
+"scene_popularmusic" = "PopMusic";
+"scene_colorsmooth" = "ColorSmooth";
+"scene_colorjump" = "ColorJump";
+"scene_summer" = "Summer";
+"scene_pleasant" = "Pleasant";
+"scene_romantic" = "Romantic";
 
 "scene_morning" = "Morning";
 "scene_sunset" = "Sunset";
 "scene_night" = "Night";
 "scene_sky" = "Sky";
-"scene_romantic" = "Romantic";
 "scene_movie" = "Movie";
-

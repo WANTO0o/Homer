@@ -66,6 +66,7 @@
 "item_dev_reset" = "重置设备";
 "item_dev_rename" = "设备重命名";
 "item_firmware_ver" = "固件版本";
+"item_scene" = "场景";
 
 "item_group_update" = "批量升级";
 "item_group_reset" = "批量重置";
@@ -89,10 +90,14 @@
 "scene_lightmusic" = "轻音乐";
 "scene_rockmusic" = "摇滚音乐";
 "scene_popularmusic" = "流行音乐";
+"scene_colorsmooth" = "七彩渐变";
+"scene_colorjump" = "七彩跳变";
+"scene_summer" = "夏日";
+"scene_pleasant" = "温馨";
+"scene_romantic" = "浪漫";
 
 "scene_morning" = "清晨";
 "scene_sunset" = "夕阳";
 "scene_night" = "夜色";
 "scene_sky" = "天空";
-"scene_romantic" = "浪漫";
 "scene_movie" = "电影";

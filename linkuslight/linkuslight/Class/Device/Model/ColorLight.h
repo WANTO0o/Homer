@@ -45,6 +45,8 @@ typedef void  (^failureBlock)(NSError *error);
 -(void) setColorTemp:(uint16_t)colorTemp Success:(successBlock)success failure:(failureBlock)failure;
 // 设置亮度，可调范围为0～100
 -(void) setBrightness:(uint8_t)brightness Success:(successBlock)success failure:(failureBlock)failure;
+// 设置场景
+-(void) setSceneMode:(ScenceType)type Success:(successBlock)success failure:(failureBlock)failure;
 
 // 以下方法后续应该考虑设计为设备类型通用
 // 绑定到云端
