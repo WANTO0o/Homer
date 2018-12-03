@@ -46,10 +46,11 @@
 "add_dev_fail" = "添加失败";
 "enter_pswd" = "请输入密码";
 "dev_offline" = "设备已离线";
+"add_dev_prompt" = "确保设备处于闪烁状态,再点击确定按钮";
 "add_mul_dev" = "多个设备";
 
 // Refresh & Setting
-"refresh_error" = "获取数据失败，请稍后重试";
+"refresh_error" = "获取服务器数据失败，请稍后重试";
 "setting_success" = "操作成功";
 "setting_fail" = "操作失败";
 "setting_devname_not_null" = "设备名称不能为空";

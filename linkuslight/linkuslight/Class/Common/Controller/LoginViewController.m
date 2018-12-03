@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 
+// 调试开关，打开该开关的话将通过模拟账号进行测试，不跟amazon进行远程交互
+@property (nonatomic) Boolean localDebug;
+
 @end
 
 @implementation LoginViewController
@@ -28,6 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.localDebug = YES;
+
     [_loginButton setTitle:NSLocalizedString(@"login_amazon", nil) forState:UIControlStateNormal];
     [self initView];
 }
@@ -36,9 +41,13 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     
-    // 此处检测是否存在已有账号自动登录
-    if ([Uility getAutoLogin]) {
-        [self didLoginButtonClicked:nil];
+    if (self.localDebug == YES) {
+        // 本地调试状态不进行自动账号登录
+    } else {
+        // 此处检测是否存在已有账号自动登录
+        if ([Uility getAutoLogin]) {
+            [self didLoginButtonClicked:nil];
+        }
     }
 }
 
@@ -62,6 +71,10 @@
     [_loginButton.layer setCornerRadius:8.0];
     
     _loginButton.imageEdgeInsets = UIEdgeInsetsMake(0, _loginButton.titleLabel.frame.size.width-63, 0, -_loginButton.imageView.frame.size.width);
+    
+    if(self.localDebug) {
+        self.userNameTextField.text = @"3287407457@qq.com";
+    }
 }
 
 - (IBAction)didLoginButtonClicked:(id)sender {

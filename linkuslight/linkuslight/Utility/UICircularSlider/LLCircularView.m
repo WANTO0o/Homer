@@ -568,6 +568,7 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
     CGPoint centerPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
     
     int currentAngle = floor(AngleFromNorth(centerPoint, point, NO));
+    
     if (currentAngle > 60 && currentAngle < 120) {
         return;
     }
@@ -579,7 +580,7 @@ static inline float AngleFromNorth(CGPoint p1, CGPoint p2, BOOL flipped) {
     }
     
     currentAngle=currentAngle-120;
-    //NSLog(@"currentAngle====%d",currentAngle);
+    NSLog(@"currentAngle====%d",currentAngle);
 
     CGFloat curentProcess = currentAngle/300.0f;
     _currentValue = (1-curentProcess) * (int)(_maximumValue-_minimumValue)+_minimumValue;

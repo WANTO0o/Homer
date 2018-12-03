@@ -70,7 +70,7 @@
 - (void)createGroupAction{
     NSMutableArray *tempArr = [NSMutableArray array];
     for (DeviceInfo *device in self.devices) {
-        if (device.IsOn) {
+        if (device.isOn) {
             [tempArr addObject:device];
         }
     }
@@ -94,7 +94,7 @@
 - (void)createScenceAction{
     [Uility showLoadingToView:self.view];
     for (DeviceInfo *device in self.devices) {
-        if (device.IsOn) {
+        if (device.isOn) {
             ColorLight *colorLight = [[ColorLight alloc] initWithDeviceInfo:device];
             if (self.sceneType == ScenceMorning) {
                 [colorLight setColorH:39 S:100 B:6000 Success:nil failure:nil];

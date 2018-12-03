@@ -48,7 +48,7 @@
 "add_mul_dev" = "Multi device";
 
 // Refresh & Setting
-"refresh_error" = "Failed to fetch data, try again please.";
+"refresh_error" = "Failed to fetch remote data, try again please.";
 "setting_success" = "Setting success";
 "setting_fail" = "Setting fail";
 "setting_devname_not_null" = "Name cannot be null";

@@ -202,15 +202,19 @@
     
     self.getLocalDevice = NO;
     self.getRemoteDevice = NO;
+    // 当前设备检索策略：远程和本地分别进行检索，各自用一个标记为标记是否检索结束。如果双方都检索结束，则进入endRefresh中统一整合两个列表设备并刷新加载到界面
+    // 开始远程设备搜索
     [self.homerRemoteCtrl searchDevice];
+    // 开始本地设备搜索
     [self.homerCtrl beginSearchDeviceWithDelegate:self];
+    // 本地设备搜索由于库没有设定超时回调，这里设定为5s超时时间，超时过后即便再搜索到，不添加进设备列表中
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
          self.getLocalDevice = YES;
-        if (self.getRemoteDevice) {//已获取到远程列表
-            [[DeviceManager sharedManager] integrateLocalDevices:self.localDevices remoteDevices:self.remoteDevices];
-            [self updateDeviceData];
+        //if (self.getRemoteDevice) {//已获取到远程列表
+            //[[DeviceManager sharedManager] integrateLocalDevices:self.localDevices remoteDevices:self.remoteDevices];
+            //[self updateDeviceData];
             [self endRefresh];
-        }
+        //}
     });
 
 }
@@ -244,8 +248,12 @@
     //if (_devices.count == 0) {
     //    [self.deviceTableView.mj_header endRefreshing];
     //}
-    [self.deviceTableView.mj_header endRefreshing];
-    
+    if(self.getRemoteDevice && self.getLocalDevice) {
+        [[DeviceManager sharedManager] integrateLocalDevices:self.localDevices remoteDevices:self.remoteDevices];
+        [self updateDeviceData];
+        
+        [self.deviceTableView.mj_header endRefreshing];
+    }
 }
 
 - (void) transform {
@@ -467,10 +475,12 @@
         DeviceInfo *devFind = [[DeviceInfo alloc] init];
         devFind.deviceID = [result getId];
         devFind.isOn = YES;
-        devFind.name = [result getId];
+        int hexNum = [devFind.deviceID intValue];
+        devFind.name = [NSString stringWithFormat:@"LIGHT%08X", hexNum];
+        //devFind.name = [NSString stringWithFormat:@"LIGHT%@", devFind.deviceID];
         devFind.ip = [result getIp];
         devFind.hasStatuFlag = NO;
-        devFind.hasClockFlag = YES;
+        devFind.hasClockFlag = NO;
         devFind.linkState = LULDeviceLinkStateWiFi;
 //        devFind.device = result;
 
@@ -500,15 +510,15 @@
 //        [[DeviceManager sharedManager] add:[light deviceInfo]];
     }
     self.getRemoteDevice = YES;
-    if (self.getLocalDevice) {//搜索本地已结束
+    //if (self.getLocalDevice) {//搜索本地已结束
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[DeviceManager sharedManager] integrateLocalDevices:self.localDevices remoteDevices:self.remoteDevices];
-            [self updateDeviceData];
+            //[[DeviceManager sharedManager] integrateLocalDevices:self.localDevices remoteDevices:self.remoteDevices];
+            //[self updateDeviceData];
             [self endRefresh];
         });
-    }else{
+    //}else{
         //继续等待
-    }
+    //}
   
 }
 
@@ -518,9 +528,11 @@
 
 -(void)transferFailWithMsg:(NSError *)failMsg {
     DebugLog(@"getDeviceFailed");
-    [self endRefresh];
+    self.getRemoteDevice = YES;
+    
+    //[self endRefresh];
     [Uility showError:NSLocalizedString(@"refresh_error", nil) toView:self.view];
-    self.getLocalDevice = YES;
+    //self.getLocalDevice = YES;
 }
 
 @end

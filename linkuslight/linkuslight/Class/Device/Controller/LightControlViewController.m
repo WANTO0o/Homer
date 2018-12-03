@@ -291,7 +291,7 @@
  */
 - (void)refreshViewWithDevice:(ColorLight *)colorLight{
     //设备开关
-    if (colorLight.deviceInfo.IsOn) {
+    if (colorLight.deviceInfo.isOn) {
         [_deviceOnButton.layer setBackgroundColor:kBackgroundColor.CGColor];
         [_deviceOFFButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
     }else{
@@ -644,8 +644,6 @@
         
         _LightType = LULLightSliderTypeColourLight;
         _colorLight.deviceInfo.lightType = LULLightTypeColourLight;
-        [self turnSlider];
-        
     } else {
         [_lightTurnClourButton setTitleColor:kBackgroundColor forState:UIControlStateNormal];
         [_lightTurnClourButton setBackgroundColor:[UIColor whiteColor]];
@@ -657,8 +655,10 @@
         
         _LightType = LULLightSliderTypeWhiteLight;
         _colorLight.deviceInfo.lightType = LULLightTypeWhiteLight;
-        [self turnSlider];
+        //[self turnSlider];
     }
+    
+    [self turnSlider];
 }
 
 
@@ -720,7 +720,7 @@
 - (void)turnSlider{
     
     CGRect fram = _lightView.frame;
-    CGRect fram1 = _lightView.bounds;
+    //CGRect fram = _lightView.bounds;
 
     if (!self.whiteLightSlider) {
         _whiteLightSlider = [[LLCircularView alloc] initWithFrame:CGRectMake(kScreen_Width/2-fram.size.width/2, fram.origin.y+2, fram.size.width, fram.size.width)];

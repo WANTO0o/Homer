@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, LULLightType) {
 @property (nonatomic,assign)LULDeviceType deviceType;
 @property (nonatomic,copy)NSString *macAddr;
 @property (nonatomic,copy)NSString *desc;
-
+@property (nonatomic, assign) Boolean isOn;
 
 @property (nonatomic, assign) uint32_t Color_H;
 @property (nonatomic, assign) uint32_t Color_S;
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, LULLightType) {
 //0~100
 @property (nonatomic, assign) uint8_t Color_Brightness;
 // 当前是否打开
-@property (nonatomic, assign) Boolean IsOn;
+
 @property (nonatomic, assign) LULLightType lightType;
 // 闹钟信息
 @property (nonatomic, copy) NSMutableArray *clockList;
