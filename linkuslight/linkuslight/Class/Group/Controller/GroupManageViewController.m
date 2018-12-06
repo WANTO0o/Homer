@@ -35,8 +35,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadData];
     [self initView];
-    [self.groupTableView.mj_header beginRefreshing];
+    //[self.groupTableView.mj_header beginRefreshing];
 //    [self initData];
 }
 
@@ -62,7 +63,7 @@
     [super viewDidAppear:animated];
     
     [self.navigationController.topViewController.navigationItem setTitle:@"SMART ELF"];
-    [self.groupTableView.mj_header beginRefreshing];
+    //[self.groupTableView.mj_header beginRefreshing];
 
 }
 
@@ -117,7 +118,7 @@
     
     _groupTableView.backgroundView = theView;
     //默认【下拉刷新】
-    _groupTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    //_groupTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
 }
 
 - (void)initData {

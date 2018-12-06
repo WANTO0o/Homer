@@ -63,7 +63,7 @@
 }
 
 - (void) turnOffSuccess:(successBlock)success failure:(failureBlock)failure {
-    _deviceInfo.IsOn = NO;
+    _deviceInfo.isOn = NO;
     DebugLog(@"ColorLight turnOff");
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
         if (success != nil) {
@@ -91,7 +91,7 @@
 }
 
 -(void) turnOnSuccess:(successBlock)success failure:(failureBlock)failure {
-    _deviceInfo.IsOn = YES;
+    _deviceInfo.isOn = YES;
     DebugLog(@"ColorLight turnOn");
     if (_deviceInfo.linkState & LULDeviceLinkStateWiFi) {
         if (success != nil) {
@@ -176,55 +176,72 @@
 
 - (void)getDeviceStatusSuccess:(successBlock)success failure:(failureBlock)failure{
     /**直接拷贝获取列表的解析，可能有问题*/
-    [self.homerRemoteCtrl getDeviceStatus:self.deviceInfo.deviceID success:^(id response) {
-//        {
-//            brightness = 38;
-//            color =     {
-//                brightness = "0.38"; 明亮度
-//                hue = 344; //色调
-//                saturation = 1; 饱和度
-//            };
-//            colorTemperatureInKelvin = 0;
-//            powerState = ON;
-//            ret = ok;
-//        }
-       
-        NSDictionary *dict = (NSDictionary *)response;
-        DebugLog(@"searchDevice %@", dict);
-        if ([dict[@"ret"] isEqualToString:@"ok"]) {
-            if ( [dict[@"powerState"] isEqualToString:@"ON"]) {
-                self.deviceInfo.IsOn = YES;
-            }else{
-                self.deviceInfo.IsOn = NO;
-            }
-            _deviceInfo.Color_Temp = [dict[@"colorTemperatureInKelvin"] unsignedIntValue];
-            if (_deviceInfo.Color_Temp == 0) {
-                _deviceInfo.lightType = LULLightTypeColourLight;
-            }else{
-                _deviceInfo.lightType = LULLightTypeWhiteLight;
-            }
-            _deviceInfo.Color_Brightness = [dict[@"brightness"] unsignedIntValue];
-            NSDictionary *colorDict =dict[@"color"];
-            _deviceInfo.Color_H = [colorDict[@"hue"] unsignedIntValue];
-            _deviceInfo.Color_S = [colorDict[@"saturation"] unsignedIntValue] *100;
-            _deviceInfo.Color_B = [colorDict[@"brightness"] unsignedIntValue] *100;
-//            self.Color_Brightness = [colorDict[@"hue"] unsignedIntValue];
-//            self. = colorDict[@"hue"];
-//            if () {
-//                
-//            }
-//            if (self.Color_Brightness) {
-//
-//            }
-//            NSObject *objAppliances = [dict objectForKey:@"appliances"];
-            //NSLog(@"%@--%@", [objAppliances class], objAppliances);
-//                success(response);
-//                break;
-            }
-        success(response);
-    } failure:^(id response) {
-        failure(response);
-    }];
+    if(_deviceInfo.linkState == LULDeviceLinkStateWiFi || _deviceInfo.linkState == LULDeviceLinkStateBoth)
+    {
+        NSDictionary *dict = [_device getDevInfo];
+//        NSArray *hsbColor = dict[@"hsb"];
+//        //NSArray *hsbColor = [_device getColorHSB];
+//        _deviceInfo.Color_H = [[hsbColor objectAtIndex:0] intValue];
+//        _deviceInfo.Color_S = [[hsbColor objectAtIndex:1] intValue];
+//        _deviceInfo.Color_B = [[hsbColor objectAtIndex:2] intValue];
+//        //_deviceInfo.isOn = [_device getDevState];
+//        //_deviceInfo.Color_Brightness = [_device getBrightness];
+//        NSNumber *whiteLight = dict[@"white"];
+//        NSLog(@"brightness: %d", [whiteLight intValue]);
+        success(@"");
+    }
+    else
+    {
+        [self.homerRemoteCtrl getDeviceStatus:self.deviceInfo.deviceID success:^(id response) {
+    //        {
+    //            brightness = 38;
+    //            color =     {
+    //                brightness = "0.38"; 明亮度
+    //                hue = 344; //色调
+    //                saturation = 1; 饱和度
+    //            };
+    //            colorTemperatureInKelvin = 0;
+    //            powerState = ON;
+    //            ret = ok;
+    //        }
+
+            NSDictionary *dict = (NSDictionary *)response;
+            DebugLog(@"searchDevice %@", dict);
+            if ([dict[@"ret"] isEqualToString:@"ok"]) {
+                if ( [dict[@"powerState"] isEqualToString:@"ON"]) {
+                    self.deviceInfo.isOn = YES;
+                }else{
+                    self.deviceInfo.isOn = NO;
+                }
+                _deviceInfo.Color_Temp = [dict[@"colorTemperatureInKelvin"] unsignedIntValue];
+                if (_deviceInfo.Color_Temp == 0) {
+                    _deviceInfo.lightType = LULLightTypeColourLight;
+                }else{
+                    _deviceInfo.lightType = LULLightTypeWhiteLight;
+                }
+                _deviceInfo.Color_Brightness = [dict[@"brightness"] unsignedIntValue];
+                NSDictionary *colorDict =dict[@"color"];
+                _deviceInfo.Color_H = [colorDict[@"hue"] unsignedIntValue];
+                _deviceInfo.Color_S = [colorDict[@"saturation"] unsignedIntValue] *100;
+                _deviceInfo.Color_B = [colorDict[@"brightness"] unsignedIntValue] *100;
+    //            self.Color_Brightness = [colorDict[@"hue"] unsignedIntValue];
+    //            self. = colorDict[@"hue"];
+    //            if () {
+    //
+    //            }
+    //            if (self.Color_Brightness) {
+    //
+    //            }
+    //            NSObject *objAppliances = [dict objectForKey:@"appliances"];
+                //NSLog(@"%@--%@", [objAppliances class], objAppliances);
+    //                success(response);
+    //                break;
+                }
+            success(response);
+        } failure:^(id response) {
+            failure(response);
+        }];
+    }
 }
 
 

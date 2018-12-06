@@ -71,8 +71,6 @@
 //    self.homerRemoteCtrl.delegate = self;
     _colorLight = [[ColorLight alloc] initWithDeviceInfo:_DeviceInfo];
     [self initView];
-    // DEBUG:
-    // [self getDeviceStatus];
 
     [_deviceOnButton setTitle:NSLocalizedString(@"on", nil) forState:UIControlStateNormal];
     [_deviceOFFButton setTitle:NSLocalizedString(@"off", nil) forState:UIControlStateNormal];
@@ -82,6 +80,8 @@
     [_lightTurnWhiteButton setTitle:NSLocalizedString(@"dev_whitelight", nil) forState:UIControlStateNormal];
     [_stateLabel setText:NSLocalizedString(@"state_prompt", nil)];
     [_brightnessLable setText:NSLocalizedString(@"brightness", nil)];
+    
+    [self getDeviceStatus];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,6 +99,8 @@
     
     //self.navigationController.navigationBar.clipsToBounds = YES;
     //[self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -111,26 +113,29 @@
 - (void)getDeviceStatus{
     if (self.lightControlDeviceType == LightControlDeviceTypeSingle) {
         //单个设备
-        if(self.DeviceInfo.linkState == LULDeviceLinkStateCloud || self.DeviceInfo.linkState == LULDeviceLinkStateBoth){
+        //if(self.DeviceInfo.linkState == LULDeviceLinkStateCloud || self.DeviceInfo.linkState == LULDeviceLinkStateBoth){
             //远程设备需要重新获取列表
             [Uility showLoadingToView:self.view];
             [_colorLight getDeviceStatusSuccess:^(id response) {
-                NSString *msg = response[@"ret"];
-                if ([msg containsString:@"Device is offline"]) {
-                    self.colorLight.deviceInfo.IsOn = NO;
-                    [Uility hideLoadingView:self.view];
-                    [Uility showError:NSLocalizedString(@"dev_offline", nil) toView:self.view];
-                    return ;
+                if([response isKindOfClass:[NSDictionary class]]) {
+                    NSString *msg = response[@"ret"];
+                    if ([msg containsString:@"Device is offline"]) {
+                        self.colorLight.deviceInfo.isOn = NO;
+                        [Uility hideLoadingView:self.view];
+                        [Uility showError:NSLocalizedString(@"dev_offline", nil) toView:self.view];
+                        return ;
+                    }
                 }
+                
                 //设备在线，刷新视图
                 [self refreshViewWithDevice:self.colorLight];
                 [Uility hideLoadingView:self.view];
             } failure:^(id response) {
                 [Uility showError:NSLocalizedString(@"refresh_error", nil) toView:self.view];
             }];
-        }else{
-            [self refreshViewWithDevice:self.colorLight];
-        }
+        //}else{
+        //    [self refreshViewWithDevice:self.colorLight];
+        //}
     }else{//分组一个或多个设备
         
     }
@@ -298,25 +303,25 @@
         [_deviceOnButton.layer setBackgroundColor:[UIColor colorWithRed:0.8128 green:0.8128 blue:0.8128 alpha:1.0].CGColor];
         [_deviceOFFButton.layer setBackgroundColor:kBackgroundColor.CGColor];
     }
-    //亮度
-    
+//    //亮度
+//
      _brightnessLable.text = [NSString stringWithFormat:@"%@：%d%%",
                               NSLocalizedString(@"brightness", nil),
                               (int)colorLight.deviceInfo.Color_Brightness];
     _lightenessSlider.value = colorLight.deviceInfo.Color_Brightness;
-    
-    if (self.colorLight.deviceInfo.lightType == LULLightTypeWhiteLight) {
-        self.LightType = LULLightSliderTypeWhiteLight;
-    }else{
-        self.LightType = LULLightSliderTypeColourLight;
-    }
+//
+//    if (self.colorLight.deviceInfo.lightType == LULLightTypeWhiteLight) {
+//        self.LightType = LULLightSliderTypeWhiteLight;
+//    }else{
+//        self.LightType = LULLightSliderTypeColourLight;
+//    }
     //白彩灯
-    if (self.LightType == LULLightSliderTypeWhiteLight) {
-        [self turnLight:NO];
-        //_whiteLightSlider.currentValue = colorLight.deviceInfo
-    } else {
-        [self turnLight:YES];
-    }
+//    if (self.LightType == LULLightSliderTypeWhiteLight) {
+//        [self turnLight:NO];
+//        //_whiteLightSlider.currentValue = colorLight.deviceInfo
+//    } else {
+//        [self turnLight:YES];
+//    }
     
 }
 

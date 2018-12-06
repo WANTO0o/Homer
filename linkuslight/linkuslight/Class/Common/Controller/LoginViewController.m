@@ -31,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.localDebug = YES;
+    self.localDebug = NO;
 
     [_loginButton setTitle:NSLocalizedString(@"login_amazon", nil) forState:UIControlStateNormal];
     [self initView];
